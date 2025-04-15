@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fee_assignment,fee.assignment,model_school_management_fee_assignment,base.group_user,1,1,1,1
+access_fee_category,fee.category,model_school_management_fee_category,base.group_user,1,1,1,1
+access_fee_invoice,fee.invoice,model_school_management_fee_invoice,base.group_user,1,1,1,1
+access_fee_structure,fee.structure,model_school_management_fee_structure,base.group_user,1,1,1,1
+access_fee_reminder,fee.reminder,model_school_management_fee_reminder,base.group_user,1,1,1,1

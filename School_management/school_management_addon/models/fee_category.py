@@ -11,3 +11,5 @@ class FeeCategory(models.Model):
     default_amount = fields.Float(string='Default Amount', default=0.0)
     description = fields.Text(string='Description')
     active = fields.Boolean(string='Active', default=True)
+    fee_assignment_ids = fields.One2many('school_management.fee.assignment', 'fee_category_id',
+                                         string="Fee Assignments")

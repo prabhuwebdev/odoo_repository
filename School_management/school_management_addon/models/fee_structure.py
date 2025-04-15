@@ -19,3 +19,7 @@ class FeeStructure(models.Model):
     payment_terms = fields.Text(string='Payment Terms')
     applicable_date = fields.Date(string='Applicable From')
     active = fields.Boolean(string='Active', default=True)
+
+    fee_structure_ids = fields.One2many('school_management.fee.assignment', 'fee_structure_id',
+                                        string="Fee Assignments")
+

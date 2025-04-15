@@ -32,7 +32,7 @@ class FeeInvoice(models.Model):
         for record in self:
             record.balance_amount = record.total_amount - record.paid_amount
 
-    @api.depends('amount')
+    @api.depends('paid_amount')
     def _compute_paid_amount(self):
         for record in self:
             # Logic to calculate paid amount

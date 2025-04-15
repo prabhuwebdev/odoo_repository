@@ -1,0 +1,59 @@
+
+<odoo>
+
+    <!-- Form View -->
+    <record id="view_fee_structure_form" model="ir.ui.view">
+        <field name="name">fee.structure.form</field>
+        <field name="model">school_management.fee.structure</field>
+        <field name="arch" type="xml">
+            <form string="Fee Structure">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="academic_year_id"/>
+                        <field name="class_id"/>
+                        <field name="Frequency"/>
+                        <field name="total_amount"/>
+                        <field name="payment_terms"/>
+                        <field name="applicable_date"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View (With ALL FIELDS) -->
+    <record id="view_fee_structure_list" model="ir.ui.view">
+        <field name="name">fee.structure.list</field>
+        <field name="model">school_management.fee.structure</field>
+        <field name="arch" type="xml">
+            <list string="Fee Structures">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="academic_year_id"/>
+                <field name="class_id"/>
+                <field name="Frequency"/>
+                <field name="total_amount"/>
+                <field name="payment_terms"/>
+                <field name="applicable_date"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_fee_structure" model="ir.actions.act_window">
+        <field name="name">Fee Structures</field>
+        <field name="res_model">school_management.fee.structure</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+<!--    <menuitem id="menu_school_management_root" name="School Management"/>-->
+    <menuitem id="menu_fee_structure" name="Fee Structures"
+              parent="menu_fee_assignment_root"
+              action="action_fee_structure"/>
+
+</odoo>
