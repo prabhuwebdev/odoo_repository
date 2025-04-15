@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form View -->
+    <record id="view_medical_progress_note_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.progress.note.form</field>
+        <field name="model">ehr_cdss.medical.progress.note</field>
+        <field name="arch" type="xml">
+            <form string="Progress Note">
+                <header>
+                    <button name="action_back_to_patient" string="Back to Appointment" type="object" class="oe_secondary" invisible="not show_back_button"/>
+                </header>
+                <!-- <header>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" state="draft"/>
+                    <button name="action_sign" string="Sign" type="object" state="confirmed"/>
+                    <button name="action_cancel" string="Cancel" type="object" state="draft,confirmed"/>
+                    <button name="action_reset_to_draft" string="Reset to Draft" type="object" state="confirmed,cancelled"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,signed,cancelled"/>
+                </header> -->
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" class="oe_inline"/>
+                        </h1>
+                    </div>
+                    
+                    
+                    <group>
+                        <group>
+                            <field name="patient_id" options="{'no_open': True}" readonly= "show_back_button" />
+                            <field name="provider_id"/>
+                            <field name="appointment_ids"/>
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <!-- SUBJECTIVE Section -->
+                        <page string="Subjective">
+                            <group>
+                                <field name="chief_complaint_ids" mode="list,form">
+                                    <list editable="bottom">
+                                        <field name="description"/>
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="description"/>
+                                        </group>
+                                    </form>
+                                </field>
+                                <field name="chief_complaint_display" readonly="1"/>
+                                <button name="action_open_hpi_form" string="Add HPI" type="object"/>
+                                <field name="history_present_illness" readonly="1"/>
+                                <button name="action_open_pmh_form" string="Add PMH" type="object"/>
+                                <field name="past_medical_history" readonly="1"/>
+                                <button name="action_open_family_history_form" string="Add Family History" type="object"/>
+                                <field name="family_history" readonly="1"/>
+                                <button name="action_open_social_history_form" string="Add Social History" type="object"/>
+                                <field name="social_history" readonly="1"/>
+                                <field name="ros_ids" mode="list,form">
+                                    <list editable="bottom">
+                                        <field name="system"/>
+                                        <field name="findings"/>
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="system"/>
+                                            <field name="findings"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+                        
+                        <!-- OBJECTIVE Section -->
+                        <page string="Objective">
+                            <group>
+                                <field name="vital_signs_ids" mode="list,form">
+                                    <list editable="bottom">
+                                        <field name="progress_note_id"/>
+                                        <!-- <field name="blood_pressure"/>
+                                        <field name="heart_rate"/> -->
+                                        <field name="date"/>
+                                        <field name="notes"/>
+                                        
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="progress_note_id"/>
+                                            <field name="blood_pressure"/>
+                                        </group>
+                                    </form>
+                                </field>
+                                <!-- <button name="action_open_general_appearance_form" string="Add General Appearance" type="object"/>
+                                <field name="general_appearance" readonly="1"/> -->
+                                <field name="physical_exam_ids" mode="list,form">
+                                    <list editable="bottom">
+                                        <field name="system"/>
+                                        <field name="findings"/>
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="system"/>
+                                            <field name="findings"/>
+                                        </group>
+                                    </form>
+                                </field>
+                                <!-- <button name="action_open_diagnostic_tests_form" string="Add Diagnostic Tests" type="object"/>
+                                <field name="diagnostic_tests" readonly="1"/> -->
+                            </group>
+                        </page>
+                        
+                        <!-- ASSESSMENT Section -->
+                        <page string="Diagnosis">
+                            <group>
+                                <!-- <button name="action_open_primary_diagnosis_form" string="Add Primary Diagnosis" type="object"/> -->
+                                <field name="primary_diagnosis" readonly="1"/>
+                                <field name="diagnosis_ids" mode="list,form">
+                                    <list editable="bottom">
+                                        <field name="cd_code"/>
+                                        <field name="cp_name"/>
+                                        <field name="unit"/>
+                                        <field name="modifier"/>
+                                        <field name="name"/>
+                                        <field name="notes"/>
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="notes"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+                        
+                        <!-- PLAN Section -->
+                        <page string="Medication">
+                            <group>
+                                <field name="medication_ids" mode="list,form">
+                                    <list editable="bottom">
+                                        <field name="cd_code"/>
+                                        <field name="cp_name"/>
+                                        <field name="unit"/>
+                                        <field name="modifier"/>
+                                        <field name="name"/>
+                                        <field name="dosage"/>
+                                        <field name="route"/>
+                                        <field name="frequency"/>
+                                        <field name="notes"/>
+
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="route"/>
+                                            <field name="dosage"/>
+                                            <field name="frequency"/>
+                                            <field name="notes"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+
+                                <!-- <field name="lifestyle_modification_ids" mode="list,form"/>
+                                    <list editable="bottom">
+                                        <field name="progress_note_id"/>
+                                        <field name="description"/>
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="progress_note_id"/>
+                                            <field name="description"/>
+                                        </group>
+                                    </form>
+                                </field> -->
+                        <!-- <page string="Life Style Plan">
+                            <group>
+                               <field name="lifestyle_modification_ids" mode="list,form">
+                                    <list editable="bottom">
+                                        <field name="progress_note_id"/>
+                                        <field name="description"/>
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="progress_note_id"/>
+
+                                            <field name="description"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page> -->
+                        <page string="Procedure">
+                            <group>
+
+                                <field name="treatment_ids" mode="list,form">
+                                    <list editable="bottom">
+                                        <!-- <field name="cpt_id"/> -->
+                                        <field name="cd_code"/>
+                                        <field name="cp_name"/>
+                                        <field name="unit"/>
+                                        <field name="modifier"/>
+
+                                        <field name="name"/>
+                                        <field name="sequence"/>
+                                        <field name="price"/>
+                                        <field name="notes"/>
+                                    </list>
+                                    <form>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="notes"/>
+                                            <field name="sequence"/>
+                                            <field name="price"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+
+    <!-- list View -->
+    <record id="view_medical_progress_note_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.progress.note.list</field>
+        <field name="model">ehr_cdss.medical.progress.note</field>
+        <field name="arch" type="xml">
+            <list string="Progress Notes">
+                <!-- <field name="name"/> -->
+                <field name="patient_id"/>
+                <field name="provider_id"/>
+                <field name="date"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_medical_progress_note_search" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.progress.note.search</field>
+        <field name="model">ehr_cdss.medical.progress.note</field>
+        <field name="arch" type="xml">
+            <search string="Progress Note Search">
+                <!-- <field name="name"/> -->
+                <field name="patient_id"/>
+                <field name="provider_id"/>
+                <field name="date"/>
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="Confirmed" name="confirmed" domain="[('state','=','confirmed')]"/>
+                <filter string="Signed" name="signed" domain="[('state','=','signed')]"/>
+                <filter string="Today" name="today" domain="[('date','&gt;=',context_today().strftime('%Y-%m-%d 00:00:00')),('date','&lt;=',context_today().strftime('%Y-%m-%d 23:59:59'))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="group_by_state" context="{'group_by':'state'}"/>
+                    <filter string="Provider" name="group_by_provider" context="{'group_by':'provider_id'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by':'date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_medical_progress_note" model="ir.actions.act_window">
+        <field name="name">Progress Notes</field>
+        <field name="res_model">ehr_cdss.medical.progress.note</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first progress note
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <!-- <menuitem id="menu_medical_progress_note_root" name="Progress Notes" parent="menu_ehr_cdss_root" sequence="20"/> -->
+    <menuitem id="menu_medical_progress_note" name="Odoo Progress Notes" parent="Master_ehr_cdss_modules" action="action_medical_progress_note" sequence="10"/>
+</odoo>

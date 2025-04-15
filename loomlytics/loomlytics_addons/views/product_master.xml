@@ -1,0 +1,37 @@
+<odoo>
+    <record id="view_product_master_list" model="ir.ui.view">
+        <field name="name">product.master.list</field>
+        <field name="model">product.master</field>
+        <field name="arch" type="xml">
+            <list string="Product Master">
+                <field name="product_name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_product_master_form" model="ir.ui.view">
+        <field name="name">product.master.form</field>
+        <field name="model">product.master</field>
+        <field name="arch" type="xml">
+            <form string="Product Master">
+                <sheet>
+                    <group>
+                        <field name="product_name"/>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_product_name" model="ir.actions.act_window">
+        <field name="name">Product Master</field>
+        <field name="res_model">product.master</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_product_master_list"/>
+    </record>
+
+    <!-- Menu Items -->
+
+    <menuitem id="menu_product_master" name="Product Master" parent="menu_loomlytics_root" action="action_product_name"/>
+</odoo>

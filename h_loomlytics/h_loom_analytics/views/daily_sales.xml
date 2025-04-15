@@ -1,0 +1,54 @@
+<odoo>
+    <!-- List View for Daily Sales Management -->
+    <record id="view_daily_sales_management_list" model="ir.ui.view">
+        <field name="name">daily.sales.management.list.view</field>
+        <field name="model">daily.sales.management</field>
+        <field name="arch" type="xml">
+            <list string="Daily Sales Report">
+                <field name="product"/>
+                <field name="product_group"/>
+                <field name="floor"/>
+                <field name="section"/>
+                <field name="supplier"/>
+                <field name="sales_date"/>
+                <field name="sale_quantity"/>
+                <field name="sale_amount"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View for Daily Sales Management -->
+    <record id="view_daily_sales_management_form" model="ir.ui.view">
+        <field name="name">daily.sales.management.form.view</field>
+        <field name="model">daily.sales.management</field>
+        <field name="arch" type="xml">
+            <form string="Daily Sales Report">
+                <sheet>
+                    <group>
+                        <field name="product"/>
+                        <field name="product_group"/>
+                        <field name="floor"/>
+                        <field name="section"/>
+                        <field name="supplier"/>
+                        <field name="sales_date"/>
+                        <field name="sale_quantity"/>
+                        <field name="sale_amount"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Daily Sales Management -->
+    <record id="action_daily_sales_management" model="ir.actions.act_window">
+        <field name="name">Daily Sales Management</field>
+        <field name="res_model">daily.sales.management</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu Item for Daily Sales Management -->
+    <menuitem id="menu_daily_sales_management"
+              name="Daily Sales Report"
+              parent="menu_loomlytics_analytics_root" 
+              action="action_daily_sales_management"/>
+</odoo>

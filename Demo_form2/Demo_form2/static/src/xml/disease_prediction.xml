@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="disease.container">
+        <div>
+            <label>Person Name</label>
+            <select t-on-change="selectedName">
+                <option value="" selected="1">Select A Name</option>
+                <option t-foreach="state.people" t-as="person" t-key="person.name" t-att-value="person.name">
+                    <t t-esc="person.name"/>
+                </option>
+            </select>
+            <p>Age: <t t-esc="state.selectedAge"/></p>
+        </div>
+    </t>
+</templates>

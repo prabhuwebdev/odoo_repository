@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- <record id="action_report_progress_note" model="ir.actions.report">
+        <field name="name">Progress Note</field>
+        <field name="model">ehr_cdss.medical.progress.note</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ehr_cdss.medical_progress_notes.report_progress_notes</field>
+        <field name="binding_model_id" ref="model_medical_progress_note"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="base.paperformat_us"/>
+    </record> -->
+
+
+
+    <!-- PDF Report Template -->
+    <template id="report_progress_note">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        
+                        <!-- Header -->
+                        <div class="row mt16 mb16">
+                            <div class="col-12 text-center">
+                                <h2>MEDICAL PROGRESS NOTE</h2>
+                            </div>
+                        </div>
+                        
+                        <!-- Basic Info -->
+                        <div class="row mb16">
+                            <div class="col-6">
+                                <strong>Patient:</strong>
+                                <span t-field="doc.patient_id"/>
+                            </div>
+                            <div class="col-6 text-right">
+                                <strong>Date &amp; Time:</strong>
+                                <span t-field="doc.date"/>
+                            </div>
+                        </div>
+                        <div class="row mb16">
+                            <div class="col-6">
+                                <strong>Provider:</strong>
+                                <span t-field="doc.provider_id"/>
+                            </div>
+                            <div class="col-6 text-right">
+                                <strong>Reference:</strong>
+                                <span t-field="doc.name"/>
+                            </div>
+                        </div>
+                        
+                        <!-- SOAP Format -->
+                        <!-- Subjective Section -->
+                        <div class="row mt32">
+                            <div class="col-12">
+                                <h3 class="mt16" style="background-color:#f2f2f2; padding:8px;">SUBJECTIVE</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.chief_complaint_ids">
+                            <div class="col-12">
+                                <h4>Chief Complaint</h4>
+                                <ul>
+                                    <t t-foreach="doc.chief_complaint_ids" t-as="complaint">
+                                        <li><span t-field="complaint.description"/></li>
+                                    </t>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.history_present_illness">
+                            <div class="col-12">
+                                <h4>History of Present Illness</h4>
+                                <p t-field="doc.history_present_illness" class="mb16"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.past_medical_history">
+                            <div class="col-12">
+                                <h4>Past Medical History</h4>
+                                <p t-field="doc.past_medical_history" class="mb16"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.family_history">
+                            <div class="col-12">
+                                <h4>Family History</h4>
+                                <p t-field="doc.family_history" class="mb16"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.social_history">
+                            <div class="col-12">
+                                <h4>Social History</h4>
+                                <p t-field="doc.social_history" class="mb16"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.ros_ids">
+                            <div class="col-12">
+                                <h4>Review of Systems</h4>
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>System</th>
+                                            <th>Findings</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="doc.ros_ids" t-as="ros">
+                                            <td>
+                                                <span t-field="ros.system"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="ros.findings"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Objective Section -->
+                        <div class="row mt32">
+                            <div class="col-12">
+                                <h3 class="mt16" style="background-color:#f2f2f2; padding:8px;">OBJECTIVE</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.blood_pressure">
+                            <div class="col-12">
+                                <h4>Vital Signs</h4>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <strong>Blood Pressure:</strong>
+                                        <span t-field="doc.blood_pressure"/>
+                                    </div>
+                                    <div class="col-4">
+                                        <strong>Heart Rate:</strong>
+                                        <span t-field="doc.heart_rate"/> bpm
+                                    </div>
+                                    <div class="col-4">
+                                        <strong>Respiratory Rate:</strong>
+                                        <span t-field="doc.respiratory_rate"/> breaths/min
+                                    </div>
+                                </div>
+                                <div class="row mt8">
+                                    <div class="col-4">
+                                        <strong>Temperature:</strong>
+                                        <span t-field="doc.temperature"/> °F
+                                    </div>
+                                    <div class="col-4">
+                                        <strong>Oxygen Saturation:</strong>
+                                        <span t-field="doc.oxygen_saturation"/> %
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.general_appearance">
+                            <div class="col-12">
+                                <h4>General Appearance</h4>
+                                <p t-field="doc.general_appearance" class="mb16"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.physical_exam_ids">
+                            <div class="col-12">
+                                <h4>Physical Examination Findings</h4>
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>System</th>
+                                            <th>Findings</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="doc.physical_exam_ids" t-as="exam">
+                                            <td>
+                                                <span t-field="exam.system"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="exam.findings"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.diagnostic_tests">
+                            <div class="col-12">
+                                <h4>Diagnostic Tests and Imaging</h4>
+                                <p t-field="doc.diagnostic_tests" class="mb16"/>
+                            </div>
+                        </div>
+                        
+                        <!-- Assessment Section -->
+                        <div class="row mt32">
+                            <div class="col-12">
+                                <h3 class="mt16" style="background-color:#f2f2f2; padding:8px;">ASSESSMENT</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.primary_diagnosis">
+                            <div class="col-12">
+                                <h4>Primary Diagnosis</h4>
+                                <p t-field="doc.primary_diagnosis" class="mb16"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.diagnosis_ids">
+                            <div class="col-12">
+                                <h4>Diagnoses</h4>
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Primary</th>
+                                            <th>ICD-10 Code</th>
+                                            <th>Diagnosis</th>
+                                            <th>Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="doc.diagnosis_ids" t-as="diagnosis">
+                                            <td>
+                                                <span t-if="diagnosis.is_primary">✓</span>
+                                            </td>
+                                            <td>
+                                                <span t-field="diagnosis.icd10_id.code"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="diagnosis.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="diagnosis.notes"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Plan Section -->
+                        <div class="row mt32">
+                            <div class="col-12">
+                                <h3 class="mt16" style="background-color:#f2f2f2; padding:8px;">PLAN</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.medication_ids">
+                            <div class="col-12">
+                                <h4>Medications and Dosages</h4>
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Medication</th>
+                                            <th>Dosage</th>
+                                            <th>Route</th>
+                                            <th>Frequency</th>
+                                            <th>Duration</th>
+                                            <th>Instructions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="doc.medication_ids" t-as="med">
+                                            <td>
+                                                <span t-field="med.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="med.dosage"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="med.route"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="med.frequency"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="med.duration"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="med.notes"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.lifestyle_modifications">
+                            <div class="col-12">
+                                <h4>Lifestyle Modifications</h4>
+                                <p t-field="doc.lifestyle_modifications" class="mb16"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.treatment_ids">
+                            <div class="col-12">
+                                <h4>Treatments</h4>
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>CPT Code</th>
+                                            <th>Treatment</th>
+                                            <th>Fee</th>
+                                            <th>Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="doc.treatment_ids" t-as="treatment">
+                                            <td>
+                                                <span t-field="treatment.cpt_id.code"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="treatment.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="treatment.price" t-options='{"widget": "monetary", "display_currency": res_company.currency_id}'/>
+                                            </td>
+                                            <td>
+                                                <span t-field="treatment.notes"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="row" t-if="doc.follow_up or doc.next_appointment">
+                            <div class="col-12">
+                                <h4>Follow-up Recommendations</h4>
+                                <p t-field="doc.follow_up" class="mb16"/>
+                                <div t-if="doc.next_appointment">
+                                    <strong>Next Appointment:</strong>
+                                    <span t-field="doc.next_appointment"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Signature -->
+                        <div class="row mt32">
+                            <div class="col-6">
+                                <div t-if="doc.signature_image">
+                                    <img t-att-src="'data:image/png;base64,%s' % to_text(doc.signature_image)" style="max-height: 80px;"/>
+                                </div>
+                                <div t-else="">
+                                    <div style="border-top: 1px solid black; margin-top: 50px; width: 200px;"></div>
+                                </div>
+                                <p>
+                                    <strong>Provider Signature:</strong>
+                                    <span t-field="doc.provider_id.name"/>
+                                </p>
+                            </div>
+                            <div class="col-6 text-right">
+                                <div t-if="doc.signature_date">
+                                    <strong>Signed on:</strong>
+                                    <span t-field="doc.signature_date"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Footer -->
+                        <div class="row mt16 mb16">
+                            <div class="col-12 text-center small">
+                                <p>This document is part of the patient's medical record and is confidential.</p>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

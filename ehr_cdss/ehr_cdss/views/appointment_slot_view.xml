@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!-- list View -->
+    <record id="view_appointment_slot_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.appointment.slot.list</field>
+        <field name="model">ehr_cdss.appointment.slot</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="provider_id"/>
+                <field name="start_datetime"/>
+                <field name="end_datetime"/>
+                <field name="duration"/>
+                <field name="service_type"/>
+                <field name="state"/>
+                <field name="is_telehealth"/>
+                <field name="is_group"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_appointment_slot_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.appointment.slot.form</field>
+        <field name="model">ehr_cdss.appointment.slot</field>
+        <field name="arch" type="xml">
+            <form>
+                <!-- <header>
+                    <button name="action_reserve" string="Reserve" type="object" state="available"/>
+                    <button name="action_book" string="Book" type="object" state="available,reserved"/>
+                    <button name="action_cancel" string="Cancel" type="object" state="available,booked,reserved"/>
+                    <button name="action_reset" string="Reset to Available" type="object" state="cancelled,reserved"/>
+                    <button name="action_complete" string="Mark Completed" type="object" state="booked"/>
+                    <button name="create_appointment" string="Create Appointment" type="object" state="available"/>
+                    <field name="state" widget="statusbar" statusbar_visible="available,reserved,booked,completed,cancelled"/>
+                </header> -->
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="provider_id"/>
+                            <field name="start_datetime"/>
+                            <field name="end_datetime"/>
+                            <field name="duration" readonly="1"/>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <field name="appointment_id"/>
+                            <field name="service_type"/>
+                            <field name="is_telehealth"/>
+                            <field name="telehealth_platform" />
+                            <field name="is_group"/>
+                            <field name="max_attendees" />
+                            <field name="current_attendees" />
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Restrictions">
+                            <group>
+                                <field name="insurance_ids" widget="many2many_tags"/>
+                                <field name="new_patients_only"/>
+                                <field name="existing_patients_only"/>
+                                <field name="priority_patients"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Group Details" >
+                            <group>
+                                <field name="group_name"/>
+                                <field name="group_description"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Recurrence" >
+                            <group>
+                                <field name="is_recurring"/>
+                                <field name="recurrence_id"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Buffer Times">
+                            <group>
+                                <field name="buffer_before"/>
+                                <field name="buffer_after"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Calendar View -->
+    <record id="view_appointment_slot_calendar" model="ir.ui.view">
+        <field name="name">ehr_cdss.appointment.slot.calendar</field>
+        <field name="model">ehr_cdss.appointment.slot</field>
+        <field name="arch" type="xml">
+            <calendar date_start="start_datetime" color="provider_id">
+                <field name="name"/>
+                <field name="provider_id"/>
+                <field name="service_type"/>
+                <field name="state"/>
+                <field name="is_telehealth"/>
+            </calendar>
+        </field>
+    </record>
+    <record id="action_appointment_slot" model="ir.actions.act_window">
+        <field name="name">Appointment Slots</field>
+        <field name="res_model">ehr_cdss.appointment.slot</field>
+        <field name="view_mode">list,form,calendar</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a new appointment slot
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_appointment_slot_root" name="Appointment Slots" 
+            parent="Master_ehr_cdss_modules" sequence="20"
+            action="action_appointment_slot"/>
+</odoo>

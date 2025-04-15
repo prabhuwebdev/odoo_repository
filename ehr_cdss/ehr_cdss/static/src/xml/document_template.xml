@@ -1,0 +1,67 @@
+<template id="document_workspace_dashboard" name="Document Workspace Dashboard">
+  <t t-name="ehr_cdss.DocumentWorkspace" owl="1">
+    <div class="d-flex h-100" style="min-height: 100vh;">
+      <!-- Sidebar -->
+      <div class="bg-light border-end p-3" style="width: 250px;">
+        <h5 class="mb-3">Document Types</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item" t-on-click.prevent="() => selectType('all')">
+            <a class="nav-link" href="#">📁 All</a>
+          </li>
+          <!-- <t t-foreach="docTypes" t-as="type">
+            <li class="nav-item" t-on-click.prevent="() => selectType(type[0])">
+              <a class="nav-link" href="#">📄 <t t-esc="type[1]"/></a>
+            </li>
+          </t> -->
+
+            <t t-foreach="docTypes" t-as="type" t-key="type[0]">
+                <li>
+                    <button t-on-click="() => selectType(type[0])">
+                        <t t-esc="type[1]" />
+                    </button>
+                </li>
+            </t>
+        </ul>
+      </div>
+
+      <!-- Main content -->
+      <!-- <div class="flex-fill p-4 overflow-auto">
+        <h3 t-esc="title" class="mb-4"/>
+        <div class="row">
+          <t t-foreach="documents" t-as="doc">
+            <div class="col-md-4">
+              <div class="card mb-3 shadow-sm" t-on-click="() => openDocument(doc.id)">
+                <div class="card-body">
+                  <h5 class="card-title" t-esc="doc.name"/>
+                  <p class="card-text">
+                    Type: <t t-esc="doc.document_type"/>
+                    <br/>
+                    Date: <t t-esc="doc.document_date"/>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </t>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <t t-foreach="documents" t-as="doc" t-key="doc.id">
+            <div class="col-md-4">
+            <div class="card mb-3 shadow-sm" t-on-click="() => openDocument(doc.id)">
+                <div class="card-body">
+                <h5 class="card-title" t-esc="doc.name"/>
+                <p class="card-text">
+                    Type: <t t-esc="doc.document_type"/>
+                    <br/>
+                    Date: <t t-esc="doc.document_date"/>
+                </p>
+                </div>
+            </div>
+            </div>
+        </t>
+        </div>
+
+    </div>
+  </t>
+</template>

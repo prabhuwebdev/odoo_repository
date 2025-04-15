@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="email_template_loom_hub" model="mail.template">
+            <field name="name">Loom Hub Notification</field>
+            <field name="email_from">${(object.email or 'info@example.com')}</field>
+            <field name="subject">Your Order ${object.supplier_name_id.supplier_name}</field>
+            <field name="model_id" ref="loom_hub.model_loom_hub_purchase_order"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html">
+                <![CDATA[
+                <p>Dear ${object.supplier_name_id.supplier_name},</p>
+                <p>Your order ${object.name} has been processed.</p>
+                <p>Best regards,<br/>${object.contact_name}</p>
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

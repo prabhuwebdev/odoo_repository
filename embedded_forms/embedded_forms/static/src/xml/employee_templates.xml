@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="embedded_forms.EmbeddedFormContainer" owl="1">
+        <div class="d-flex h-100">
+            <!-- Left Sidebar -->
+            <div class="o_employee_sidebar bg-dark text-white flex-shrink-0" style="width: 200px;">
+                <div class="p-3 border-bottom border-secondary">
+                    <h5>Employee</h5>
+                </div>
+                <div class="d-flex flex-column">
+                    <button t-on-click="() => this.switchForm('info')"
+                            t-attf-class="btn text-left p-3 {{ state.activeForm === 'info' ? 'bg-secondary' : '' }}">
+                        Info
+                    </button>
+                    <button t-on-click="() => this.switchForm('address')"
+                            t-attf-class="btn text-left p-3 {{ state.activeForm === 'address' ? 'bg-secondary' : '' }}">
+                        Address
+                    </button>
+                    <button t-on-click="() => this.switchForm('medical_history')"
+                            t-attf-class="btn text-left p-3 {{ state.activeForm === 'medical_history' ? 'bg-secondary' : '' }}">
+                        Medical History
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="flex-grow-1 p-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4>
+                            <t t-if="state.activeForm === 'info'">Employee Info</t>
+                            <t t-if="state.activeForm === 'address'">Employee Address</t>
+                            <t t-if="state.activeForm === 'medical_history'">Medical History</t>
+                        </h4>
+                    </div>
+                    <div class="card-body position-relative overflow-auto">
+                        <div t-if="state.isLoading"
+                             class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-white bg-opacity-75">
+                            <div class="text-center">
+                                <i class="fa fa-spinner fa-spin fa-2x"></i>
+                                <p>Loading...</p>
+                            </div>
+                        </div>
+
+                        <!-- Info Form -->
+                        <div t-if="state.activeForm === 'info'" class="o_employee_info_form">
+                            <div >
+
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="form-control" id="firstName"
+                                       t-att-value="state.employee.firstName || ''"
+                                       t-on-input="(ev) => this.onInputChange('firstName', ev)" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="form-control" id="lastName"
+                                       t-att-value="state.employee.lastName || ''"
+                                       t-on-input="(ev) => this.onInputChange('lastName', ev)" />
+                            </div>
+                        </div>
+
+                        <!-- Address Form -->
+                        <div t-if="state.activeForm === 'address'" class="o_employee_address_form">
+                            <div class="form-group mb-3">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" id="city"
+                                       t-att-value="state.employee.city || ''"
+                                       t-on-input="(ev) => this.onInputChange('city', ev)" />
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="pin">PIN</label>
+                                <input type="text" class="form-control" id="pin"
+                                       t-att-value="state.employee.pin || ''"
+                                       t-on-input="(ev) => this.onInputChange('pin', ev)" />
+                            </div>
+                        </div>
+
+                        <!-- Medical History Form -->
+
+                        <div t-if="state.activeForm === 'medical_history'" class="o_employee_medical_history_form">
+                            <div>
+                                <div class="row">
+                                    <!-- Fieldset 1 -->
+                                    <fieldset class="col-md-4 border border-rounded">
+                                    <legend>Medical Diagnosis</legend>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-3">
+                                                    <label>Primary Cancer Diagnosis</label>
+                                                    <input type="text" class="form-control w-100" t-att-value="state.medicalHistories.primary_cancer_diagnosis || ''" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-3">
+                                                    <label>Histological Molecular Subtype</label>
+                                                    <input type="text" class="form-control w-100"
+                                                        t-att-value="state.medicalHistories.histological_molecular_subtype || ''" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="form-group mb-3">
+                                                    <label>Stage At Diagnosis</label>
+                                                    <input type="text" class="form-control w-100"
+                                                            t-att-value="state.medicalHistories.stage_at_diagnosis || ''" />
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </fieldset>
+
+                                    <fieldset class="col-md-4 border border-rounded">
+                                        <legend> Cancer Diagnosis</legend>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Previous Cancer Diagnosis</label>
+                                                        <input type="text" class="form-control w-100"
+                                                            t-att-value="state.medicalHistories.previous_cancer_diagnosis || ''" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Previous Cancer Details</label>
+                                                        <input type="text" class="form-control w-100"
+                                                                    t-att-value="state.medicalHistories.previous_cancer_details || ''" />
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3 ">
+                                                        <label>Treatment History</label>
+                                                        <select class="form-control w-100" t-model="state.medicalHistories.treatment_history"
+                                                                t-on-input="(ev) => this.onInputChange('treatment_history', ev)">
+                                                            <option value="">Select Treatment</option>
+                                                            <option value="surgery">Surgery</option>
+                                                            <option value="chemotherapy">Chemotherapy</option>
+                                                            <option value="radiotherapy">Radiotherapy</option>
+                                                            <option value="immunotherapy">Immunotherapy</option>
+                                                            <option value="targeted_therapy">Targeted Therapy</option>
+                                                        </select>
+                                                     </div>
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Treatment Details</label>
+                                                        <input type="text" class="form-control"
+                                                            t-att-value="state.medicalHistories.treatment_details || ''" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group mb-3">
+                                                        <label>Response To Treatment</label>
+                                                        <select class="form-control" t-model="state.medicalHistories.treatment_history"
+                                                                t-on-input="(ev) => this.onInputChange('treatment_history', ev)">
+                                                            <option value="">Select Treatment</option>
+                                                            <option value="partial">Partial</option>
+                                                            <option value="complete">Complete</option>
+                                                            <option value="stable">Stable</option>
+                                                            <option value="progressive_disease">Progressive Disease</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                    </fieldset>
+                                    <fieldset class="col-md-4 border border-rounded">
+                                        <legend>Third Field Set</legend>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                 <div class="form-group mb-3">
+                                                    <label>Date Of Last Follow Up</label>
+                                                    <input type="text" class="form-control"
+                                                            t-att-value="state.medicalHistories.date_of_last_follow_up || ''" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label>Comorbidities</label>
+                                                    <select class="form-control" t-model="state.comorbidity" t-on-input="(ev) => this.onInputChange('comorbidities', ev)">
+                                                        <option t-foreach="state.comorbidity" t-as="comorbidity" t-att-value="comorbidity.id" t-key="comorbidity.id">
+                                                                                            <t t-esc="comorbidity.name"/>
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label>Comorbidities Details</label>
+                                                    <input type="text" class="form-control"
+                                                                    t-att-value="state.medicalHistories.comorbidities_details || ''" />
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="text-end mt-3">
+                            <button t-on-click="saveData" class="btn btn-primary" t-att-disabled="state.isLoading">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form View -->
+    <record id="view_ehr_cdss_assessment_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.assessment.form</field>
+        <field name="model">ehr_cdss.assessment</field>
+        <field name="arch" type="xml">
+            <form string="Clinical Assessment">
+                <!-- <header>
+                    <button name="action_create_risk_assessment" string="Create Risk Assessment" type="object" class="oe_highlight"/>
+                    <button name="action_create_treatment_plan" string="Create Treatment Plan" type="object"/>
+                    <field name="state" widget="statusbar" clickable="1"/>
+                </header> -->
+                <sheet>
+                    <group>
+                        <group>
+                            <!-- <field name="name" readonly="1"/> -->
+                            <field name="patient_id" options="{'no_open': True}"/>
+                            <field name="provider_id"/>
+                            <field name="date"/>
+                            <field name="assessment_type"/>
+                        </group>
+                        <group>
+                            <field name="service_provided"/>
+                            <field name="present_at_session"/>
+                            <field name="location"/>
+                            <field name="telehealth_confirmation" />
+                            <field name="telehealth_appropriate" />
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <!-- Service Information Tab -->
+                        <page string="Service Information">
+                            <group>
+                                <field name="baseline_measures_completed"/>
+                                <field name="measures_reviewed"/>
+                            </group>
+                        </page>
+
+                        <!-- Presenting Problem Tab -->
+                        <page string="Presenting Problem">
+                            <group>
+                                <field name="presenting_problem" class="oe_inline"/>
+                                <field name="current_symptoms" class="oe_inline"/>
+                                <field name="functional_impairment_areas"/>
+                                <field name="functional_impairment_details"/>
+                            </group>
+                        </page>
+
+                        <!-- Treatment History Tab -->
+                        <page string="Treatment History">
+                            <group>
+                                <field name="mental_health_treatment_history"/>
+                                <field name="substance_use_treatment_history"/>
+                                <field name="family_mental_health_history"/>
+                            </group>
+                        </page>
+
+                        <!-- Psychosocial Tab -->
+                        <page string="Psychosocial">
+                            <group>
+                                <field name="highest_education"/>
+                                <field name="employment_status"/>
+                                <field name="employer_school"/>
+                                <field name="military_involvement"/>
+                                <field name="military_details" />
+                                <field name="social_concerns"/>
+                                <field name="interpersonal_family_info"/>
+                                <field name="living_situation"/>
+                                <field name="cultural_considerations"/>
+                            </group>
+                        </page>
+
+                        <!-- Trauma History Tab -->
+                        <page string="Trauma History">
+                            <group>
+                                <field name="trauma_abuse_history"/>
+                                <field name="trauma_abuse_description" />
+                                <field name="client_strengths"/>
+                            </group>
+                        </page>
+
+                        <!-- Substance Use Tab -->
+                        <page string="Substance Use">
+                            <field name="substance_use_ids" mode="list,form">
+                                <list editable="bottom">
+                                    <field name="substance"/>
+                                    <field name="frequency"/>
+                                    <field name="other_substance"/>
+                                    <field name="first_use_age"/>
+                                    <field name="last_use_date"/>
+                                </list>
+                                <form>
+                                    <group>
+                                        <field name="substance"/>
+                                        <field name="frequency"/>
+                                        <field name="other_substance"/>
+                                        <field name="first_use_age"/>
+                                        <field name="last_use_date"/>
+                                        <field name="details"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+
+                        <!-- Health History Tab -->
+                        <page string="Health History">
+                            <group>
+                                <field name="health_history"/>
+                                <field name="current_medications"/>
+                                <field name="primary_care_physician"/>
+                                <field name="psychiatrist_np"/>
+                            </group>
+                        </page>
+
+                        <!-- Mental Status Exam Tab -->
+                        <page string="Mental Status Exam">
+                            <group>
+                                <field name="affect" widget="many2many_tags"/>
+                                <field name="mood" widget="many2many_tags"/>
+                                <field name="orientation"/>
+                                <field name="recent_memory"/>
+                                <field name="remote_memory"/>
+                                <field name="intellect"/>
+                                <field name="attention_concentration" widget="many2many_tags"/>
+                                <field name="grooming_appearance" widget="many2many_tags"/>
+                                <field name="behavior"/>
+                                <field name="hallucinations"/>
+                                <field name="hallucinations_description" />
+                                <field name="delusions"/>
+                                <field name="delusions_description" />
+                                <field name="obsessions"/>
+                                <field name="obsessions_description" />
+                                <field name="thought_processes" widget="many2many_tags"/>
+                                <field name="speech" widget="many2many_tags"/>
+                                <field name="motor"/>
+                                <field name="impulse_control"/>
+                                <field name="impulse_control_description" />
+                                <field name="insight"/>
+                                <field name="judgment"/>
+                                <field name="mse_comments"/>
+                            </group>
+                        </page>
+
+                        <!-- Child/Adolescent Tab -->
+                        <page string="Child/Adolescent">
+                            <group>
+                                <field name="minor_verbal_assent"/>
+                                <field name="parent_privacy_agreement"/>
+                                <field name="parent_guardian_names"/>
+                                <field name="custody_arrangements"/>
+                                <field name="prenatal_exposure"/>
+                                <field name="prenatal_exposure_details" />
+                                <field name="developmental_milestones"/>
+                                <field name="is_adopted"/>
+                                <field name="adoption_age" />
+                                <field name="parents_marital_status"/>
+                                <field name="divorce_age" />
+                                <field name="parent_relationships"/>
+                                <field name="sibling_relationships"/>
+                                <field name="peer_relationships"/>
+                                <field name="activities_hobbies"/>
+                                <field name="sexual_behavior_history"/>
+                                <field name="sleep_patterns"/>
+                                <field name="eating_habits"/>
+                                <field name="iep_services"/>
+                                <field name="iep_details" />
+                                <field name="cps_involvement"/>
+                                <field name="cps_details" />
+                            </group>
+                        </page>
+
+                        <!-- Couples/Family Tab -->
+                        <page string="Couples/Family">
+                            <group>
+                                <field name="relationship_length"/>
+                                <field name="relationship_substance_strain"/>
+                                <field name="relationship_substance_details" />
+                                <field name="relationship_abuse"/>
+                                <field name="relationship_abuse_details" />
+                                <field name="couple_strengths"/>
+                                <field name="family_treatment_reason"/>
+                                <field name="family_system_description"/>
+                                <field name="family_substance_strain"/>
+                                <field name="family_substance_details" />
+                                <field name="family_abuse"/>
+                                <field name="family_abuse_details" />
+                                <field name="family_strengths"/>
+                            </group>
+                        </page>
+
+                        <!-- Clinical Summary Tab -->
+                        <page string="Clinical Summary">
+                            <group>
+                                <field name="clinical_summary"/>
+                                <!-- <field name="diagnosis_ids" widget="many2many_tags"/> -->
+                            </group>
+                        </page>
+
+                        <!-- Timing Tab -->
+                        <page string="Session Timing">
+                            <group>
+                                <field name="session_start_time"/>
+                                <field name="session_end_time"/>
+                                <field name="session_duration" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- list View -->
+    <record id="view_ehr_cdss_assessment_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.assessment.list</field>
+        <field name="model">ehr_cdss.assessment</field>
+        <field name="arch" type="xml">
+            <list string="Clinical Assessments">
+                <!-- <field name="name"/> -->
+                <field name="patient_id"/>
+                <field name="provider_id"/>
+                <field name="date"/>
+                <field name="assessment_type"/>
+                <field name="clinical_summary" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_ehr_cdss_assessment_search" model="ir.ui.view">
+        <field name="name">ehr_cdss.assessment.search</field>
+        <field name="model">ehr_cdss.assessment</field>
+        <field name="arch" type="xml">
+            <search string="Assessment Search">
+                <!-- <field name="name"/> -->
+                <field name="patient_id"/>
+                <field name="provider_id"/>
+                <filter string="This Month" name="current_month" 
+                    domain="[('date','&gt;=',context_today().replace(day=1)),('date','&lt;=',context_today())]"/>
+                <filter string="Initial Assessments" name="initial_assessments" 
+                    domain="[('assessment_type','=','initial')]"/>
+                <filter string="Reassessments" name="reassessments" 
+                    domain="[('assessment_type','=','reassessment')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Assessment Type" name="group_by_type" 
+                        context="{'group_by':'assessment_type'}"/>
+                    <filter string="Provider" name="group_by_provider" 
+                        context="{'group_by':'provider_id'}"/>
+                    <filter string="Month" name="group_by_month" 
+                        context="{'group_by':'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_ehr_cdss_assessment" model="ir.actions.act_window">
+        <field name="name">Clinical Assessments</field>
+        <field name="res_model">ehr_cdss.assessment</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first clinical assessment
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_ehr_cdss_assessment" name="Clinical Assessments" parent="Master_ehr_cdss_modules" action="action_ehr_cdss_assessment" sequence="10"/>
+
+</odoo>             

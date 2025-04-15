@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_document_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.document.list</field>
+        <field name="model">ehr_cdss.document</field>
+        <field name="arch" type="xml">
+            <list>
+                
+                <field name="name"/>
+                <field name="document_type"/>
+                <field name="create_date"/>
+                <field name="description"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_document_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.document.form</field>
+        <field name="model">ehr_cdss.document</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_back_to_patient" string="Demographic" type="object" class="oe_secondary" invisible="not show_back_button"/>
+                    <button name="action_medical_history" string="Medical History" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="action_family_history" string="Family History" type="object" class="oe_highlight" invisible="not show_back_button"/>
+                    <button name="action_immunization_infectious_disease" string="Immunization-Infectious-Disease" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="action_medication" string="Medication" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="action_medical_patient_allergy" string="Patient Allergy" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="dummy_action" string="Patient Document" class="btn btn-danger oe_highlight" invisible="not show_back_button" disabled="1" />
+                    <button name="action_appointment" string="Patient Appointment" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="open_insurance_record" string="Insurance" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="open_allergy_record" string="Patient Allergy" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <!-- <button name="action_document" string="Patient Documents" type="object" invisible="show_back_button" class="oe_highlight"/>  -->
+                    <!-- <button name="action_demographic" string="Demographic" type="object" class="oe_highlight" domain="[('patient_id', '==', True)]" /> -->
+                </header>
+                <sheet>
+                    <group>
+                        <field name="patient_id" readonly= "show_back_button" />
+                        <field name="name"/>
+                        <field name="document_type"/>
+                        <field name="file"/>
+                        <field name="file_name"/>
+                        <field name="file_type"/>
+                        <field name="file_size"/>
+                        <field name="document_date"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- <record id="view_document_kanban" model="ir.ui.view">
+        <field name="name">ehr_cdss.document.kanban</field>
+        <field name="model">ehr_cdss.document</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <header>
+                    <button name="action_back_to_patient" string="Demographic" type="object" class="oe_secondary" invisible="not show_back_button"/>
+                    <button name="action_medical_history" string="Medical History" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="action_family_history" string="Family History" type="object" class="oe_highlight" invisible="not show_back_button"/>
+                    <button name="action_immunization_infectious_disease" string="Immunization-Infectious-Disease" type="object" class="oe_highlight" invisible="not show_back_button"/>
+                    <button name="action_medication" string="Medication" type="object" class="oe_highlight" invisible="not show_back_button"/>
+                    <button name="action_medical_patient_allergy" string="Patient Allergy" type="object" class="oe_highlight" invisible="not show_back_button"/>
+                    <button name="dummy_action" string="Patient Document" class="btn btn-danger oe_highlight" invisible="not show_back_button" disabled="1" />
+                    <button name="action_appointment" string="Patient Appointment" type="object" class="oe_highlight" invisible="not show_back_button" />
+                </header>
+                <field name="patient_id"/>
+                <field name="document_type"/>
+                <field name="create_date"/>
+            </kanban>
+        </field>
+    </record> -->
+
+
+    <record id="view_document_kanban" model="ir.ui.view">
+        <field name="name">ehr_cdss.document.kanban</field>
+        <field name="model">ehr_cdss.document</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_small_column">
+                <templates>
+
+                    <t t-name="kanban-box">
+                        <!-- Record content -->
+                        <div class="oe_kanban_details">
+                            <strong><field name="patient_id"/></strong><br/>
+                            <field name="document_type"/><br/>
+                            <field name="create_date"/>
+                        </div>
+                    </t>
+
+                    <!-- 🔽 Define the kanban header template -->
+                    <!-- <t t-name="kanban-header">
+                        <div class="o_kanban_header_buttons mb-2">
+                            <button type="object" name="action_back_to_patient" class="btn btn-secondary">Demographic</button>
+                            <button type="object" name="action_medical_history" class="btn btn-primary">Medical History</button>
+                            <button type="object" name="action_family_history" class="btn btn-primary">Family History</button>
+                            <button type="object" name="action_immunization_infectious_disease" class="btn btn-primary">Immunization</button>
+                            <button type="object" name="action_medication" class="btn btn-primary">Medication</button>
+                            <button type="object" name="action_medical_patient_allergy" class="btn btn-primary">Allergy</button>
+                            <button class="btn btn-danger" disabled="1">Patient Document</button>
+                            <button type="object" name="action_appointment" class="btn btn-primary">Appointment</button>
+                        </div>
+                    </t> -->
+
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="view_document_search" model="ir.ui.view">
+        <field name="name">ehr_cdss.document.search</field>
+        <field name="model">ehr_cdss.document</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Basic search field -->
+                <field name="name"/>
+                <field name="patient_id"/>
+                
+                <!-- Filter section -->
+                <filter string="Document Type" name="document_type" domain="[]" context="{'group_by': 'document_type'}"/>
+                <filter string="State" name="state" domain="[]" context="{'group_by': 'state'}"/>
+                
+                <!-- Group by options -->
+                <group expand="0" string="Group By">
+                    <filter string="Patient" name="group_patient" context="{'group_by': 'patient_id'}"/>
+                    <filter string="Document Date" name="group_date" context="{'group_by': 'document_date'}"/>
+                    <filter string="File Type" name="group_file_type" context="{'group_by': 'file_type'}"/>
+                </group>
+                <searchpanel>
+                    <field name="document_type" string="Document Types" />
+                    <field name="patient_id" string="Patient Name" />
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="document_action" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="res_model">ehr_cdss.document</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create and manage your medical documents efficiently.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_document" name="All Documents" parent="Master_ehr_cdss_modules" action="document_action" sequence="10"/>
+</odoo>

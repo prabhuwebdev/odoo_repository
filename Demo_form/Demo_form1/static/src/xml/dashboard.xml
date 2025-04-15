@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+  <t t-name="dashboard.container" owl="1">
+    <div class="d-flex h-100 bg-light">
+
+      <!-- Left Sidebar -->
+      <div class="p-3 bg-white border-end" style="width: 280px; min-height: 100vh;">
+        <div class="mb-4 mt-5">
+          <h6 class="fw-bold">Patient Demographics</h6>
+          <div class="border p-2 rounded bg-light">
+            <p class="mb-1">Name: <t t-esc="state.name" /></p>
+            <p class="mb-1">Age: <t t-esc="state.age" /></p>
+            <p class="mb-1">Gender: <t t-esc="state.gender" /></p>
+            <p class="mb-1">DOB: <t t-esc="state.dob" /></p>
+            <p class="mb-0">Contact: <t t-esc="state.contact" /></p>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <h6 class="fw-bold">Family Health History</h6>
+          <div class="border p-2 rounded bg-light" style="min-height: 60px;"></div>
+        </div>
+
+        <div>
+          <h6 class="fw-bold">Habits</h6>
+          <div class="border p-2 rounded bg-light">
+            <p class="mb-1">Smoking: <t t-esc="state.smoking" /></p>
+            <p class="mb-1">Alcohol: <t t-esc="state.alcohol" /></p>
+            <p class="mb-0">Exercise: <t t-esc="state.exercise" /></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side Content -->
+      <div class="flex-grow-1">
+        <div class="d-flex">
+          <ul class="nav nav-tabs mb-2">
+            <li class="nav-item">
+              <a class="nav-link" t-att-class="{active: state.selected_tab === 'medical'}" t-on-click.prevent="() => state.selected_tab = 'medical'">Medical Records</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" t-att-class="{active: state.selected_tab === 'past_medication'}" t-on-click.prevent="() => state.selected_tab = 'past_medication'">Past Medications</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" t-att-class="{active: state.selected_tab === 'surgical_history'}" t-on-click.prevent="() => state.selected_tab = 'surgical_history'">Surgical History</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" t-att-class="{active: state.selected_tab === 'ai_diagnosis'}" t-on-click.prevent="() => state.selected_tab = 'ai_diagnosis'">AI Diagnostics</a>
+            </li>
+          </ul>
+        </div>
+
+<!--        &lt;!&ndash; Filter and Add Record Buttons &ndash;&gt;-->
+<!--        <div class="d-flex justify-content-between align-items-center px-3">-->
+<!--          <div class="d-flex align-items-center gap-2">-->
+<!--            <span class="me-2 fw-bold">Filter by:</span>-->
+<!--            <button class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-semibold">All</button>-->
+<!--            <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold">Images</button>-->
+<!--            <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold">Lab Tests</button>-->
+<!--            <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold">Clinical Notes</button>-->
+<!--          </div>-->
+<!--          <button class="btn btn-success btn-sm px-3">+ Add Record</button>-->
+<!--        </div>-->
+
+        <!-- Medical Records Card -->
+        <t t-if="state.selected_tab === 'medical'">
+          <div class="d-flex justify-content-between align-items-center px-3">
+            <div class="d-flex align-items-center gap-2">
+              <span class="me-2 fw-bold">Filter by:</span>
+              <button class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-semibold">All</button>
+              <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold">Images</button>
+              <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold">Lab Tests</button>
+              <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold">Clinical Notes</button>
+            </div>
+            <button class="btn btn-success btn-sm px-3" t-on-click.prevent="state.new_image_record = 'true'">+ Add Record</button>
+            <button class="btn btn-outline-primary btn-sm" t-on-click="() => editRecord(record.id)">
+                      Edit
+                  </button>
+          </div>
+
+          <div class="card shadow-sm border mb-4 m-4 col-md-6" style="width: 24rem;">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h6 class="card-title fw-bold mb-0">CT Scan - Brain</h6>
+                <small class="text-muted">15/03/2025</small>
+              </div>
+              <div class="d-flex border rounded overflow-hidden mb-3 p-3" style="height: 150px;">
+                <div class="bg-light d-flex align-items-center justify-content-center" style="width: 50%; height: 100%;">
+                  <img src="https://via.placeholder.com/120x120?text=CT+Scan" class="img-fluid h-100 w-100 object-fit-cover" alt="CT Scan Image" />
+                </div>
+                <div class="p-2" style="width: 50%; font-size: 0.875rem; height:100%">
+                  <p class="mb-1">Provider: City Hospital</p>
+                  <p class="mb-1">Radiologist: Dr. Smith</p>
+                  <p class="mb-0">Status: Analyzed</p>
+                  <button class="btn btn-sm btn-success px-3">View Report</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Summary Always Shown -->
+        <div class="border p-2 m-2 mx-3" style="width:100%; height:auto; border-radius:6px">
+          <div class="my-2">
+            <h5>AI Diagnostic Summary</h5>
+            <p>Based on the multimodal analysis of the patient data</p>
+          </div>
+          <hr/>
+          <div class="my-2">
+            <ul>
+              <li>The first analysis of the patient data</li>
+              <li>The second analysis of the patient data</li>
+              <li>The third analysis of the patient data</li>
+              <li>The fourth analysis of the patient data</li>
+            </ul>
+          </div>
+          <div class="d-flex justify-content-center align-items-center">
+            <button class="p-2 btn btn-primary my-2">Generate Comprehensive Report</button>
+          </div>
+        </div>
+
+        </t>
+
+<!--        past medication forms-->
+
+
+        <t t-if="state.selected_tab === 'past_medication'">
+          <div class="d-flex justify-content-between align-items-center px-3">
+            <div class="d-flex align-items-center gap-2">
+              <span class="me-2 fw-bold">Filter by:</span>
+              <button class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-semibold">All</button>
+              <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold">Current</button>
+              <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold">Past</button>
+            </div>
+            <button class="btn btn-success btn-sm px-3"   t-on-click.prevent="() => state.add_more = true">+ Add Medications</button>
+          </div>
+
+
+          <t t-if="state.add_more === 'false'">
+
+          <div class="overflow-x-auto d-flex align-items-center justify-content-center my-4 w-100 col-md-12" style="width:100%">
+            <table class="min-w-full bg-white rounded-lg shadow-sm">
+              <thead class="bg-gray-100 text-sm text-gray-700">
+                <tr>
+                  <th class="px-4 py-2 text-left">Medication</th>
+                  <th class="px-4 py-2 text-left">Dosage</th>
+                  <th class="px-4 py-2 text-left">Start Date</th>
+                  <th class="px-4 py-2 text-left">End Date</th>
+                  <th class="px-4 py-2 text-left">Status</th>
+                  <th class="px-4 py-2 text-left">Prescriber</th>
+                  <th class="px-4 py-2 text-left">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+<!--                <t t-foreach="medications" t-as="med" t-key="med.name">-->
+                  <tr class="border-t text-sm text-gray-800">
+                    <td class="px-4 py-2">Lisinopril</td>
+                    <td class="px-4 py-2">10 Mg</td>
+                    <td class="px-4 py-2">01/01/2000</td>
+                    <td class="px-4 py-2"> - </td>
+                    <td class="px-4 py-2">
+<!--                      <span t-if="med.status === 'Active'" class="px-2 py-1 text-green-700 bg-green-100 rounded text-xs font-semibold">Active</span>-->
+<!--                      <span t-if="med.status === 'Completed'" class="px-2 py-1 text-gray-700 bg-gray-200 rounded text-xs font-semibold">Completed</span>-->
+<!--                      <span t-if="med.status === 'Discontinued'" class="px-2 py-1 text-red-700 bg-red-100 rounded text-xs font-semibold">Discontinued</span>-->
+                    Active
+                    </td>
+                    <td class="px-4 py-2">Dr.James Will</td>
+                    <td class="px-4 py-2">
+                      <button class="text-blue-600 hover:underline btn-outline rounded-pill text-sm px-3">View</button>
+                    </td>
+                  </tr>
+
+<!--                </t>-->
+              </tbody>
+            </table>
+          </div>
+          <t t-name="ehr_cdss.MedicationDetails" owl="1">
+            <div class="p-4 border rounded-md shadow-sm " style="max-height:400px; overflow:scroll">
+              <div class="">
+                <h2 class="text-md font-semibold text-gray-700 mb-4 ">
+                Medication Details - Lisinopril
+              </h2>
+              </div>
+
+
+              <div class="row">
+                <!-- Basic Information -->
+                <div class="col-md-6 mb-4">
+                  <div class="border rounded p-4 bg-gray-50 h-100">
+                    <h3 class="text-sm font-semibold mb-2 text-gray-600">Basic Information</h3>
+                    <div class="text-sm text-gray-800 space-y-1">
+                      <p><strong>Medication Name:</strong> Lisinopril</p>
+                      <p><strong>Dosage:</strong> 10 mg </p>
+                      <p><strong>Frequency:</strong> Once Daily</p>
+                      <p><strong>Route:</strong> Oral</p>
+                      <p><strong>Start Date:</strong> 01/01/2003</p>
+                      <p><strong>End Date:</strong> 1</p><p><strong>Prescriber:</strong> Dr. James Wilson</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Medication Assessment -->
+                <div class="col-md-6 mb-4">
+                  <div class="border rounded p-4 bg-gray-50 h-100">
+                    <h3 class="text-sm font-semibold mb-2 text-gray-600">Medication Assessment</h3>
+                    <div class="text-sm text-gray-800 space-y-1 mb-4">
+                      <p><strong>Reason/Condition:</strong> Hypertension</p>
+                      <p>
+                        <strong>Effectiveness:</strong>
+                        <span class="inline-block px-2 py-0.5 text-green-700 bg-green-100 rounded text-xs font-semibold">
+                          Effective
+                        </span>
+                      </p>
+
+<!--                      <p>-->
+<!--                        <strong>Effectiveness:</strong>-->
+<!--                        <span class="inline-block px-2 py-0.5 text-green-700 bg-green-100 rounded text-xs font-semibold">-->
+<!--                          <t t-esc="medication.effectiveness"/>-->
+<!--                        </span>-->
+<!--                      </p>-->
+
+                      <p><strong>Allergic Reaction:</strong> No</p>
+                      <p><strong>Side Effects:</strong> Mild Dizziness (first week only)</p>
+                    </div>
+
+                    <!-- AI Analysis -->
+                    <h4 class="text-sm font-semibold mb-1 text-gray-600">AI Analysis</h4>
+                    <p class="text-sm text-gray-700">
+                      Blood pressure readings show positive response to current medication regimen. Recommend continuing current dosage
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="mt-1 mb-2 d-flex justify-content-end gap-2">
+                <button class="bg-gray-200 text-gray-700 px-2 py-2 rounded hover:bg-gray-300 text-sm font-medium">
+                  End Medication
+                </button>
+                <button class="bg-purple-600 text-gray px-2 py-2 rounded hover:bg-purple-700 text-sm font-medium">
+                  Edit Medication
+                </button>
+              </div>
+            </div>
+          </t>
+          </t>
+
+          <t t-else="state.add_more === 'true'">
+            <div>
+              <div class="d-flex flex-direction-end">
+                <button class="btn btn-success btn-sm px-3"   t-on-click.prevent="() => state.add_more = 'false'"> Back</button>
+
+              </div>
+<!--            this is the form for adding the past medications  -->
+              <div class="container bg-white p-4 shadow-sm my-4" style=" max-height:600px;  overflow-y: auto; padding-bottom: 3rem;">
+                <h5 class="mb-4 fw-bold">Medication Details - Lisinopril</h5>
+
+                <div class="row">
+                  <!-- Basic Information -->
+                  <div class="col-md-6 mb-4">
+                    <div class="border rounded p-4 bg-light">
+                      <h6 class="mb-3 fw-semibold">Basic Information</h6>
+
+                      <div class="mb-2">
+                        <label for="med_name" class="form-label">Medication Name</label>
+                        <input type="text" class="form-control" id="med_name" value="Lisinopril"/>
+                      </div>
+
+                      <div class="mb-2">
+                        <label for="dosage" class="form-label">Dosage</label>
+                        <input type="text" class="form-control" id="dosage" value="10 mg"/>
+                      </div>
+
+                      <div class="mb-2">
+                        <label for="frequency" class="form-label">Frequency</label>
+                        <input type="text" class="form-control" id="frequency" value="Once daily"/>
+                      </div>
+
+                      <div class="mb-2">
+                        <label for="route" class="form-label">Route</label>
+                        <input type="text" class="form-control" id="route" value="Oral"/>
+                      </div>
+
+                      <div class="mb-2">
+                        <label for="start_date" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="start_date" value="2023-05-10"/>
+                      </div>
+
+                      <div class="mb-2">
+                        <label for="end_date" class="form-label">End Date</label>
+                        <input type="text" class="form-control" id="end_date" value="-"/>
+                      </div>
+
+                      <div class="mb-2">
+                        <label for="prescriber" class="form-label">Prescriber</label>
+                        <input type="text" class="form-control" id="prescriber" value="Dr. James Wilson"/>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Medication Assessment -->
+                  <div class="col-md-6 mb-4">
+                    <div class="border rounded p-4 bg-light">
+                      <h6 class="mb-3 fw-semibold">Medication Assessment</h6>
+
+                      <div class="mb-2">
+                        <label for="reason" class="form-label">Reason/Condition</label>
+                        <input type="text" class="form-control" id="reason" value="Hypertension"/>
+                      </div>
+
+<!--        <div class="mb-2">-->
+<!--          <label for="effectiveness" class="form-label">Effectiveness</label>-->
+<!--          <select id="effectiveness" class="form-select">-->
+<!--            <option selected>Effective</option>-->
+<!--            <option>Good</option>-->
+<!--            <option>Moderate</option>-->
+<!--            <option>Poor</option>-->
+<!--          </select>-->
+<!--        </div>-->
+
+<!--        <div class="mb-2">-->
+<!--          <label for="allergy" class="form-label">Allergic Reaction</label>-->
+<!--          <select id="allergy" class="form-select">-->
+<!--            <option selected>No</option>-->
+<!--            <option>Yes</option>-->
+<!--          </select>-->
+<!--        </div>-->
+
+                      <div class="mb-2">
+                        <label for="side_effects" class="form-label">Side Effects</label>
+                        <textarea class="form-control" id="side_effects" rows="2">Mild dizziness (first week only)</textarea>
+                      </div>
+
+                      <div class="mb-2">
+                        <label for="ai_analysis" class="form-label">AI Analysis</label>
+                        <textarea class="form-control" id="ai_analysis" rows="3">Blood pressure readings show positive response to current medication regimen. Recommend continuing current dosage.</textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--              and this is the form medication end-->
+            </div>
+          </t>
+        </t>
+
+        <!--        surgical history forms-->
+        <t t-if="state.selected_tab === 'surgical_history'">
+          <div class="d-flex justify-content-between align-items-center my-3 px-3">
+            <!-- Left side: Search bar -->
+            <div class="d-flex align-items-center gap-2">
+              <input type="text" class="form-control" placeholder="Search surgeries..." style="max-width: 220px;" />
+              <button class="btn btn-outline-primary" style="border-color: #b3a6d2; color: #5e4b8b;">Timeline View</button>
+            </div>
+
+            <!-- Right side: Add Surgery button -->
+            <button class="btn btn-success" style="padding: 6px 16px; font-weight: 500;"  t-on-click.prevent="() => state.add_surgical_form = 'true'">+ Add Surgery</button>
+          </div>
+
+          <t t-if="state.add_surgical_form === 'true'">
+<!--              surgical Form start-->
+
+            <div class="container mt-4" style="max-height: 90vh; overflow-y: auto; padding-bottom: 100px;">
+            <button class="btn btn-success" style="padding: 6px 16px; font-weight: 500;"  t-on-click.prevent="() => state.add_surgical_form = 'false'">Back</button>
+  <form class="mb-4">
+    <div class="row">
+      <!-- Left Column -->
+      <div class="col-md-6">
+        <h5 class="mb-3">Surgical Procedure Information</h5>
+        <div class="mb-3">
+          <label for="procedureName" class="form-label">Surgery/Procedure Name *</label>
+          <input type="text" class="form-control" id="procedureName" placeholder="Enter surgery or procedure name..." />
+        </div>
+        <div class="mb-3">
+          <label for="surgeryDate" class="form-label">Surgery Date *</label>
+          <input type="date" class="form-control" id="surgeryDate" />
+        </div>
+        <div class="mb-3">
+          <label for="surgeonName" class="form-label">Surgeon Name</label>
+          <input type="text" class="form-control" id="surgeonName" placeholder="Enter surgeon name..." />
+        </div>
+        <div class="mb-3">
+          <label for="hospital" class="form-label">Hospital/Facility</label>
+          <input type="text" class="form-control" id="hospital" placeholder="Enter hospital or facility name..." />
+        </div>
+        <div class="mb-3">
+          <label for="anesthesia" class="form-label">Anesthesia Type</label>
+          <select class="form-select" id="anesthesia">
+            <option value="">Select anesthesia type</option>
+            <option value="general">General</option>
+            <option value="local">Local</option>
+            <option value="regional">Regional</option>
+            <option value="sedation">Sedation</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="outcome" class="form-label">Outcome *</label>
+          <select class="form-select" id="outcome">
+            <option value="">Select outcome</option>
+            <option value="good">Good</option>
+            <option value="fair">Fair</option>
+            <option value="poor">Poor</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </div>
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" id="complicationsCheckbox" />
+          <label class="form-check-label" for="complicationsCheckbox">Complications</label>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="col-md-6">
+        <h5 class="mb-3">Additional Information</h5>
+        <div class="mb-3">
+          <label for="reason" class="form-label">Reason for Surgery *</label>
+          <textarea class="form-control" id="reason" rows="2" placeholder="Enter reason for surgery..."></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="complicationDetails" class="form-label">Complication Details</label>
+          <textarea class="form-control" id="complicationDetails" rows="2" placeholder="Describe complications (if any)..."></textarea>
+        </div>
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="checkbox" id="followUpRequired" />
+          <label class="form-check-label" for="followUpRequired">Follow-up Required</label>
+        </div>
+        <div class="mb-3">
+          <label for="followUpDate" class="form-label">Follow-up Date</label>
+          <input type="date" class="form-control" id="followUpDate" />
+        </div>
+        <div class="mb-3">
+          <label for="notes" class="form-label">Notes</label>
+          <textarea class="form-control" id="notes" rows="2" placeholder="Enter additional notes..."></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="documents" class="form-label">Related Documents</label>
+          <input type="file" class="form-control" id="documents" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-flex justify-content-end mt-1 mb-4">
+      <button type="button" class="btn btn-secondary me-2">Preview</button>
+      <button type="reset" class="btn btn-light me-2">Cancel</button>
+      <button type="submit" class="btn btn-success">Save</button>
+    </div>
+  </form>
+</div>
+            <!--              surgical Form end-->
+            </t>
+          <t t-else="state.add_surgical_form === false">
+
+            <div>
+              <h6>Surgical Layout</h6>
+            </div>
+
+          </t>
+
+        </t>
+
+
+
+
+<!--        ai diagnosis forms-->
+        <t t-if="state.selected_tab === 'ai_diagnosis'">
+          <div class="ai-summary-card p-4 border rounded shadow-sm bg-white">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="mb-0">AI Diagnostic Summary</h5>
+    <button class="btn btn-primary">Run New Analysis</button>
+  </div>
+
+  <!-- Health Score -->
+  <div class="mb-3">
+    <label class="form-label fw-semibold">Health Score</label>
+    <div class="text-muted small">Last updated: 15/03/2025</div>
+    <div class="progress rounded-pill mt-2" style="height: 24px;">
+      <div class="progress-bar bg-success" role="progressbar" style="width: 96%; font-weight: 600;">
+        83%
+      </div>
+    </div>
+    <div class="d-flex justify-content-between small text-muted mt-1 px-1">
+      <span>Poor</span>
+      <span>Fair</span>
+      <span>Good</span>
+      <span>Excellent</span>
+    </div>
+  </div>
+
+  <!-- Risk Assessment -->
+  <div class="risk-box border p-3 rounded mt-3">
+    <div class="fw-semibold text-primary mb-2">Risk Assessment</div>
+    <div class="btn-group w-100" role="group">
+      <button type="button" class="btn btn-outline-primary active">Low</button>
+      <button type="button" class="btn btn-outline-secondary">Moderate</button>
+      <button type="button" class="btn btn-outline-secondary">High</button>
+    </div>
+  </div>
+</div>
+
+        </t>
+      </div>
+    </div>
+  </t>
+</templates>
+
+
+
+

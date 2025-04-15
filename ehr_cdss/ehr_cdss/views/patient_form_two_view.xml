@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_allergy_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.patient.allergy.form</field>
+        <field name="model">ehr_cdss.patient.allergy</field>
+        <field name="arch" type="xml">
+            <form string="Patient Allergies">
+                <sheet>
+                    <header>
+                        <button name="action_back_to_patient" string="Demographic" type="object" class="oe_secondary" invisible="not show_back_button"/>
+                        <button name="action_medical_history" string="Medical History" type="object" class="oe_highlight" invisible="not show_back_button" />
+                        <button name="action_immunization_infectious_disease" string="Immunization-Infectious-Disease" type="object" class="oe_highlight" invisible="not show_back_button" />
+                        <button name="action_family_history" string="Family History" type="object" class="oe_highlight" invisible="not show_back_button" />
+                        <button name="action_medication" string="Medication" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                        <button name="action_medical_patient_allergy" string="Patient Allergy" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                        <button name="action_document" string="Patient Document" class="oe_highlight" type="object" invisible="not show_back_button" />
+                        <button name="action_appointment" string="Patient Appointment" type="object" class="oe_highlight" invisible="not show_back_button" />
+                        <button name="open_insurance_record" string="Insurance" type="object" class="oe_highlight" invisible="not show_back_button" />
+                        <!-- <button name="open_allergy_record" string="Patient Allergy" type="object" class="oe_highlight" invisible="not show_back_button" /> -->
+                        <button name="dummy_action" string="Patient Allergy" type="object" class="btn btn-danger oe_highlight" invisible="not show_back_button" disabled="1" />
+
+                    </header>
+                    <group>
+                        <h1> <field name="patient_id"/></h1>
+                    </group>
+                    <notebook>
+                        <page string="Allergies">
+                            <field name="allergy_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="category_id"/>
+                                    <field name="severity_id"/>
+                                    <field name="is_intolerance"/>
+                                    <field name="verified"/>
+                                    <field name="allergy_band_applied"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_patient_allergy" model="ir.actions.act_window">
+        <field name="name">Allergies</field>
+        <field name="res_model">ehr_cdss.patient.allergy</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_allergy_form"/>
+        <field name="target">current</field>
+    </record>
+    <record id="view_insurance_financial_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.patient.insurance.form</field>
+        <field name="model">ehr_cdss.patient.insurance</field>
+        <field name="arch" type="xml">
+            <form string="Insurance and Financial Information">
+                <header>
+                    <!-- Add buttons here if needed -->
+                    <button name="action_back_to_patient" string="Demographic" type="object" class="oe_highlight" invisible="not show_back_button"/>
+                    <button name="action_medical_history" string="Medical History" type="object" class="oe_highlight" invisible="not show_back_button"/>
+                    <button name="action_family_history" string="Family History" type="object" class="oe_highlight" invisible="not show_back_button"/>
+                    <button name="action_immunization_infectious_disease" string="Immunization-Infectious-Disease" type="object" class="oe_highlight" invisible="not show_back_button"/>
+                    <button name="action_medication" string="Medication" type="object" class="oe_highlight" invisible="not show_back_button"/>
+                    <button name="action_medical_patient_allergy" string="Patient Allergy" type="object" class="oe_highlight" invisible="not show_back_button"/>
+                    <button name="action_document" string="Patient Documents" type="object" class="oe_highlight" invisible="not show_back_button"/> 
+                    <button name="action_appointment" string="Patient Appointment" type="object" class="oe_highlight" invisible="not show_back_button"/> 
+                    <button name="dummy_action" string="Patient Insurance" type="object" invisible="not show_back_button" class="btn btn-danger oe_highlight" disabled="1"/>
+                </header>
+                <sheet>
+                    <group>
+                        <h1><field name="patient_id"/></h1>
+                    </group>
+                    <notebook>
+                        <page string="Insurance Information">
+                            <group>
+                                <group>
+                                    <field name="insurance_status" required="1"/>
+                                    <field name="primary_insurance"/>
+                                    <field name="primary_insurance_id"/>
+                                    <field name="primary_insurance_group"/>
+                                    <field name="primary_insurance_holder"/>
+                                    <field name="primary_insurance_holder_name"/>
+                                    <field name="primary_insurance_holder_dob"/>
+                                </group>
+                                <group>
+                                    <field name="secondary_insurance"/>
+                                    <field name="secondary_insurance_id"/>
+                                    <field name="secondary_insurance_group"/>
+                                    <field name="financial_assistance"/>
+                                    <field name="financial_counseling"/>
+                                    <field name="pharmacy_preference"/>
+                                    <field name="pharmacy_address"/>
+                                    <field name="pharmacy_phone"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_patient_insurance_tree" model="ir.ui.view">
+        <field name="name">ehr_cdss.patient.insurance.tree</field>
+        <field name="model">ehr_cdss.patient.insurance</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="patient_id"/>
+                <field name="insurance_status"/>
+                <field name="primary_insurance"/>
+                <field name="secondary_insurance"/>
+                <field name="pharmacy_phone"/>
+                <field name="pharmacy_address"/>
+            </list>
+        </field>
+    </record>
+    
+
+    <record id="action_insurance_financial" model="ir.actions.act_window">
+        <field name="name">Insurance and Financial</field>
+        <field name="res_model">ehr_cdss.patient.insurance</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_patient_insurance_tree"/>
+    </record>
+
+
+    <record id="view_insurance_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.patient.insurance_patient.form</field>
+        <field name="model">ehr_cdss.patient.insurance_patient</field>
+        <field name="arch" type="xml">
+            <form string="Patient Info">
+                <header>
+                    <button name="action_back_to_patient" string="Demographic" type="object" class="oe_secondary" invisible="not show_back_button"/>
+                    <button name="action_medical_history" string="Medical History" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="action_immunization_infectious_disease" string="Immunization-Infectious-Disease" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="action_family_history" string="Family History" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="action_medication" string="Medication" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="action_medical_patient_allergy" string="Patient Allergy" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="action_document" string="Patient Document" class="oe_highlight" type="object" invisible="not show_back_button" />
+                    <button name="action_appointment" string="Patient Appointment" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <!-- <button name="open_insurance_record" string="Insurance" type="object" class="oe_highlight" invisible="not show_back_button" /> -->
+                    <button name="dummy_action" string="Insurance" type="object" class="btn btn-danger oe_highlight" invisible="not show_back_button" disabled="1" />
+                    <button name="open_allergy_record" string="Patient Allergy" type="object" class="oe_highlight" invisible="not show_back_button" />
+
+                </header>
+                <sheet>
+                    <!-- Your patient fields go here -->
+                    <group>
+                        <h1> <field name="patient_id"/></h1>
+                    </group>
+
+                    <notebook>
+                        <page string="Insurance Information">
+                            <field name="insurance_ids">
+                                <list editable="bottom">
+                                    <field name="patient_id"/>
+                                    <field name="insurance_status"/>
+                                    <field name="primary_insurance"/>
+                                    <field name="financial_assistance"/>
+                                    <field name="pharmacy_address"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pateitne_insurance" model="ir.actions.act_window">
+        <field name="name">Insurance</field>
+        <field name="res_model">ehr_cdss.patient.insurance_patient</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_insurance_form"/>
+        <field name="target">current</field>
+    </record>
+
+    <record id="view_patient_info_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.patient.info.form</field>
+        <field name="model">ehr_cdss.patient.info</field>
+        <field name="arch" type="xml">
+            <form string="Patient Information">
+                <header>
+                    <button name="action_demographic" string="Demographic" type="object" class="oe_highlight"/>
+                    <button name="action_medical_history" string="Medical History" type="object" class="oe_highlight"/>
+                    <button name="action_family_history" string="Family History" type="object" class="oe_highlight"/>
+                    <button name="action_immunization_infectious_disease" string="Immunization-Infectious-Disease" type="object" class="oe_highlight"/>
+                    <button name="action_medication" string="Medication" type="object" class="oe_highlight"/>
+                    <!-- <button name="action_medical_patient_allergy" string="Patient Allergy" type="object" class="oe_highlight"/> -->
+                    <button name="action_document" string="Patient Documents" type="object" class="oe_highlight"/> 
+                    <button name="action_appointment" string="Patient Appointment" type="object" class="oe_highlight"/> 
+                    <!-- <button name="action_insurance" string="Patient Insurance" type="object" class="oe_highlight"/> -->
+                    <button name="open_insurance_record" string="Insurance" type="object" class="oe_highlight"/>
+                    <button name="open_allergy_record" string="Patient Allergy" type="object" class="oe_highlight"/>
+
+                    <!-- <button string="Patient Allergy" type="action" name="ehr_cdss.action_patient_allergy" class="oe_highlight"/> -->
+
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="image" widget="image" class="oe_avatar"/>
+                            <field name="patient_id" readonly="1"/>
+                            <field name="name" required="1"/>
+                            <field name="preferred_name"/>
+                            <field name="birth_date" required="1"/>
+                            <field name="age" readonly="1"/>
+                            <field name="gender" required="1"/>
+                            <field name="sex_assigned_at_birth" required="1"/>
+                            <field name="mrn" required="1"/>
+                            <field name="is_minor" required="1"/>
+                        </group>
+                        <group>
+                            <field name="address_street"/>
+                            <field name="address_city"/>
+                            <field name="address_state"/>
+                            <field name="address_postal_code"/>
+                            <field name="address_country"/>
+                            <field name="phone_primary"/>
+                            <field name="phone_secondary"/>
+                            <field name="email"/>
+                            <field name="preferred_contact_method"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Demographics" class="highlight-tab" style="background-color: red;">
+                            <group>
+                                <field name="ethnicity"/>
+                                <field name="race"/>
+                                <field name="marital_status"/>
+                                <field name="preferred_language"/>
+                                <field name="interpreter_needed"/>
+                                <field name="interpreter_language"/>
+                                <field name="english_proficiency"/>
+                            </group>
+                        </page>
+                        <page string="Socioeconomic" class="highlight-tab" style="background-color: red;">
+                            <group>
+                                <field name="education_level"/>
+                                <field name="employment_status"/>
+                                <field name="occupation"/>
+                                <field name="employer"/>
+                                <field name="industry"/>
+                                <field name="income_range"/>
+                                <field name="household_size"/>
+                                <field name="veteran_status"/>
+                            </group>
+                        </page>
+                        <page string="Geographic and Transportation" class="highlight-tab" style="background-color: red;">
+                            <group>
+                                <field name="geographic_location"/>
+                                <field name="travel_time_to_facility"/>
+                                <field name="transportation"/>
+                                <field name="housing_status"/>
+                            </group>
+                        </page>
+                        <page string="Cultural and Religious" class="highlight-tab" style="background-color: red;">
+                            <group>
+                                <field name="religion"/>
+                                <field name="religious_practices"/>
+                                <field name="cultural_preferences"/>
+                                <field name="dietary_restrictions"/>
+                                <field name="is_aboriginal_torres_strait"/>
+                            </group>
+                        </page>
+                        <page string="Family and Emergency Contact" class="highlight-tab" style="background-color: red;">
+                            <group>
+                                <field name="family_structure"/>
+                                <field name="children"/>
+                                <field name="dependents"/>
+                                <field name="caregiver_name"/>
+                                <field name="caregiver_relationship"/>
+                                <field name="caregiver_phone"/>
+                                <field name="emergency_contact_name" required="1"/>
+                                <field name="emergency_contact_relationship" required="1"/>
+                                <field name="emergency_contact_phone" required="1"/>
+                                <field name="emergency_contact_address"/>
+                            </group>
+                        </page>
+                        <page string="Administrative" class="highlight-tab" style="background-color: red;">
+                            <group>
+                                <field name="registration_date"/>
+                                <field name="last_updated"/>
+                                <field name="admission_source"/>
+                                <field name="pcp_name"/>
+                                <field name="pcp_phone"/>
+                                <field name="pcp_address"/>
+                                <field name="referring_provider"/>
+                                <field name="preferred_facility"/>
+                                <field name="advance_directive"/>
+                                <field name="healthcare_proxy"/>
+                                <field name="organ_donor_status"/>
+                                <field name="hipaa_acknowledgment"/>
+                                <field name="consent_to_treat"/>
+                                <field name="patient_portal_access"/>
+                                <field name="recent_overseas_travel"/>
+                                <field name="overseas_location"/>
+                                <field name="overseas_return_date"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+    
+    <record id="view_patient_tree" model="ir.ui.view">
+        <field name="name">ehr_cdss.patient.info.tree</field>
+        <field name="model">ehr_cdss.patient.info</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="phone_primary"/>
+                <field name="email"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_patient_tree" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">ehr_cdss.patient.info</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_patient_tree"/>
+    </record>
+
+    
+    <!-- Main Menu Item -->
+    <menuitem id="menu_ehr_cdss_main" name="EHR CDSS" sequence="10"/>
+
+    <!-- Patients Submenu -->
+    <menuitem id="menu_ehr_cdss_patient_menu" name="Patients" parent="menu_ehr_cdss_main" action="action_patient_tree" sequence="2" />
+    <menuitem id="Master_ehr_cdss_modules" name="Record" parent="menu_ehr_cdss_main"  sequence="5" />
+    <menuitem id="sub_Master_ehr_cdss_modules" name="Master" parent="menu_ehr_cdss_main"  sequence="4" />
+
+    <menuitem id="menu_ehr_cdss_patient_insurance" parent="Master_ehr_cdss_modules"  name="Patients Insurances" action="action_insurance_financial" />	
+</odoo>

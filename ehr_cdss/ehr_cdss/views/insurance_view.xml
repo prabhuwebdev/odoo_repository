@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form View -->
+    <record id="view_ehr_cdss_insurance_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.insurance.form</field>
+        <field name="model">ehr_cdss.insurance</field>
+        <field name="arch" type="xml">
+            <form string="Patient Insurance">
+                <!-- <header>
+                    <button name="action_verify_eligibility" string="Verify Eligibility" type="object" class="btn-primary" />
+                    <button name="action_term" string="Terminate" type="object" class="btn-danger" />
+                    <field name="status" widget="statusbar" clickable="1"/>
+                </header> -->
+                <sheet>
+                    <group>
+                        <group>
+                            <!-- <field name="name" readonly="1"/> -->
+                            <field name="patient_id" required="1"/>
+                            <field name="plan_id" required="1"/>
+                            <field name="payer_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="coverage_type"/>
+                            <field name="member_id" required="1"/>
+                            <field name="group_number"/>
+                            <field name="policy_number"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Subscriber Info">
+                            <group>
+                                <field name="is_subscriber"/>
+                                <group >
+                                    <field name="subscriber_first_name"/>
+                                    <field name="subscriber_middle_name"/>
+                                    <field name="subscriber_last_name"/>
+                                    <field name="subscriber_dob"/>
+                                    <field name="subscriber_gender"/>
+                                    <field name="subscriber_phone"/>
+                                    <field name="subscriber_relationship"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Coverage Details">
+                            <group>
+                                <field name="effective_date"/>
+                                <field name="termination_date"/>
+                                <field name="eligibility_verified"/>
+                                <field name="eligibility_verification_date"/>
+                                <field name="eligibility_notes"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Benefits">
+                            <group>
+                                <field name="copay_amount"/>
+                                <field name="coinsurance_percentage"/>
+                                <field name="deductible_amount"/>
+                                <field name="deductible_met"/>
+                                <field name="out_of_pocket_max"/>
+                                <field name="out_of_pocket_met"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Authorizations">
+                            <field name="authorization_required"/>
+                            <field name="authorization_ids" mode="list,form">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="request_date"/>
+                                    <field name="visits_used"/>
+                                    <field name="effective_date"/>
+                                    <field name="expiration_date"/>
+                                </list>
+                                <form>
+                                    <field name="name"/>
+                                    <field name="request_date"/>
+                                    <field name="visits_used"/>
+                                    <field name="effective_date"/>
+                                    <field name="expiration_date"/>
+                                    <field name="notes"/>
+                                </form>
+                            </field>
+                        </page>
+                        
+                        <page string="Card Images">
+                            <group>
+                                <field name="card_image_front" widget="image" class="oe_avatar"/>
+                                <field name="card_image_back" widget="image" class="oe_avatar"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_insurance_plan_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.insurance.plan.form</field>
+        <field name="model">ehr_cdss.insurance.plan</field>
+        <field name="arch" type="xml">
+            <form string="Insurance Plan">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Plan Name" /></h1>
+                        <h2><field name="payer_id" placeholder="Payer ID" /></h2>
+                    </div>
+                    
+                    <group>
+                        <group>
+                            <field name="plan_id"/>
+                            <field name="plan_type"/>
+                            <field name="plan_level"/>
+                            <field name="network_type"/>
+                        </group>
+                        <group>
+                            <field name="active" widget="radio"/>
+                            <field name="mental_health_coverage"/>
+                            <field name="substance_use_coverage"/>
+                            <field name="telehealth_coverage"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Coverage Details">
+                            <group>
+                                <group>
+                                    <field name="requires_referral"/>
+                                    <field name="requires_authorization"/>
+                                    <field name="requires_pcp"/>
+                                </group>
+                                <group>
+                                    <field name="accepts_electronic_claims"/>
+                                    <field name="electronic_payer_id"/>
+                                    <field name="claims_clearinghouse"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Cost Sharing">
+                            <group>
+                                <group>
+                                    <field name="has_deductible"/>
+                                    <field name="typical_deductible"/>
+                                    <field name="has_copay"/>
+                                    <field name="typical_copay"/>
+                                </group>
+                                <group>
+                                    <field name="has_coinsurance"/>
+                                    <field name="typical_coinsurance_percentage"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Administrative">
+                            <group>
+                                <field name="verification_url" widget="url"/>
+                                <field name="verification_phone" widget="phone"/>
+                                <field name="billing_notes" widget="textarea"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_insurance_payer_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.insurance.payer.form</field>
+        <field name="model">ehr_cdss.insurance.payer</field>
+        <field name="arch" type="xml">
+            <form string="Insurance Payer">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Payer Name" /></h1>
+                        <h2><field name="payer_type" placeholder="Payer Type" /></h2>
+                    </div>
+                    
+                    <group>
+                        <group>
+                            <field name="payer_id"/>
+                            <field name="contact_info_id"/>
+                            <field name="active" widget="radio"/>
+                        </group>
+                        <group>
+                            <field name="website" widget="url"/>
+                            <field name="provider_portal" widget="url"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Contact Information">
+                            <group>
+                                <group>
+                                    <field name="claims_address_id"/>
+                                    <field name="claims_phone" widget="phone"/>
+                                    <field name="claims_fax"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Claims Processing">
+                            <group>
+                                <group>
+                                    <field name="accepts_electronic_claims"/>
+                                    <field name="electronic_payer_id"/>
+                                    <field name="claims_clearinghouse"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Insurance Plans">
+                            <field name="plan_ids" context="{'default_payer_id': id}">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="plan_id"/>
+                                    <field name="plan_type"/>
+                                    <field name="active"/>
+                                </list>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="plan_id"/>
+                                        <field name="plan_type"/>
+                                        <field name="network_type"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        
+                        <page string="Notes">
+                            <field name="notes" widget="textarea"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="view_insurance_plan_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.insurance.plan.list</field>
+        <field name="model">ehr_cdss.insurance.plan</field>
+        <field name="arch" type="xml">
+            <list string="Insurance Plans">
+                <field name="name"/>
+                <field name="plan_id"/>
+                <field name="payer_id"/>
+                <field name="plan_type"/>
+                <field name="plan_level"/>
+                <field name="network_type"/>
+                <field name="active" widget="boolean_button"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="view_insurance_payer_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.insurance.payer.list</field>
+        <field name="model">ehr_cdss.insurance.payer</field>
+        <field name="arch" type="xml">
+            <list string="Insurance Payers">
+                <field name="name" string="Payer Name"/>
+                <field name="payer_id" string="Payer ID"/>
+                <field name="payer_type"/>
+                <field name="contact_info_id" invisible="1"/>
+                <field name="active" widget="boolean_button"/>
+                <field name="plan_ids" widget="many2many_tags" string="Plans" options="{'no_open': True}"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- list View -->
+    <record id="view_ehr_cdss_insurance_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.insurance.list</field>
+        <field name="model">ehr_cdss.insurance</field>
+        <field name="arch" type="xml">
+            <list string="Patient Insurances">
+                <!-- <field name="name"/> -->
+                <field name="patient_id"/>
+                <field name="plan_id"/>
+                <field name="payer_id"/>
+                <field name="member_id"/>
+                <field name="coverage_type"/>
+                <field name="status"/>
+                <field name="effective_date"/>
+                <field name="termination_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_ehr_cdss_insurance_search" model="ir.ui.view">
+        <field name="name">ehr_cdss.insurance.search</field>
+        <field name="model">ehr_cdss.insurance</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="patient_id"/>
+                <field name="plan_id"/>
+                <field name="payer_id"/>
+                <field name="member_id"/>
+                <field name="status"/>
+                <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Needs Verification" name="needs_verification" domain="[('eligibility_verified', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_ehr_cdss_insurance" model="ir.actions.act_window">
+        <field name="name">Patient Insurances</field>
+        <field name="res_model">ehr_cdss.insurance</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new insurance record
+            </p>
+        </field>
+    </record>
+
+    <record id="action_insurance_plan" model="ir.actions.act_window">
+        <field name="name">Insurance Plans</field>
+        <field name="res_model">ehr_cdss.insurance.plan</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_insurance_payer" model="ir.actions.act_window">
+        <field name="name">Insurance Payers</field>
+        <field name="res_model">ehr_cdss.insurance.payer</field>
+        <field name="view_mode">list,form</field>
+        <!-- <field name="context">{'default_active': True}</field> -->
+    </record>
+
+
+    <!-- Menu Item -->
+    <menuitem id="menu_ehr_cdss_insurance" name="Patient Insurances" parent="Master_ehr_cdss_modules" action="action_ehr_cdss_insurance"/>
+
+</odoo>

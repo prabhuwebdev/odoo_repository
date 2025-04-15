@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Action for the form -->
+        <record id="new_record_form" model="ir.actions.client">
+            <field name="name">New Record</field>
+            <field name="tag">new_record.understanding</field>
+            <field name="target">current</field>
+        </record>
+
+        <!-- Parent menu -->
+<!--        <menuitem id="menu_demo_form_root"-->
+<!--                  name="Demo Forms"-->
+<!--                  sequence="10"/>-->
+
+        <!-- Child menu referencing the action -->
+        <menuitem id="menu_new_record"
+                  name="New Record"
+                  action="new_record_form"
+                  parent="menu_demo_form_root" sequence="10"/>
+    </data>
+</odoo>

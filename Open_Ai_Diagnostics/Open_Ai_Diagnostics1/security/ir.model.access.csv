@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_medical_diagnosis,medical.diagnosis,model_medical_diagnosis,base.group_user,1,1,1,1
+access_medical_patient_habit,medical.patient.habit,model_medical_patient_habit,base.group_user,1,1,1,1
+access_medical_substance,medical.substance,model_medical_substance,base.group_user,1,1,1,1
+access_medical_patient,medical.patient,model_medical_patient,base.group_user,1,1,1,1

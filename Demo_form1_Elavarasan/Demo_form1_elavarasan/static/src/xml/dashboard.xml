@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+  <t t-name="dashboard.container" owl="1">
+    <div class="d-flex h-100 bg-light">
+
+      <!-- Left Sidebar -->
+      <div class="p-3 bg-white border-end" style="width: 280px; min-height: 100vh;">
+
+        <div class="mb-4 mt-5">
+          <h6 class="fw-bold">Patient Demographics</h6>
+          <div class="border p-2 rounded bg-light">
+            <p class="mb-1">Name: <t t-esc="state.Name" /></p>
+            <p class="mb-1">Age: <t t-esc="state.Age" /></p>
+            <p class="mb-1">Gender: <t t-esc="state.Gender" /></p>
+            <p class="mb-1">DOB: <t t-esc="state.DOB" /></p>
+            <p class="mb-0">Contact: <t t-esc="state.Contact" /></p>
+          </div>
+        </div>
+
+
+        <div class="mb-4">
+          <h6 class="fw-bold">Family Health History</h6>
+          <div class="border p-2 rounded bg-light" style="min-height: 60px;">
+
+          </div>
+        </div>
+
+
+        <div>
+          <h6 class="fw-bold">Habits</h6>
+          <div class="border p-2 rounded bg-light">
+            <p class="mb-1">Smoking: <t t-esc="state.Smoking" /></p>
+            <p class="mb-1">Alcohol: <t t-esc="state.Alcohol" /></p>
+            <p class="mb-0">Exercise: <t t-esc="state.Exercise" /></p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="flex-grow-1">
+        <div class="d-flex">
+          <ul class="nav nav-tabs mb-2">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Medical Records</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Past Medications</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Surgical History</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">AI Diagnostics</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center px-3">
+          <div class="d-flex align-items-center gap-2">
+            <span class="me-2 fw-bold">Filter by:</span>
+            <button class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-semibold">All</button>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold">Images</button>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold">Lab Tests</button>
+            <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold">Clinical Notes</button>
+          </div>
+          <!-- <button t-on-click="openEditForm" class="btn btn-success btn-sm px-3">Edit</button> -->
+          <!-- <button t-on-click="() => openEditForm(record.id)" class="btn btn-success">Edit</button> -->
+          <button t-on-click="openNewRecordForm" class="btn btn-success btn-sm px-3">+ Add Record</button>
+          <t t-foreach="records" t-as="record" t-key="record.id">
+              <div class="card">
+                  <h5><t t-esc="record.name" /></h5>
+                  <!-- Edit Button -->
+                  <button class="btn btn-outline-primary btn-sm" t-on-click="() => editRecord(record.id)">
+                      Edit
+                  </button>
+              </div>
+          </t>
+
+        </div>
+
+<!--        card and its style starts here-->
+        <div class="card shadow-sm border mb-4 m-4 col-md-6" style="width: 24rem;">
+          <div class="card-body">
+
+<!--            title and data-->
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h6 class="card-title fw-bold mb-0">CT Scan - Brain</h6>
+              <small class="text-muted">15/03/2025</small>
+            </div>
+
+
+            <div class="d-flex border rounded overflow-hidden mb-3 p-3" style="height: 150px;">
+
+<!--              image column-->
+              <div class="bg-light d-flex align-items-center justify-content-center" style="width: 50%; height: 100%;">
+                <img src="https://via.placeholder.com/120x120?text=CT+Scan" class="img-fluid h-100 w-100 object-fit-cover" alt="CT Scan Image" />
+              </div>
+
+<!--              details column-->
+              <div class="p-2" style="width: 50%; font-size: 0.875rem; height:100%">
+                <p class="mb-1">Provider: City Hospital</p>
+                <p class="mb-1">Radiologist: Dr. Smith</p>
+                <p class="mb-0">Status: Analyzed</p>
+                <button class="btn btn-sm btn-success px-3">View Report</button>
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+
+<!--        Ai Diagnostic Summery start here-->
+        <div class=" border p-2 m-2 mx-3" style="width:100%; height:auto; border-radius:6px">
+          <div class="my-2">
+            <h5>Ai Diagnostic Summery</h5>
+            <p>Based on the multimodal analysis of the patient data</p>
+          </div>
+          <hr/>
+          <div class="my-2">
+            <ul>
+              <li>The first analysis of the patient data</li>
+              <li>The second analysis of the patient data</li>
+              <li>The third analysis of the patient data</li>
+              <li>The fourth analysis of the patient data</li>
+            </ul>
+          </div>
+          <div class="d-flex justify-content-center align-items-center">
+            <button class="p-2 btn btn-primary my-2">Generate Comprehensive Report</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </t>
+</templates>
+

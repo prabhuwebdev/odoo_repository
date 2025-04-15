@@ -1,0 +1,239 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Common substances -->
+        <record id="substance_cannabis" model="medical.substance">
+            <field name="name">Cannabis</field>
+            <field name="category">cannabis</field>
+            <field name="description">Cannabis (marijuana) in various forms including smoked, edibles, oils, etc.</field>
+            <field name="common_effects">Altered perception, mood changes, impaired cognition, increased appetite</field>
+            <field name="medical_interactions">May interact with CNS depressants, certain antidepressants, and blood pressure medications</field>
+        </record>
+
+        <record id="substance_cocaine" model="medical.substance">
+            <field name="name">Cocaine</field>
+            <field name="category">stimulants</field>
+            <field name="description">Stimulant drug that can be snorted, smoked, or injected</field>
+            <field name="common_effects">Euphoria, increased energy, decreased appetite, paranoia, cardiovascular effects</field>
+            <field name="medical_interactions">Dangerous interactions with many medications including beta-blockers, MAOIs, and other stimulants</field>
+        </record>
+
+        <record id="substance_mdma" model="medical.substance">
+            <field name="name">MDMA (Ecstasy)</field>
+            <field name="category">stimulants</field>
+            <field name="description">Synthetic drug with stimulant and hallucinogenic properties</field>
+            <field name="common_effects">Euphoria, increased empathy, altered sensations, increased heart rate and blood pressure</field>
+            <field name="medical_interactions">Dangerous interactions with MAOIs, SSRIs, and other serotonergic drugs</field>
+        </record>
+
+        <record id="substance_heroin" model="medical.substance">
+            <field name="name">Heroin</field>
+            <field name="category">opioids</field>
+            <field name="description">Illicit opioid drug typically injected, smoked, or snorted</field>
+            <field name="common_effects">Euphoria, sedation, respiratory depression, constipation</field>
+            <field name="medical_interactions">Dangerous with CNS depressants including benzodiazepines, alcohol, and other opioids</field>
+        </record>
+
+        <record id="substance_methamphetamine" model="medical.substance">
+            <field name="name">Methamphetamine</field>
+            <field name="category">stimulants</field>
+            <field name="description">Potent stimulant that can be smoked, snorted, injected, or taken orally</field>
+            <field name="common_effects">Intense euphoria, increased energy and focus, decreased appetite, insomnia</field>
+            <field name="medical_interactions">Dangerous interactions with MAOIs, certain antidepressants, and other stimulants</field>
+        </record>
+
+        <record id="substance_lsd" model="medical.substance">
+            <field name="name">LSD</field>
+            <field name="category">hallucinogens</field>
+            <field name="description">Potent hallucinogenic drug typically taken orally</field>
+            <field name="common_effects">Visual and sensory hallucinations, altered thinking processes, synesthesia</field>
+            <field name="medical_interactions">May interact with lithium, antipsychotics, and serotonergic drugs</field>
+        </record>
+
+        <record id="substance_benzodiazepines" model="medical.substance">
+            <field name="name">Benzodiazepines (non-prescribed)</field>
+            <field name="category">sedatives</field>
+            <field name="description">Class of sedative medications used illicitly</field>
+            <field name="common_effects">Sedation, anxiolysis, muscle relaxation, memory impairment</field>
+            <field name="medical_interactions">Dangerous with alcohol, opioids, and other CNS depressants</field>
+        </record>
+    </data>
+
+    <data noupdate="1">
+        <!-- Patient 1: John Smith -->
+        <record id="patient_john_smith" model="medical.patient">
+            <field name="name">John Smith</field>
+            <field name="age">45</field>
+            <field name="sex">male</field>
+            <field name="date_of_birth">1980-02-15</field>
+            <field name="blood_group">a+</field>
+            <field name="height">180</field>
+            <field name="weight">95</field>
+            <field name="phone">+1 555-123-4567</field>
+            <field name="email">john.smith@example.com</field>
+            <field name="address">123 Main St, Boston, MA 02108</field>
+            <field name="allergies">Penicillin</field>
+            <field name="current_medications">Lisinopril 10mg daily for hypertension, Atorvastatin 20mg daily for high cholesterol</field>
+            <field name="medical_history">Hypertension diagnosed 5 years ago, Type 2 Diabetes diagnosed 3 years ago, Family history of heart disease</field>
+        </record>
+
+        <record id="patient_john_smith_habits" model="medical.patient.habit">
+            <field name="patient_id" ref="patient_john_smith"/>
+            <field name="smoking_status">daily_light</field>
+            <field name="smoking_years">20</field>
+            <field name="smoking_notes">Has expressed desire to quit</field>
+            <field name="alcohol_status">regular_moderate</field>
+            <field name="alcohol_frequency">weekly_multiple</field>
+            <field name="alcohol_drinks_per_day">2.5</field>
+            <field name="alcohol_notes">Usually drinks beer and wine with dinner</field>
+            <field name="substance_use">false</field>
+            <field name="physical_activity">light</field>
+            <field name="exercise_frequency">rarely</field>
+            <field name="exercise_notes">Walks dog for 15 minutes daily</field>
+            <field name="diet_type">regular</field>
+            <field name="diet_notes">High in processed foods and red meat</field>
+            <field name="avg_sleep_hours">6.5</field>
+            <field name="sleep_quality">fair</field>
+            <field name="sleep_notes">Reports occasional difficulty falling asleep</field>
+        </record>
+
+        <!-- Patient 2: Sarah Johnson -->
+        <record id="patient_sarah_johnson" model="medical.patient">
+            <field name="name">Sarah Johnson</field>
+            <field name="age">32</field>
+            <field name="sex">female</field>
+            <field name="date_of_birth">1993-07-21</field>
+            <field name="blood_group">o-</field>
+            <field name="height">165</field>
+            <field name="weight">58</field>
+            <field name="phone">+1 555-987-6543</field>
+            <field name="email">sarah.johnson@example.com</field>
+            <field name="address">456 Oak St, Portland, OR 97205</field>
+            <field name="allergies">None</field>
+            <field name="current_medications">Oral contraceptives, occasional ibuprofen for menstrual cramps</field>
+            <field name="medical_history">History of tension headaches, anxiety disorder diagnosed 2 years ago</field>
+        </record>
+
+        <record id="patient_sarah_johnson_habits" model="medical.patient.habit">
+            <field name="patient_id" ref="patient_sarah_johnson"/>
+            <field name="smoking_status">non_smoker</field>
+            <field name="alcohol_status">occasional</field>
+            <field name="alcohol_frequency">monthly</field>
+            <field name="alcohol_drinks_per_day">1.5</field>
+            <field name="alcohol_notes">Social drinking only</field>
+            <field name="substance_use">true</field>
+            <field name="substances" eval="[(6, 0, [ref('substance_cannabis')])]"/>
+            <field name="substance_notes">Occasional cannabis use for anxiety (1-2 times monthly)</field>
+            <field name="physical_activity">moderate</field>
+            <field name="exercise_frequency">weekly</field>
+            <field name="exercise_notes">Yoga twice weekly, occasional hiking</field>
+            <field name="diet_type">vegetarian</field>
+            <field name="diet_notes">Primarily plant-based with occasional dairy</field>
+            <field name="avg_sleep_hours">7.5</field>
+            <field name="sleep_quality">good</field>
+            <field name="sleep_notes">Generally good sleep except during periods of stress</field>
+        </record>
+
+        <!-- Patient 3: Miguel Rodriguez -->
+        <record id="patient_miguel_rodriguez" model="medical.patient">
+            <field name="name">Miguel Rodriguez</field>
+            <field name="age">67</field>
+            <field name="sex">male</field>
+            <field name="date_of_birth">1958-04-12</field>
+            <field name="blood_group">b+</field>
+            <field name="height">175</field>
+            <field name="weight">82</field>
+            <field name="phone">+1 555-789-0123</field>
+            <field name="email">miguel.rodriguez@example.com</field>
+            <field name="address">789 Pine Ave, Miami, FL 33101</field>
+            <field name="allergies">Sulfa drugs</field>
+            <field name="current_medications">Metformin 1000mg twice daily, Losartan 50mg daily, Aspirin 81mg daily</field>
+            <field name="medical_history">Type 2 Diabetes (10 years), Hypertension, History of TIA 3 years ago</field>
+        </record>
+
+        <record id="patient_miguel_rodriguez_habits" model="medical.patient.habit">
+            <field name="patient_id" ref="patient_miguel_rodriguez"/>
+            <field name="smoking_status">ex_smoker</field>
+            <field name="smoking_years">35</field>
+            <field name="smoking_quit_date">2013-06-15</field>
+            <field name="smoking_notes">Smoked 1 pack per day from age 18-53</field>
+            <field name="alcohol_status">regular_light</field>
+            <field name="alcohol_frequency">weekly</field>
+            <field name="alcohol_drinks_per_day">1</field>
+            <field name="alcohol_notes">One glass of red wine with dinner several times a week</field>
+            <field name="substance_use">false</field>
+            <field name="physical_activity">light</field>
+            <field name="exercise_frequency">weekly</field>
+            <field name="exercise_notes">Short walks daily, community center exercise class once weekly</field>
+            <field name="diet_type">diabetic</field>
+            <field name="diet_notes">Low carbohydrate, restricted sugar intake</field>
+            <field name="avg_sleep_hours">6</field>
+            <field name="sleep_quality">fair</field>
+            <field name="sleep_notes">Reports waking up 2-3 times nightly to urinate</field>
+        </record>
+
+        <!-- Patient 4: Emma Chen -->
+        <record id="patient_emma_chen" model="medical.patient">
+            <field name="name">Emma Chen</field>
+            <field name="age">8</field>
+            <field name="sex">female</field>
+            <field name="date_of_birth">2017-09-28</field>
+            <field name="blood_group">ab+</field>
+            <field name="height">128</field>
+            <field name="weight">27</field>
+            <field name="address">101 Cherry Lane, Seattle, WA 98101</field>
+            <field name="allergies">None known</field>
+            <field name="current_medications">Children's Tylenol as needed for fever</field>
+            <field name="medical_history">Recurrent ear infections as toddler, otherwise healthy</field>
+        </record>
+
+        <record id="patient_emma_chen_habits" model="medical.patient.habit">
+            <field name="patient_id" ref="patient_emma_chen"/>
+            <field name="smoking_status">non_smoker</field>
+            <field name="alcohol_status">non_drinker</field>
+            <field name="substance_use">false</field>
+            <field name="physical_activity">active</field>
+            <field name="exercise_frequency">regular</field>
+            <field name="exercise_notes">Active play daily, soccer team practice twice weekly</field>
+            <field name="diet_type">regular</field>
+            <field name="diet_notes">Generally balanced diet with occasional sweets and fast food</field>
+            <field name="avg_sleep_hours">9.5</field>
+            <field name="sleep_quality">good</field>
+            <field name="sleep_notes">No significant sleep issues</field>
+        </record>
+
+        <!-- Patient 5: Robert Wilson -->
+        <record id="patient_robert_wilson" model="medical.patient">
+            <field name="name">Robert Wilson</field>
+            <field name="age">52</field>
+            <field name="sex">male</field>
+            <field name="date_of_birth">1973-11-05</field>
+            <field name="blood_group">o+</field>
+            <field name="height">183</field>
+            <field name="weight">88</field>
+            <field name="phone">+1 555-456-7890</field>
+            <field name="email">robert.wilson@example.com</field>
+            <field name="address">234 Elm St, Chicago, IL 60007</field>
+            <field name="allergies">Codeine</field>
+            <field name="current_medications">Ibuprofen 800mg as needed, not providing much relief</field>
+            <field name="medical_history">Hypertension, previous back strain 2 years ago that resolved with physical therapy</field>
+        </record>
+
+        <record id="patient_robert_wilson_habits" model="medical.patient.habit">
+            <field name="patient_id" ref="patient_robert_wilson"/>
+            <field name="smoking_status">non_smoker</field>
+            <field name="alcohol_status">regular_moderate</field>
+            <field name="alcohol_frequency">weekly_multiple</field>
+            <field name="alcohol_drinks_per_day">2</field>
+            <field name="alcohol_notes">Typically beer or spirits after work</field>
+            <field name="substance_use">false</field>
+            <field name="physical_activity">moderate</field>
+            <field name="exercise_frequency">weekly</field>
+            <field name="exercise_notes">Weight lifting 2x weekly before back pain</field>
+            <field name="diet_type">low_carb</field>
+            <field name="diet_notes">Attempting weight loss through reduced carbohydrate intake</field>
+            <field name="avg_sleep_hours">5.5</field>
+            <field name="sleep_quality">poor</field>
+            <field name="sleep_notes">Reports difficulty sleeping due to back pain, often awakens unrefreshed</field>
+        </record>
+    </data>
+</odoo>

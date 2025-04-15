@@ -1,0 +1,8 @@
+<odoo>
+    <data inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/embedded_forms/static/src/js/employee_lazy_form.js"/>
+        </xpath>
+    </data>
+
+</odoo>

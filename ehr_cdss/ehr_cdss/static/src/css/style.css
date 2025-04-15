@@ -1,0 +1,15 @@
+/* Define the clicked state class */
+.oe_highlight.clicked-button {
+    background-color: #ff5733 !important;  /* Red, or any color you prefer */
+    color: white !important;               /* White text */
+    border-color: #ff5733 !important;      /* Match border color */
+}
+
+a.nav-link.highlight-tab{
+    color: black;
+}
+
+a.nav-link.active.highlight-tab {
+    background: beige;
+    color: black;
+}

@@ -1,0 +1,55 @@
+<odoo>
+ <data>
+
+   <!-- List View -->
+    <record model="ir.ui.view" id="view_custom_module_list">
+      <field name="name">custom_module.list</field>
+      <field name="model">first_module.custom_module</field>
+      <field name="arch" type="xml">
+        <list>
+          <field name="name"/>
+          <field name="age"/>
+          <field name="department"/>
+        </list>
+      </field>
+    </record>
+
+    <!-- Form View -->
+    <record model="ir.ui.view" id="view_custom_module_form">
+      <field name="name">custom_module.form</field>
+      <field name="model">first_module.custom_module</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="age"/>
+              <field name="department"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+	<record model="ir.actions.act_window" id="action_custom_module">
+    <field name="name">Custom Module</field>
+    <field name="res_model">first_module.custom_module</field>
+    <field name="view_mode">list,form</field>
+    </record>
+
+
+
+    <record model="ir.ui.menu" id="menu_custom_module">
+   <field name="name">Custom Module</field>
+   <field name="sequence" eval="10"/>
+   <field name="action" ref="action_custom_module"/>
+    </record>
+
+     <menuitem id="menu_custom_module" name="custom module" parent="sale.sale_menu_root" action="action_custom_module" sequence="10"/>
+
+  </data>
+</odoo>
+
+
+

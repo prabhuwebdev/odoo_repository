@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="demo_form.container" owl="1">
+        <div class="d-flex h-100">
+            <!-- Left Sidebar -->
+            <div class="o_employee_sidebar bg-dark text-white" style="width: 200px;">
+                <div class="p-3 border-bottom border-secondary">
+                    <h5>Employee</h5>
+                </div>
+                <div class="d-flex flex-column">
+                    <button t-on-click="() => this.switchForm('info')"
+                            t-attf-class="btn text-left p-3 {{ state.activeForm === 'info' ? 'bg-secondary' : '' }}">
+                        Info
+                    </button>
+                    <button t-on-click="() => this.switchForm('address')"
+                            t-attf-class="btn text-left p-3 {{ state.activeForm === 'address' ? 'bg-secondary' : '' }}">
+                        Address
+                    </button>
+                    <button t-on-click="() => this.switchForm('medical_history')"
+                            t-attf-class="btn text-left p-3 {{ state.activeForm === 'medical_history' ? 'bg-secondary' : '' }}">
+                        Medical History
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="flex-grow-1 p-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h4>
+                            <t t-if="state.activeForm === 'info'">Employee Info</t>
+                            <t t-if="state.activeForm === 'address'">Employee Address</t>
+                            <t t-if="state.activeForm === 'medical_history'">Medical History</t>
+                        </h4>
+                    </div>
+                    <div class="card-body position-relative overflow-auto">
+                        <!-- Loading Spinner -->
+                        <div t-if="state.isLoading"
+                             class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-white bg-opacity-75">
+                            <div class="text-center">
+                                <i class="fa fa-spinner fa-spin fa-2x"></i>
+                                <p>Loading...</p>
+                            </div>
+                        </div>
+
+                        <!-- Employee Info Form -->
+                        <div t-if="state.activeForm === 'info'" class="o_employee_info_form">
+                            <div class="form-group mb-3">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name"
+                                       t-att-value="state.employee.name || ''"
+                                       t-on-input="(ev) => this.onInputChange('Name', ev)" />
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="age">Age</label>
+                                <input type="number" class="form-control" id="age"
+                                       t-att-value="state.employee.age || ''"
+                                        t-on-input="(ev) => this.onInputChange('age', ev)" />
+                            </div>
+
+
+                            <div class="form-group mb-3">
+                                <label for="partner_dropdown">Your Id</label>
+                                <select class="form-control" id="partner_dropdown" t-att-name="'partner_ids'" multiple="multiple" t-on-input="(ev) => this.onInputChange('yourId',ev)">
+                                    <t t-foreach="state.res_data" t-as="partner" t-key="partner.id">
+                                        <option t-att-value="partner.id" t-esc="partner.name"/>
+                                    </t>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="country">Country</label>
+                                <select type="text" class="form-control" id="country"
+                                       t-att-value="state.employee.country || ''"
+                                        t-on-input="(ev) => this.onInputChange('country', ev)" >
+
+                                    <option value="">Select Country</option>
+                                    <option value="india">India</option>
+                                    <option value="australia">Australia</option>
+                                    <option value="newzealand">NewZealand</option>
+                                    <option value="england">England</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="dob">Date of Birth</label>
+                                <input type="date" class="form-control" id="dob"
+                                       t-att-value="state.employee.dob || ''"
+                                       t-on-input="(ev) => this.onInputChange('dob', ev)" />
+                            </div>
+                        </div>
+
+                        <!-- Save Button -->
+                        <div class="text-end mt-3">
+                            <button t-on-click="storeDemoData" class="btn btn-primary" t-att-disabled="state.isLoading">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

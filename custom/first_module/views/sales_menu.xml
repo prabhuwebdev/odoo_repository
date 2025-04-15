@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+
+
+        <record id="action_price_range_master" model="ir.actions.act_window">
+            <field name="name">Price Range Master</field>
+            <field name="res_model">price.range.master</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="action_section_master" model="ir.actions.act_window">
+            <field name="name">Section Master</field>
+            <field name="res_model">section.master</field>
+            <field name="view_mode">list,form</field>
+        </record>
+        <menuitem id="menu_price_range_master" name="Price Range Master"  action="action_price_range_master" parent="sale.sale_menu_root" sequence="10" />
+        <menuitem id="menu_section_master" name="Section Master"  action="action_section_master" parent="sale.sale_menu_root" sequence="20" />
+
+
+        <record id="price_range_master_form" model="ir.ui.view">
+            <field name="name">price.range.master.form</field>
+            <field name="model">price.range.master</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="price_range"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="price_range_master_list" model="ir.ui.view">
+            <field name="name">price.range.master.list</field>
+            <field name="model">price.range.master</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="price_range" />
+                </list>
+            </field>
+        </record>
+
+
+        <record id="section_master_form" model="ir.ui.view">
+            <field name="name">section.master.form</field>
+            <field name="model">section.master</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="section"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="section_master_list" model="ir.ui.view">
+            <field name="name">section.master.list</field>
+            <field name="model">section.master</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="section" />
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

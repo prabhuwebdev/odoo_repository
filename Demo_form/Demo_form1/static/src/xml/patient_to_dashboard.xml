@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="ehr_cdss.PatientListView">
+        <div class="p-4">
+            <h2 class="text-xl font-bold mb-4">Patient List</h2>
+            <table class="table-auto w-full border-collapse border border-gray-300">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="border px-4 py-2">Name</th>
+                        <th class="border px-4 py-2">Patient ID</th>
+                        <th class="border px-4 py-2">Birth Date</th>
+                        <th class="border px-4 py-2">Age</th>
+                        <th class="border px-4 py-2">Gender</th>
+                        <th class="border px-4 py-2">Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="state.patients" t-as="patient" t-key="patient.id">
+                        <tr class="bg-white border">
+<!--                            <td class="border px-4 py-2"><t t-esc="patient.name"/></td>-->
+                            <td class="border px-4 py-2 text-primary" style="cursor:pointer"
+                                t-on-click="goToDashboard.bind(this,patient.id)">
+                                <t t-esc="patient.name"/>
+                            </td>
+                            <td class="border px-4 py-2"><t t-esc="patient.id"/></td>
+                            <td class="border px-4 py-2"><t t-esc="patient.birth_date"/></td>
+                            <td class="border px-4 py-2"><t t-esc="patient.age"/></td>
+                            <td class="border px-4 py-2"><t t-esc="patient.gender"/></td>
+                            <td class="border px-4 py-2"><t t-esc="patient.phone_primary"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </t>
+</templates>
+
+
+
+

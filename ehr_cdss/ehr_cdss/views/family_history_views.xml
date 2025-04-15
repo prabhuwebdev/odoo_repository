@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Family Member Cancer Views -->
+    <record id="view_family_member_cancer_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.family.member.cancer.form</field>
+        <field name="model">ehr_cdss.medical.family.member.cancer</field>
+        <field name="arch" type="xml">
+            <form string="Family Member Cancer">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="relation"/>
+                            <field name="cancer_type"/>
+                        </group>
+                        <group>
+                            <field name="age_of_onset"/>
+                            <field name="outcome"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Additional Notes">
+                            <field name="additional_notes" placeholder="Additional Notes" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_family_member_cancer_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.family.member.cancer.list</field>
+        <field name="model">ehr_cdss.medical.family.member.cancer</field>
+        <field name="arch" type="xml">
+            <list string="Family Member Cancers">
+                <field name="relation"/>
+                <field name="cancer_type"/>
+                <field name="age_of_onset"/>
+                <field name="outcome"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_family_member_cancer" model="ir.actions.act_window">
+        <field name="name">Family Cancer History</field>
+        <field name="res_model">ehr_cdss.medical.family.member.cancer</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Family History Views -->
+    <record id="view_family_history_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.family.history.form</field>
+        <field name="model">ehr_cdss.medical.family.history</field>
+        <field name="arch" type="xml">
+            <form string="Family History">
+                <header>
+                    <!-- <button name="action_back_to_patient" string="Demographic" type="object" class="oe_secondary" invisible = "[('patient_id', '=', False)]"/> -->
+                    <button name="action_back_to_patient" string="Demographic" type="object" class="oe_secondary" invisible="not show_back_button"/>
+                    <button name="action_medical_history" string="Medical History" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="dummy_action" string="Family History" type="object" class="btn btn-danger oe_highlight" invisible="not show_back_button" disabled="1" />
+                    <button name="action_immunization_infectious_disease" string="Immunization-Infectious-Disease" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="action_medication" string="Medication" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="action_medical_patient_allergy" string="Patient Allergy" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <!-- <button name="action_document" string="Patient Documents" type="object" invisible="show_back_button" class="oe_highlight"/>  -->
+                    <button name="action_document" string="Patient Document" class="oe_highlight" type="object" invisible="not show_back_button" />
+                    <button name="action_appointment" string="Patient Appointment" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="open_insurance_record" string="Insurance" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="open_allergy_record" string="Patient Allergy" type="object" class="oe_highlight" invisible="not show_back_button" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="patient_id" placeholder="Patient" readonly= "show_back_button" />
+                        </h1>
+                    </div>
+                    <notebook>
+                        <page string="Cancer History" name="cancer_history">
+                            <group>
+                                <group>
+                                    <field name="family_cancer_history"/>
+                                </group>
+                                <group>
+                                    <button name="%(action_family_member_cancer)d" string="Add Family Cancer History" type="action" class="oe_highlight"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="family_cancer_details" placeholder="Provide additional details about cancer history..."/>
+                            </group>
+                        </page>
+                        <page string="Genetic Information" name="genetic_info">
+                            <group>
+                                <field name="genetic_predisposition"/>
+                                <field name="genetic_syndrome_type" />
+                                <field name="genetic_syndrome_details" />
+                                <field name="hereditary_cancer_screening"/>
+                                <field name="screening_details" />
+                            </group>
+                        </page>
+                        <page string="Family Disease History" name="disease_history">
+                            <group>
+                                <group string="Cardiovascular">
+                                    <field name="family_cardiovascular_disease"/>
+                                    <field name="family_hypertension"/>
+                                    <field name="family_stroke"/>
+                                </group>
+                                <group string="Metabolic">
+                                    <field name="family_diabetes"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Neuropsychiatric">
+                                    <field name="family_neurological_disorders"/>
+                                    <field name="family_psychiatric_disorders"/>
+                                    <field name="family_substance_abuse"/>
+                                    <field name="family_developmental_disorders"/>
+                                </group>
+                                <group string="Other">
+                                    <field name="family_autoimmune_disorders"/>
+                                    <field name="family_congenital_anomalies"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="other_hereditary_conditions" placeholder="Describe other hereditary conditions..."/>
+                            </group>
+                        </page>
+                        <page string="Family Structure" name="family_structure">
+                            <group>
+                                <field name="consanguinity"/>
+                                <field name="family_longevity" placeholder="Information about longevity in the family..."/>
+                                <field name="family_structure" placeholder="Describe family structure and living arrangements..."/>
+                                <field name="primary_caregiver" placeholder="Information about primary caregiver..."/>
+                                <field name="family_support_system"/>
+                            </group>
+                            <group string="Family Members">
+                                <field name="siblings_information" placeholder="Number and ages of siblings..."/>
+                                <field name="parents_health_status" placeholder="Health status of parents..."/>
+                                <field name="grandparents_health_status" placeholder="Health status of grandparents..."/>
+                            </group>
+                        </page>
+                        <page string="Additional Information" name="additional_info">
+                            <group>
+                                <field name="family_medical_history_unknown"/>
+                                <field name="family_history_comments" placeholder="Additional comments on family history..."/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_family_history_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.family.history.list</field>
+        <field name="model">ehr_cdss.medical.family.history</field>
+        <field name="arch" type="xml">
+            <list string="Family Histories">
+                <field name="patient_id"/>
+                <field name="genetic_predisposition"/>
+                <field name="family_cardiovascular_disease"/>
+                <field name="family_diabetes"/>
+                <field name="family_medical_history_unknown"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_family_history_search" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.family.history.search</field>
+        <field name="model">ehr_cdss.medical.family.history</field>
+        <field name="arch" type="xml">
+            <search string="Search Family History">
+                <field name="patient_id"/>
+                <filter string="Genetic Predisposition" name="genetic_predisposition" domain="[('genetic_predisposition', '=', True)]"/>
+                <filter string="Family History Unknown" name="history_unknown" domain="[('family_medical_history_unknown', '=', True)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Patient" name="group_by_patient" context="{'group_by': 'patient_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_family_history" model="ir.actions.act_window">
+        <field name="name">Family History</field>
+        <field name="res_model">ehr_cdss.medical.family.history</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_medical_family_history" name="Family Histories" parent="Master_ehr_cdss_modules" action="action_family_history" sequence="10"/>
+    <menuitem id="menu_medical_family_cancer" name="Family Cancer Records" parent="Master_ehr_cdss_modules" action="action_family_member_cancer" sequence="20"/>
+</odoo>

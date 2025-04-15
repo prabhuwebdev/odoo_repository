@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_h_loomlytics_analytics,loomlytics analytics,model_loomlytics_analytics,base.group_user,1,1,1,1
+access_report_sale_aging,report sale aging,model_report_sale_aging,base.group_user,1,1,1,0
+access_daily_sales_management,Daily Sales Management,model_daily_sales_management,base.group_user,1,1,1,1
+access_daily_stock_management,Daily Stock Management,model_daily_stock_management,base.group_user,1,1,1,1
+access_monthly_stock_management,Monthly Stock Management,model_monthly_stock_management,base.group_user,1,1,1,1
+access_daily_sale_stock_report,daily sale stock report,model_daily_sales_stock_report,base.group_user,1,1,1,1

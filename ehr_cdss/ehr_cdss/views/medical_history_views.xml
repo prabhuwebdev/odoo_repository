@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Medical History Form View -->
+        <record id="view_medical_history_form" model="ir.ui.view">
+            <field name="name">ehr_cdss.medical.history.form</field>
+            <field name="model">ehr_cdss.medical.history</field>
+            <field name="arch" type="xml">
+                <form string="Medical History">
+                <header>
+                    <button name="action_back_to_patient" string="Demographic" type="object" class="oe_secondary" invisible="not show_back_button"/>
+                    <!-- <button name="action_medical_history" string="Medical History" type="object" class="oe_highlight" invisible="not show_back_button" /> -->
+                    <button name="dummy_action" string="Medical History" type="object" class="btn btn-danger oe_highlight" invisible="not show_back_button" disabled="1" />
+                    <button name="action_immunization_infectious_disease" string="Immunization-Infectious-Disease" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="action_family_history" string="Family History" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="action_medication" string="Medication" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="action_medical_patient_allergy" string="Patient Allergy" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="action_document" string="Patient Document" class="oe_highlight" type="object" invisible="not show_back_button" />
+                    <button name="action_appointment" string="Patient Appointment" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="open_insurance_record" string="Insurance" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="open_allergy_record" string="Patient Allergy" type="object" class="oe_highlight" invisible="not show_back_button" />
+
+                </header>
+                    <sheet>
+
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="patient_id" placeholder="Patient" options="{'no_create': True}" readonly= "show_back_button" />
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="date_recorded"/>
+                        </group>
+                        <notebook>
+                            <page string="Hospitalizations" name="hospitalizations">
+                                <field name="hospitalization_ids">
+                                    <list editable="bottom" style="white-space: normal;" >
+                                        <field name="hospital"/>
+                                        <field name="admission_date"/>
+                                        <field name="discharge_date"/>
+                                        <field name="reason"/>
+                                        <field name="diagnosis"/>
+                                    </list>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="hospital"/>
+                                                    <field name="admission_date"/>
+                                                    <field name="discharge_date"/>
+                                                    <field name="reason"/>
+                                                </group>
+                                                <group>
+                                                    <field name="attending_physician"/>
+                                                    <field name="documents" filename="hospital_documents_filename"/>
+                                                </group>
+                                            </group>
+                                            <notebook>
+                                                <page string="Medical Details">
+                                                    <group>
+                                                        <field name="diagnosis"/>
+                                                        <field name="treatment"/>
+                                                        <field name="notes"/>
+                                                    </group>
+                                                </page>
+                                            </notebook>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Major Illnesses" name="illnesses">
+                                <field name="illness_ids">
+                                    <list editable="bottom">
+                                        <field name="name"/>
+                                        <field name="diagnosis_date"/>
+                                        <field name="state"/>
+                                        <field name="severity"/>
+                                        <field name="treating_physician"/>
+                                    </list>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <field name="diagnosis_date"/>
+                                                    <field name="state"/>
+                                                    <field name="severity"/>
+                                                </group>
+                                                <group>
+                                                    <field name="treating_physician"/>
+                                                </group>
+                                            </group>
+                                            <group string="Treatment">
+                                                <field name="treatment" nolabel="1"/>
+                                            </group>
+                                            <group string="Notes">
+                                                <field name="notes" nolabel="1"/>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="Surgeries" name="surgeries">
+                                <field name="surgery_ids">
+                                    <list editable="bottom">
+                                        <field name="name"/>
+                                        <field name="date"/>
+                                        <field name="surgeon"/>
+                                        <field name="hospital"/>
+                                        <field name="outcome"/>
+                                    </list>
+                                    <form>
+                                        <sheet>
+                                            <group>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <field name="date"/>
+                                                    <field name="surgeon"/>
+                                                    <field name="hospital"/>
+                                                </group>
+                                                <group>
+                                                    <field name="outcome"/>
+                                                    <field name="documents" filename="surgery_documents_filename"/>
+                                                </group>
+                                            </group>
+                                            <group string="Reason for Surgery">
+                                                <field name="reason" nolabel="1"/>
+                                            </group>
+                                            <group string="Complications" attrs="{'invisible': [('outcome', '!=', 'complications')]}">
+                                                <field name="complications" nolabel="1"/>
+                                            </group>
+                                            <group string="Notes">
+                                                <field name="notes" nolabel="1"/>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                            <page string="General Notes" name="notes">
+                                <field name="notes" placeholder="Enter any additional medical history information..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <!-- <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div> -->
+                </form>
+            </field>
+        </record>
+
+        <!-- Medical History list View -->
+        <record id="view_medical_history_list" model="ir.ui.view">
+            <field name="name">ehr_cdss.medical.history.list</field>
+            <field name="model">ehr_cdss.medical.history</field>
+            <field name="arch" type="xml">
+                <list string="Medical Histories">
+                    <field name="patient_id"/>
+                    <field name="date_recorded"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Medical History Search View -->
+        <record id="view_medical_history_search" model="ir.ui.view">
+            <field name="name">ehr_cdss.medical.history.search</field>
+            <field name="model">ehr_cdss.medical.history</field>
+            <field name="arch" type="xml">
+                <search string="Search Medical History">
+                    <field name="patient_id"/>
+                    <field name="date_recorded"/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Patient" name="patient_groupby" context="{'group_by': 'patient_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Views for Hospitalization records -->
+        <record id="view_medical_hospitalization_list" model="ir.ui.view">
+            <field name="name">ehr_cdss.medical.hospitalization.list</field>
+            <field name="model">ehr_cdss.medical.hospitalization</field>
+            <field name="arch" type="xml">
+                <list string="Hospitalizations">
+                    <field name="patient_id"/>
+                    <field name="hospital"/>
+                    <field name="admission_date"/>
+                    <field name="discharge_date"/>
+                    <field name="reason"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_medical_hospitalization_search" model="ir.ui.view">
+            <field name="name">ehr_cdss.medical.hospitalization.search</field>
+            <field name="model">ehr_cdss.medical.hospitalization</field>
+            <field name="arch" type="xml">
+                <search string="Search Hospitalizations">
+                    <field name="patient_id"/>
+                    <field name="hospital"/>
+                    <field name="reason"/>
+                    <field name="admission_date"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Patient" name="patient_groupby" context="{'group_by': 'patient_id'}"/>
+                        <filter string="Hospital" name="hospital_groupby" context="{'group_by': 'hospital'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Views for Illness records -->
+        <record id="view_medical_illness_list" model="ir.ui.view">
+            <field name="name">ehr_cdss.medical.illness.list</field>
+            <field name="model">ehr_cdss.medical.illness</field>
+            <field name="arch" type="xml">
+                <list string="Illnesses">
+                    <field name="patient_id"/>
+                    <field name="name"/>
+                    <field name="diagnosis_date"/>
+                    <field name="state"/>
+                    <field name="severity"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_medical_illness_search" model="ir.ui.view">
+            <field name="name">ehr_cdss.medical.illness.search</field>
+            <field name="model">ehr_cdss.medical.illness</field>
+            <field name="arch" type="xml">
+                <search string="Search Illnesses">
+                    <field name="patient_id"/>
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="severity"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Patient" name="patient_groupby" context="{'group_by': 'patient_id'}"/>
+                        <filter string="Status" name="state_groupby" context="{'group_by': 'state'}"/>
+                        <filter string="Severity" name="severity_groupby" context="{'group_by': 'severity'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Views for Surgery records -->
+        <record id="view_medical_surgery_list" model="ir.ui.view">
+            <field name="name">ehr_cdss.medical.surgery.list</field>
+            <field name="model">ehr_cdss.medical.surgery</field>
+            <field name="arch" type="xml">
+                <list string="Surgeries">
+                    <field name="patient_id"/>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="surgeon"/>
+                    <field name="hospital"/>
+                    <field name="outcome"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_medical_surgery_search" model="ir.ui.view">
+            <field name="name">ehr_cdss.medical.surgery.search</field>
+            <field name="model">ehr_cdss.medical.surgery</field>
+            <field name="arch" type="xml">
+                <search string="Search Surgeries">
+                    <field name="patient_id"/>
+                    <field name="name"/>
+                    <field name="surgeon"/>
+                    <field name="hospital"/>
+                    <field name="outcome"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Patient" name="patient_groupby" context="{'group_by': 'patient_id'}"/>
+                        <filter string="Hospital" name="hospital_groupby" context="{'group_by': 'hospital'}"/>
+                        <filter string="Outcome" name="outcome_groupby" context="{'group_by': 'outcome'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Actions -->
+        <record id="action_medical_history" model="ir.actions.act_window">
+            <field name="name">Medical History</field>
+            <field name="res_model">ehr_cdss.medical.history</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first medical history record
+                </p>
+                <p>
+                    Track patient hospitalizations, major illnesses, and surgeries to have complete medical history.
+                </p>
+            </field>
+        </record>
+
+        <record id="action_medical_hospitalization" model="ir.actions.act_window">
+            <field name="name">Hospitalizations</field>
+            <field name="res_model">ehr_cdss.medical.hospitalization</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="action_medical_illness" model="ir.actions.act_window">
+            <field name="name">Major Illnesses</field>
+            <field name="res_model">ehr_cdss.medical.illness</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="action_medical_surgery" model="ir.actions.act_window">
+            <field name="name">Surgeries</field>
+            <field name="res_model">ehr_cdss.medical.surgery</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{}</field>
+        </record>
+
+        <!-- Menu Items -->
+        <!-- <menuitem id="menu_medical_main" name="Medical Records" sequence="10"/> -->
+        <!-- <menuitem id="menu_medical_records" name="Records" parent="Master_ehr_cdss_modules" sequence="10"/> -->
+        <menuitem id="menu_medical_history" name="Medical History" parent="Master_ehr_cdss_modules" action="action_medical_history" sequence="10"/>
+        <menuitem id="menu_medical_hospitalization" name="Hospitalizations" parent="Master_ehr_cdss_modules" action="action_medical_hospitalization" sequence="20"/>
+        <menuitem id="menu_medical_illness" name="Major Illnesses" parent="Master_ehr_cdss_modules" action="action_medical_illness" sequence="30"/>
+        <menuitem id="menu_medical_surgery" name="Surgeries" parent="Master_ehr_cdss_modules" action="action_medical_surgery" sequence="40"/>
+    </data>
+    
+</odoo>

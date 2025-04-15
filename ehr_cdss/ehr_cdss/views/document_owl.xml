@@ -1,0 +1,207 @@
+ <odoo>
+    <!-- Basic Kanban View -->
+    <record id="view_document_kanban" model="ir.ui.view">
+        <field name="name">ehr_cdss.document.kanban</field>
+        <field name="model">ehr_cdss.document</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="document_type"/>
+                <field name="file_type"/>
+                <field name="document_date"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </div>
+                                <div class="o_kanban_record_subtitle">
+                                    <field name="document_date"/>
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_bottom">
+                                <div>
+                                    <field name="document_type"/>
+                                </div>
+                                <div>
+                                    <field name="file_type"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_document_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.document.list</field>
+        <field name="model">ehr_cdss.document</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="document_type"/>
+                <field name="patient_id"/>
+                <field name="document_date"/>
+                <field name="state"/>
+                <field name="file_type"/>
+                <field name="file_size"/>
+            </list>
+        </field>
+    </record>
+    
+
+    <!-- Dashboard View -->
+        <record id="view_document_dashboard" model="ir.ui.view">
+        <field name="name">ehr_cdss.document.dashboard</field>
+        <field name="model">ehr_cdss.document</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="view_document_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="replace">
+                <!-- Now we are using <kanban> as the root element -->
+                <kanban class="o_kanban_dashboard">
+                    <field name="name"/>
+                    <field name="document_type"/>
+                    <field name="file_type"/>
+                    <field name="file_size"/>
+                    <field name="document_date"/>
+                    <field name="patient_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </div>
+                                    <div class="o_kanban_record_subtitle">
+                                        <field name="document_date"/>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div>
+                                        <field name="document_type"/>
+                                    </div>
+                                    <div>
+                                        <field name="file_type"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                    
+                    <!-- Now the sidebar filter panel is inside a div in the kanban itself -->
+                    <div class="o_content">
+                        <div class="row">
+                            <!-- Left Sidebar -->
+                            <div class="col-lg-3 o_side_panel">
+                                <div class="o_side_panel_header">
+                                    <h4>Filters</h4>
+                                </div>
+                                <div class="o_side_panel_section">
+                                    <h5>Workspace</h5>
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" data-filter="all">All</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" data-filter="internal">Internal</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" data-filter="finance">Finance</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" data-filter="hr">HR</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" data-filter="marketing">Marketing</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" data-filter="products">Products</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" data-filter="fleet">Fleet</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" data-filter="recruitment">Recruitment</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" data-filter="spreadsheet">Spreadsheet</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="o_side_panel_section">
+                                    <h5>Document Type</h5>
+                                    <field name="document_type" widget="many2one_tags" options="{'no_create': True}"/>
+                                </div>
+                                <div class="o_side_panel_section">
+                                    <h5>File Type</h5>
+                                    <field name="file_type" widget="radio"/>
+                                </div>
+                                <div class="o_side_panel_section">
+                                    <h5>Status</h5>
+                                    <field name="state" widget="radio"/>
+                                </div>
+                                <div class="o_side_panel_footer">
+                                    <button type="button" class="btn btn-primary" name="apply_filters">Apply</button>     
+                                    <button type="button" class="btn btn-secondary" name="add_condition">Add Condition</button>
+                                </div>
+                            </div>
+
+                            <!-- Main Content Area -->
+                            <!-- Kanban View -->
+                            <kanban>
+                                <field name="name"/>
+                                <field name="document_type"/>
+                                <field name="file_type"/>
+                                <field name="file_size"/>
+                                <field name="document_date"/>
+                                <field name="patient_id"/>
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div class="oe_kanban_card oe_kanban_global_click">
+                                            <div class="o_kanban_record_top">
+                                                <div class="o_kanban_record_title">
+                                                    <field name="name"/>
+                                                </div>
+                                                <div class="o_kanban_record_subtitle">
+                                                    <field name="document_date"/>
+                                                    <field name="patient_id" invisible="1"/>
+                                                </div>
+                                            </div>
+                                            <div class="o_kanban_record_bottom">
+                                                <div>
+                                                    <field name="document_type"/>
+                                                </div>
+                                                <div>
+                                                    <field name="file_type"/>
+                                                    <field name="file_size" string="Size"/> KB
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                        </div>
+                    </div>
+                </kanban>
+            </xpath>
+        </field>
+    </record>
+    <!-- Action for Document View -->
+    <record id="action_document_view" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="res_model">ehr_cdss.document</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Upload your first document</p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_document_workspace" name="Documents Workspace" parent="Master_ehr_cdss_modules" action="action_document_view"/>
+
+</odoo>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Form View -->
+    <record id="view_appointment_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.appointment.form</field>
+        <field name="model">ehr_cdss.appointment</field>
+        <field name="arch" type="xml">
+            <form string="Appointment">
+                <header>
+                    <button name="action_back_to_patient" string="Demographic" type="object" class="oe_secondary" invisible="not show_back_button"/>
+                    <button name="action_medical_history" string="Medical History" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="action_immunization_infectious_disease" string="Immunization-Infectious-Disease" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="action_family_history" string="Family History" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="action_medication" string="Medication" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="action_medical_patient_allergy" string="Patient Allergy" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="action_document" string="Patient Document" class="oe_highlight" type="object" invisible="not show_back_button" />
+                    <button name="dummy_action" string="Patient Appointment" type="object" class="btn btn-danger oe_highlight" invisible="not show_back_button" disabled="1" />
+                    <button name="open_insurance_record" string="Insurance" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="open_allergy_record" string="Patient Allergy" type="object" class="oe_highlight" invisible="not show_back_button" />
+
+                    <button name="action_progress_notes" string="Progress Notes" type="object" class="oe_highlight"/>
+                </header>
+                <!-- <header>
+                    <button name="action_confirm" string="Confirm" state="scheduled" class="oe_highlight"/>
+                    <button name="action_start" string="Start" state="confirmed" class="oe_highlight"/>
+                    <button name="action_complete" string="Complete" state="in_progress" class="oe_highlight"/>
+                    <button name="action_cancel" string="Cancel" state="scheduled,confirmed,in_progress" class="oe_highlight"/>
+                    <button name="action_no_show" string="No Show" state="scheduled,confirmed" class="oe_highlight"/>
+                    <button name="action_reschedule" string="Reschedule" state="scheduled,confirmed" class="oe_highlight"/>
+                    <button name="action_send_reminder" string="Send Reminder" state="scheduled,confirmed" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="scheduled,confirmed,in_progress,completed,cancelled,no_show,rescheduled"/>
+                </header> -->
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="patient_id" options="{'no_open': True}" readonly= "show_back_button" />
+                            <field name="provider_id" options="{'no_open': True}"/>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <field name="start_datetime"/>
+                            <field name="end_datetime"/>
+                            <field name="duration" readonly="1"/>
+                            <field name="all_day"/>
+                            <field name="appointment_slot_id"/>  <!-- Added Field -->
+
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Details">
+                            <group>
+                                <field name="service_type"/>
+                                <field name="is_telehealth"/>
+                                <!-- <field name="purpose"/> -->
+                                <field name="notes"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Status">
+                            <group>
+                                <field name="checked_in"/>
+                                <field name="check_in_time" />
+                                <field name="checked_out"/>
+                                <field name="check_out_time" />
+                                <field name="reminder_sent" readonly="1"/>
+                                <field name="reminder_datetime" readonly="1"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Billing">
+                            <group>
+                                <field name="insurance_id"/>
+                                <field name="is_billable"/>
+                                <field name="billing_status"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Related">
+                            <group>
+                                <field name="medical_record_id"/>
+                                <field name="auth_re"/>
+                                <field name="auth_date"/>
+                                <field name="referral_date"/>
+                                <field name="referral_provider"/>
+                                <!-- <field name="is_follow_up"/>
+                                <field name="parent_appointment_id"/>
+                                <field name="follow_up_appointment_id"/>
+                                <field name="is_recurrent"/>
+                                <field name="recurrence_id"/> -->
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- list View -->
+    <record id="view_appointment_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.appointment.list</field>
+        <field name="model">ehr_cdss.appointment</field>
+        <field name="arch" type="xml">
+            <list string="Appointments">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="provider_id"/>
+                <field name="start_datetime"/>
+                <field name="end_datetime"/>
+                <field name="service_type"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Calendar View -->
+    <record id="view_appointment_calendar" model="ir.ui.view">
+        <field name="name">ehr_cdss.appointment.calendar</field>
+        <field name="model">ehr_cdss.appointment</field>
+        <field name="arch" type="xml">
+            <calendar string="Appointments" date_start="start_datetime" color="provider_id">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="provider_id"/>
+                <field name="service_type"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_appointment" model="ir.actions.act_window">
+        <field name="name">Appointments</field>
+        <field name="res_model">ehr_cdss.appointment</field>
+        <field name="view_mode">list,form,calendar</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first appointment
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_appointment" name="Appointments" parent="menu_ehr_cdss_main" action="action_appointment" sequence="1"/>
+    <!-- <menuitem id="menu_appointment_fun" name="Appointments" parent="menu_appointment" action="action_appointment" sequence="10"/> -->
+
+</odoo>

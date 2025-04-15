@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- list View -->
+
+    <record id="view_treatment_plan_list" model="ir.ui.view">
+        <field name="name">treatment.plan.list</field>
+        <field name="model">ehr_cdss.treatment.plan</field>
+        <field name="arch" type="xml">
+            <list string="Treatment Plans">
+                <!-- <field name="name"/> -->
+                <field name="patient_id"/>
+                <field name="provider_id"/>
+                <field name="date"/>
+                <field name="state" widget="badge"/>
+                <field name="last_update_date"/>
+                <field name="frequency"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_treatment_plan_form" model="ir.ui.view">
+        <field name="name">treatment.plan.form</field>
+        <field name="model">ehr_cdss.treatment.plan</field>
+        <field name="arch" type="xml">
+            <form string="Treatment Plan">
+                <!-- <header>
+                    <button name="action_activate" string="Activate" type="object" class="oe_highlight" invisible="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="action_complete" string="Complete" type="object" invisible="{'invisible': [('state', '!=', 'active')]}"/>
+                    <button name="action_cancel" string="Cancel" type="object" invisible="{'invisible': [('state', 'in', ['completed', 'canceled'])]}"/>
+                    <button name="action_draft" string="Set to Draft" type="object" invisible="{'invisible': [('state', '=', 'draft')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,completed,canceled"/>
+                </header> -->
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="patient_id"/>
+                            <field name="provider_id"/>
+                            <field name="medical_record_id"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="create_date" readonly="1"/>
+                            <field name="last_update_date" readonly="1"/>
+                            <field name="state" />
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Plan Details">
+                            <group>
+                                <group>
+                                    <field name="frequency"/>
+                                    <field name="anticipated_duration"/>
+                                    <field name="next_visit_timing"/>
+                                </group>
+                                <group>
+                                    <field name="reviewed_with_client"/>
+                                    <field name="client_participation"/>
+                                </group>
+                            </group>
+                            <field name="comments"/>
+                        </page>
+                        
+                        <page string="Treatment Goals">
+                            <field name="goal_ids" mode="list,form">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="client_goal"/>
+                                    <field name="target_date"/>
+                                    <field name="state"/>
+                                </list>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="name"/>
+                                            <field name="target_date"/>
+                                            <field name="state"/>
+                                        </group>
+                                        <group>
+                                            <field name="client_goal"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        
+                        <page string="Validation">
+                            <group>
+                                <field name="reviewed_with_client"/>
+                                <field name="client_participation"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_treatment_plan" model="ir.actions.act_window">
+        <field name="name">Treatment Plans</field>
+        <field name="res_model">ehr_cdss.treatment.plan</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a new Treatment Plan</p>
+        </field>
+    </record>
+    <!-- Menu Items -->
+    <menuitem id="menu_treatment_plan" name="All Treatment Plans" parent="Master_ehr_cdss_modules" action="action_treatment_plan" sequence="10"/>
+</odoo>

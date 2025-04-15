@@ -1,0 +1,9 @@
+<odoo>
+    <template id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <!-- Load the XML template -->
+            <script type="text/javascript" src="/Demo_form1/static/src/js/demo.js"/>
+            <script type="text/javascript" src="/Demo_form1/static/src/js/disease_prediction.js"/>
+        </xpath>
+    </template>
+</odoo>

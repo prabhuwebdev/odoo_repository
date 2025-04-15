@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="view_contact_info_tree" model="ir.ui.view">
+        <field name="name">contact.info.list</field>
+        <field name="model">ehr_cdss.contact.info</field>
+        <field name="arch" type="xml">
+            <list string="Contact Information">
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="preferred_contact_method"/>
+                <field name="patient_id" invisible="1"/>
+                <field name="provider_id" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_contact_info_form" model="ir.ui.view">
+        <field name="name">contact.info.form</field>
+        <field name="model">ehr_cdss.contact.info</field>
+        <field name="arch" type="xml">
+            <form string="Contact Information">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="provider_id"/>
+                            <field name="organization_id"/>
+                            <field name="location_id"/>
+                            <field name="contact_id"/>
+                        </group>
+                        <group>
+                            <field name="preferred_contact_method"/>
+                            <field name="preferred_language_id"/>
+                            <field name="preferred_time"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Phone">
+                            <group>
+                                <group>
+                                    <field name="phone"/>
+                                    <field name="phone_type"/>
+                                    <field name="phone_extension"/>
+                                </group>
+                                <group>
+                                    <field name="alternate_phone"/>
+                                    <field name="alternate_phone_type"/>
+                                    <field name="alternate_phone_extension"/>
+                                </group>
+                                <group>
+                                    <field name="fax"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Email">
+                            <group>
+                                <group>
+                                    <field name="email"/>
+                                    <field name="email_type"/>
+                                </group>
+                                <group>
+                                    <field name="alternate_email"/>
+                                    <field name="alternate_email_type"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Web &amp; Addresses">
+                            <group>
+                                <field name="website"/>
+                                <field name="social_media"/>
+                                <field name="primary_address_id" placeholder="Primary Address" />
+                            </group>
+                            <field name="address_ids" mode="list,form">
+                                <list editable="bottom">
+                                    <field name="address_id"/>
+                                    <field name="address_type"/>
+                                    <field name="is_primary"/>
+                                </list>
+                                <form>
+                                    <group>
+                                        <field name="address_id"/>
+                                        <field name="address_type"/>
+                                        <field name="is_primary"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+
+                        <page string="Preferences">
+                            <group>
+                                <group>
+                                    <field name="needs_interpreter"/>
+                                    <field name="has_hearing_impairment"/>
+                                    <field name="has_vision_impairment"/>
+                                </group>
+                                <group>
+                                    <field name="do_not_call"/>
+                                    <field name="do_not_email"/>
+                                    <field name="do_not_text"/>
+                                    <field name="do_not_leave_message"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Notes">
+                            <field name="notes" placeholder="Notes" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_contact_info" model="ir.actions.act_window">
+        <field name="name">Contact Information</field>
+        <field name="res_model">ehr_cdss.contact.info</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create new Contact Information</p>
+        </field>
+    </record>
+    <!-- Menu Items -->
+    <menuitem id="menu_contact_info" name="All Contact Information" parent="Master_ehr_cdss_modules" action="action_contact_info" />
+
+</odoo>

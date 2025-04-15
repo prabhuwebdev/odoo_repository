@@ -1,0 +1,58 @@
+<odoo>
+    <!-- List View for Monthly Stock Management -->
+    <record id="view_monthly_stock_management_list" model="ir.ui.view">
+        <field name="name">monthly.stock.management.list.view</field>
+        <field name="model">monthly.stock.management</field>
+        <field name="arch" type="xml">
+            <list string="Monthly Stock Report">
+                <field name="month"/>
+                <field name="year"/>
+                <field name="product"/>
+                <field name="product_group"/>
+                <field name="floor"/>
+                <field name="section"/>
+                <field name="supplier"/>
+                <field name="invoice_number"/>
+                <field name="invoice_date"/>
+                <field name="closing_quantity"/>
+                <field name="sale_rate"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View for Monthly Stock Management -->
+    <record id="view_monthly_stock_management_form" model="ir.ui.view">
+        <field name="name">monthly.stock.management.form.view</field>
+        <field name="model">monthly.stock.management</field>
+        <field name="arch" type="xml">
+            <form string="Monthly Stock Report">
+                <sheet>
+                    <field name="month"/>
+                    <field name="year"/>
+                    <field name="product"/>
+                    <field name="product_group"/>
+                    <field name="floor"/>
+                    <field name="section"/>
+                    <field name="supplier"/>
+                    <field name="invoice_number"/>
+                    <field name="invoice_date"/>
+                    <field name="closing_quantity"/>
+                    <field name="sale_rate"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Monthly Stock Management -->
+    <record id="action_monthly_stock_management" model="ir.actions.act_window">
+        <field name="name">Monthly Stock Management</field>
+        <field name="res_model">monthly.stock.management</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu Items for Monthly Stock Management -->
+    <menuitem id="menu_monthly_stock_management"
+              name="Monthly Stock Report"
+              parent="menu_loomlytics_analytics_root"
+              action="action_monthly_stock_management"/>
+</odoo>

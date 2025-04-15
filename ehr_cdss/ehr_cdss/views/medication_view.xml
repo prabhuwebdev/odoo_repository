@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Medication Form View -->
+    <record id="view_medical_medication_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.medication.form</field>
+        <field name="model">ehr_cdss.medical.medication</field>
+        <field name="arch" type="xml">
+            <form string="Medication">
+                <header>
+                    <button name="action_back_to_patient" string="Demographic" type="object" class="oe_secondary" invisible="not show_back_button"/>
+                    <button name="action_medical_history" string="Medical History" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="action_family_history" string="Family History" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="action_immunization_infectious_disease" string="Immunization-Infectious-Disease" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="dummy_action" string="Medication" type="object" class="btn btn-danger oe_highlight" invisible="not show_back_button" disabled="1" />
+                    <!-- <button name="action_medication" string="Medication" type="object" invisible="not show_back_button" class="oe_highlight"/> -->
+                    <button name="action_medical_patient_allergy" string="Patient Allergy" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="action_document" string="Patient Document" class="oe_highlight" type="object" invisible="not show_back_button" />
+                    <button name="action_appointment" string="Patient Appointment" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="open_insurance_record" string="Insurance" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="open_allergy_record" string="Patient Allergy" type="object" class="oe_highlight" invisible="not show_back_button" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="patient_id" readonly= "show_back_button" />
+                        <field name="name"/>
+                        <field name="active_ingredient"/>
+                        <field name="medication_type"/>
+                        <field name="unit"/>
+                        <field name="active"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                        <field name="form_date"/>
+                        <field name="to_date"/>
+                        <field name="route"/>
+                        <field name="frequency"/>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Medication list View -->
+    <record id="view_medical_medication_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.medication.list</field>
+        <field name="model">ehr_cdss.medical.medication</field>
+        <field name="arch" type="xml">
+            <list string="Medications">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="active_ingredient"/>
+                <field name="medication_type"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Medication Search View -->
+    <record id="view_medical_medication_search" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.medication.search</field>
+        <field name="model">ehr_cdss.medical.medication</field>
+        <field name="arch" type="xml">
+            <search string="Search Medications">
+                <field name="name"/>
+                <field name="active_ingredient"/>
+                <filter string="Prescription" name="prescription" domain="[('medication_type', '=', 'prescription')]"/>
+                <filter string="OTC" name="otc" domain="[('medication_type', '=', 'otc')]"/>
+                <filter string="Supplement" name="supplement" domain="[('medication_type', '=', 'supplement')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Type" name="group_by_type" context="{'group_by': 'medication_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Medication Reconciliation Form View -->
+    <record id="view_medical_medication_reconciliation_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.medication.reconciliation.form</field>
+        <field name="model">ehr_cdss.medical.medication.reconciliation</field>
+        <field name="arch" type="xml">
+            <form string="Medication Reconciliation">
+                <!-- <header>
+                    <button name="action_verify_with_pharmacy" string="Verify with Pharmacy" 
+                            type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                    <button name="action_complete_reconciliation" string="Complete Reconciliation" 
+                            type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state', 'not in', ['draft', 'in_progress', 'verified'])]}"/>
+                    <button name="action_cancel" string="Cancel" 
+                            type="object"
+                            attrs="{'invisible': [('state', 'in', ['completed', 'cancelled'])]}"/>
+                    <button name="action_reset_to_draft" string="Reset to Draft" 
+                            type="object"
+                            attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                    <field name="state" widget="statusbar" 
+                           statusbar_visible="draft,in_progress,verified,completed"/>
+                </header> -->
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" 
+                                   options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id" options="{'no_create': True}"/>
+                            <field name="date_reconciliation"/>
+                            <field name="practitioner_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <!-- <field name="pharmacy_id" options="{'no_create': True}"/> -->
+                            <field name="pharmacy_verification"/>
+                            <field name="pharmacy_verification_date" readonly="1" />
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Medications" name="medications">
+                            <field name="medication_line_ids" widget="one2many">
+                                <list string="Medications" editable="bottom" decoration-danger="has_discrepancy">
+                                    <field name="medication_id"/>
+                                    <field name="medication_type"/>
+                                    <field name="dosage"/>
+                                    <field name="frequency"/>
+                                    <field name="route"/>
+                                    <field name="is_active"/>
+                                    <field name="pharmacy_data"/>
+                                    <field name="is_verified"/>
+                                    <field name="has_discrepancy"/>
+                                    <button name="action_verify" type="object" 
+                                            string="Verify" icon="fa-check"/>
+                                    <button name="action_resolve_discrepancy" type="object" 
+                                            string="Resolve" icon="fa-exclamation-triangle" />
+                                </list>
+                                <form string="Medication Detail">
+                                    <group>
+                                        <group>
+                                            <field name="medication_id"/>
+                                            <field name="medication_type"/>
+                                            <field name="dosage"/>
+                                            <field name="frequency"/>
+                                            <field name="route"/>
+                                        </group>
+                                        <group>
+                                            <field name="start_date"/>
+                                            <field name="end_date"/>
+                                            <field name="is_active"/>
+                                            <field name="is_verified"/>
+                                            <field name="has_discrepancy"/>
+                                        </group>
+                                    </group>
+                                    <group string="Verification">
+                                        <field name="pharmacy_data"/>
+                                        <field name="discrepancy_notes"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Summary" name="summary">
+                            <group>
+                                <field name="total_medications"/>
+                                <field name="total_verified"/>
+                                <field name="total_discrepancies"/>
+                            </group>
+                            <group string="Notes">
+                                <field name="notes" nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Medication Reconciliation list View -->
+    <record id="view_medical_medication_reconciliation_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.medication.reconciliation.list</field>
+        <field name="model">ehr_cdss.medical.medication.reconciliation</field>
+        <field name="arch" type="xml">
+            <list string="Medication Reconciliations" decoration-info="state=='draft'" 
+                  decoration-warning="state=='in_progress'" decoration-success="state=='completed'" 
+                  decoration-danger="total_discrepancies > 0">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="date_reconciliation"/>
+                <!-- <field name="pharmacy_id"/> -->
+                <field name="pharmacy_verification"/>
+                <field name="total_medications"/>
+                <field name="total_verified"/>
+                <field name="total_discrepancies"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Medication Reconciliation Search View -->
+    <!-- <record id="view_medical_medication_reconciliation_search" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.medication.reconciliation.search</field>
+        <field name="model">ehr_cdss.medical.medication.reconciliation</field>
+        <field name="arch" type="xml">
+            <search string="Search Medication Reconciliations">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="pharmacy_id"/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="In Progress" name="in_progress" domain="[('state', '=', 'in_progress')]"/>
+                <filter string="Verified" name="verified" domain="[('state', '=', 'verified')]"/>
+                <filter string="Completed" name="completed" domain="[('state', '=', 'completed')]"/>
+                <filter string="With Discrepancies" name="discrepancies" domain="[('total_discrepancies', '>', 0)]"/>
+                <filter string="Verified with Pharmacy" name="pharmacy_verified" domain="[('pharmacy_verification', '=', True)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Patient" name="group_by_patient" context="{'group_by': 'patient_id'}"/>
+                    <filter string="Status" name="group_by_state" context="{'group_by': 'state'}"/>
+                    <filter string="Pharmacy" name="group_by_pharmacy" context="{'group_by': 'pharmacy_id'}"/>
+                    <filter string="Date" name="group_by_date" context="{'group_by': 'date_reconciliation:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record> -->
+
+    <!-- Medication Reconciliation Calendar View -->
+    <record id="view_medical_medication_reconciliation_calendar" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.medication.reconciliation.calendar</field>
+        <field name="model">ehr_cdss.medical.medication.reconciliation</field>
+        <field name="arch" type="xml">
+            <calendar string="Medication Reconciliations" date_start="date_reconciliation" color="state">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="total_medications"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- Medication Action -->
+    <record id="action_medical_medication" model="ir.actions.act_window">
+        <field name="name">Medications</field>
+        <field name="res_model">ehr_cdss.medical.medication</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new medication
+            </p>
+            <p>
+                Manage all medications including prescriptions, over-the-counter medications, and supplements.
+            </p>
+        </field>
+    </record>
+
+    <!-- Medication Reconciliation Action -->
+    <record id="action_medical_medication_reconciliation" model="ir.actions.act_window">
+        <field name="name">Medication Reconciliation</field>
+        <field name="res_model">ehr_cdss.medical.medication.reconciliation</field>
+        <field name="view_mode">list,form,calendar</field>
+        <field name="context">{'search_default_draft': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new medication reconciliation
+            </p>
+            <p>
+                Track and verify medications by reconciling with pharmacy data to ensure accuracy.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <!-- <menuitem id="menu_medical_root" name="Medical" sequence="10"/>
+    <menuitem id="menu_medical_medication" name="Medications" parent="menu_medical_root" sequence="10"/> -->
+    
+    <menuitem id="menu_medical_medication_list" name="Medications" 
+              parent="Master_ehr_cdss_modules" action="action_medical_medication" sequence="10"/>
+              
+    <menuitem id="menu_medical_medication_reconciliation" name="Medication Reconciliation" 
+              parent="Master_ehr_cdss_modules" action="action_medical_medication_reconciliation" sequence="20"/>
+
+    <!-- Sequences -->
+    <!-- <record id="seq_medical_medication_reconciliation" model="ir.sequence">
+        <field name="name">Medication Reconciliation</field>
+        <field name="code">ehr_cdss.medical.medication.reconciliation</field>
+        <field name="prefix">MR/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record> -->
+</odoo>

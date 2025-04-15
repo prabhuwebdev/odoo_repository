@@ -1,0 +1,40 @@
+<odoo>
+    <record id="view_supplier_master_list" model="ir.ui.view">
+        <field name="name">supplier.master.list</field>
+        <field name="model">supplier.master</field>
+        <field name="arch" type="xml">
+            <list string="Supplier Master">
+                <field name="supplier_name"/>
+                <field name="supplier_city"/>
+                <field name="supplier_gst"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_supplier_master_form" model="ir.ui.view">
+        <field name="name">supplier.master.form</field>
+        <field name="model">supplier.master</field>
+        <field name="arch" type="xml">
+            <form string="Supplier Master">
+                <sheet>
+                    <group>
+                        <field name="supplier_name"/>
+                        <field name="supplier_city"/>
+                        <field name="supplier_gst"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_supplier_master" model="ir.actions.act_window">
+        <field name="name">Supplier Master</field>
+        <field name="res_model">supplier.master</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_supplier_master_list"/>
+    </record>
+
+    <!-- Menu Items -->
+
+    <menuitem id="menu_supplier_master" name="Supplier Master" parent="menu_loomlytics_root" action="action_supplier_master"/>
+</odoo>

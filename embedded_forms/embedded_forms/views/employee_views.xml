@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Client Action -->
+        <record id="action_employee_lazy_form" model="ir.actions.client">
+            <field name="name">Employee Forms (Lazy)</field>
+            <field name="tag">embedded_forms.employee_lazy_form</field>
+        </record>
+
+        <!-- Menu Items -->
+        <menuitem id="menu_employee_lazy_root" name="Employee Forms (Lazy)" sequence="10"/>
+        <menuitem id="menu_employee_lazy_form" name="Lazy Forms" parent="menu_employee_lazy_root" action="action_employee_lazy_form" sequence="1"/>
+    </data>
+</odoo>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- list View -->
+    <record id="view_contact_list" model="ir.ui.view">
+        <field name="name">contact.list</field>
+        <field name="model">ehr_cdss.contact</field>
+        <field name="arch" type="xml">
+            <list string="Contacts">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="relationship"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="is_emergency_contact" invisible="1"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_contact_form" model="ir.ui.view">
+        <field name="name">contact.form</field>
+        <field name="model">ehr_cdss.contact</field>
+        <field name="arch" type="xml">
+            <form string="Contact">
+                <header>
+                    <field name="active" widget="boolean_button"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="first_name"/>
+                            <field name="middle_name"/>
+                            <field name="last_name"/>
+                            <field name="suffix"/>
+                        </group>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="relationship"/>
+                            <field name="relationship_other" invisible="relationship != 'other'"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Contact Information">
+                            <group>
+                                <group>
+                                    <field name="phone"/>
+                                    <field name="email"/>
+                                    <field name="contact_info_id"/>
+                                </group>
+                                <group>
+                                    <field name="address_id"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Roles and Permissions">
+                            <group>
+                                <group>
+                                    <field name="is_emergency_contact"/>
+                                    <field name="is_guardian"/>
+                                    <field name="is_healthcare_proxy"/>
+                                    <field name="is_power_of_attorney"/>
+                                    <field name="is_caregiver"/>
+                                </group>
+                                <group>
+                                    <field name="allowed_to_discuss"/>
+                                    <field name="allowed_to_pickup"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Notes">
+                            <field name="notes" placeholder="Notes" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_contact" model="ir.actions.act_window">
+        <field name="name">Contacts</field>
+        <field name="res_model">ehr_cdss.contact</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a new Contact</p>
+        </field>
+    </record>
+    <!-- Menu Items -->
+
+    <menuitem id="menu_contact" name="All Contacts" parent="Master_ehr_cdss_modules" action="action_contact" />
+</odoo>

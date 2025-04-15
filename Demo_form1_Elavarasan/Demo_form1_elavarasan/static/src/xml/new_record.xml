@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+
+    <t t-name="new_record.container">
+        <div class="border p-3">
+            <h4>Add Medical Record</h4>
+            <p>Patient: <t t-esc="state.Name"/></p>
+        </div>
+
+        <div class="d-flex justify-content-start align-items-center px-3 my-3 flex-wrap gap-2">
+            <h5 class="me-3 mb-0 fw-bold">Record by:</h5>
+            <button class="btn btn-outline-primary rounded-pill px-3 fw-semibold">Image</button>
+            <button class="btn btn-outline-secondary rounded-pill px-3 fw-semibold">Document</button>
+            <button class="btn btn-outline-info rounded-pill px-3 fw-semibold">Upload DICOM</button>
+            <button class="btn btn-outline-success rounded-pill px-3 fw-semibold">Upload Image</button>
+            <button class="btn btn-primary rounded-pill px-3 fw-semibold">Browse Picture</button>
+            <button class="btn btn-outline-secondary rounded-pill px-3 fw-semibold">Camera</button>
+        </div>
+
+        <!-- Left Column -->
+        <div class="row px-3">
+            <div class="col-md-6" style="padding-bottom:100px">
+                <div class="mb-3">
+                    <label class="form-label">Image Title *</label>
+                    <input t-model="state.name" type="text" class="form-control" placeholder="Enter image title..." />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Image Type *</label>
+                    <select t-model="state.image_type" class="form-select">
+                        <option value="">-- Select --</option>
+                        <option value="ct">CT Scan</option>
+                        <option value="xray">X-Ray</option>
+                        <option value="mri">MRI</option>
+                        <option value="ultrasound">Ultrasound</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Body Part/Region *</label>
+                    <input t-model="state.body_region" type="text" class="form-control" placeholder="Enter body part or region..." />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Study Date *</label>
+                    <input t-model="state.study_date" type="date" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Healthcare Provider/Facility</label>
+                    <input t-model="state.provider" type="text" class="form-control" placeholder="Enter provider or facility name..." />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Physician/Specialist</label>
+                    <input t-model="state.physician" type="text" class="form-control" placeholder="Enter physician name..." />
+                </div>
+                <div class="form-check form-check-inline">
+                    <input t-model="state.contrast_used" type="checkbox" class="form-check-input" id="contrastCheck" />
+                    <label class="form-check-label" for="contrastCheck">Contrast Used</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input t-model="state.run_ai" type="checkbox" class="form-check-input" id="aiCheck" />
+                    <label class="form-check-label" for="aiCheck">Run AI Analysis on Save</label>
+                </div>
+
+                <!-- Save button -->
+                <div class="mt-3">
+                    <!-- <button class="btn btn-primary" t-on-click="saveRecord">Save</button> -->
+                    <button class="btn btn-primary" t-on-click="saveRecord()" t-att-disabled="state.saving">
+                         <t t-esc="state.saving ? 'Saving...' : 'Save'"/>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-md-6">
+                <div class="border border-secondary border-2 rounded d-flex flex-column align-items-center justify-content-center text-center p-4" style="height: 220px;" t-on-click="openFilePicker">
+                    <p class="mb-1">No image uploaded</p>
+                    <p class="small text-muted mb-0">Upload CT scan image or DICOM file</p>
+                    <p class="small text-muted mb-0">Supported formats: DICOM, JPG, PNG, TIFF</p>
+                    <p class="small text-muted">Max file size: 45MB</p>
+                </div>
+
+                <div class="border rounded p-3 mt-4 bg-light small">
+                    <h5 class="fw-semibold mb-2">Metadata</h5>
+                    <div class="row">
+                        <div class="col-6"><strong>Status:</strong> Awaiting image upload</div>
+                        <div class="col-6"><strong>Modality:</strong></div>
+                        <div class="col-6"><strong>Series:</strong></div>
+                        <div class="col-6"><strong>Patient Position:</strong></div>
+                        <div class="col-6"><strong>Slice:</strong></div>
+                        <div class="col-6"><strong>Acquisition Date:</strong></div>
+                        <div class="col-6"><strong>Resolution:</strong></div>
+                        <div class="col-6"><strong>Study UID:</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</template>

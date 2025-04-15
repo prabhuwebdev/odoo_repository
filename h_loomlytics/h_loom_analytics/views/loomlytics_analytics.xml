@@ -1,0 +1,58 @@
+<odoo>
+    <record id="view_loomlytics_analytics_list" model="ir.ui.view">
+        <field name="name">loomlytics.analytics.list</field>
+        <field name="model">loomlytics.analytics</field>
+        <field name="arch" type="xml">
+            <list string="Loomlytics Analytics">
+                <field name="month"/>
+                <field name="year"/>
+                <field name="product_group"/>
+                <field name="product"/>
+                <field name="floor"/>
+                <field name="section"/>
+                <field name="supplier"/>
+                <field name="salqty"/>
+                <field name="salrate"/>
+                <field name="salamount"/>
+
+
+            </list>
+        </field>
+    </record>
+
+    <record id="view_loomlytics_analytics_form" model="ir.ui.view">
+        <field name="name">loomlytics_analytics.form</field>
+        <field name="model">loomlytics.analytics</field>
+        <field name="arch" type="xml">
+            <form string="Loomlytics Analytics">
+                <sheet>
+                    <group>
+                        <field name="month"/>
+                        <field name="year"/>
+                        <field name="product_group"/>
+                        <field name="product"/>
+                        <field name="floor"/>
+                        <field name="section"/>
+                        <field name="supplier"/>
+                        <field name="salqty"/>
+                        <field name="salrate"/>
+                        <field name="salamount"/>
+
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_loomlytics_analytics" model="ir.actions.act_window">
+        <field name="name">Loomlytics Analytics</field>
+        <field name="res_model">loomlytics.analytics</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_loomlytics_analytics_list"/>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_loomlytics_analytics_root" name="Loomlytics Analytics"/>
+    <menuitem id="menu_loomlytics_analytics" name="Loomlytics Analytics" parent="menu_loomlytics_analytics_root" action="action_loomlytics_analytics"/>
+</odoo>

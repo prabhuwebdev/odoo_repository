@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Allergy Type Views -->
+    <record id="view_medical_allergy_type_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.allergy.type.form</field>
+        <field name="model">ehr_cdss.medical.allergy.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_medical_allergy_type_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.allergy.type.list</field>
+        <field name="model">ehr_cdss.medical.allergy.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_medical_allergy_type" model="ir.actions.act_window">
+        <field name="name">Allergy Types</field>
+        <field name="res_model">ehr_cdss.medical.allergy.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Allergy Severity Views -->
+    <record id="view_medical_allergy_severity_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.allergy.severity.form</field>
+        <field name="model">ehr_cdss.medical.allergy.severity</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_medical_allergy_severity_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.allergy.severity.list</field>
+        <field name="model">ehr_cdss.medical.allergy.severity</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_medical_allergy_severity" model="ir.actions.act_window">
+        <field name="name">Allergy Severities</field>
+        <field name="res_model">ehr_cdss.medical.allergy.severity</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Allergy Category Views -->
+    <record id="view_medical_allergy_category_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.allergy.category.form</field>
+        <field name="model">ehr_cdss.medical.allergy.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_medical_allergy_category_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.allergy.category.list</field>
+        <field name="model">ehr_cdss.medical.allergy.category</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_medical_allergy_category" model="ir.actions.act_window">
+        <field name="name">Allergy Categories</field>
+        <field name="res_model">ehr_cdss.medical.allergy.category</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Patient Allergy Views -->
+    <record id="view_medical_patient_allergy_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.patient.allergy.form</field>
+        <field name="model">ehr_cdss.medical.patient.allergy</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_back_to_patient" string="Demographic" type="object" class="oe_secondary" invisible="not show_back_button"/>
+                    <!-- <button name="action_medical_history" string="Medical History" type="object" class="oe_highlight" invisible="not show_back_button" /> -->
+                    <button name="dummy_action" string="Medical History" type="object" class="oe_highlight" invisible="not show_back_button"  />
+                    <button name="action_family_history" string="Family History" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="action_medication" string="Medication" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="action_medical_patient_allergy" string="Patient Allergy" type="object" invisible="not show_back_button" class="btn btn-danger oe_highlight" disabled="1" />
+                    <button name="action_document" string="Patient Document" class="oe_highlight" type="object" invisible="not show_back_button" />
+                    <button name="action_appointment" string="Patient Appointment" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="open_insurance_record" string="Insurance" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="open_allergy_record" string="Patient Allergy" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <!-- end command  -->
+                    <!-- <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" state="draft"/>
+                    <button name="action_verify" string="Verify in EMR" type="object" class="oe_highlight" state="confirmed"/>
+                    <button name="action_apply_allergy_band" string="Apply Allergy Band" type="object" modifiers="{'invisible': [('allergy_band_applied', '=', True)]}"/>
+                    <button name="action_set_inactive" string="Set Inactive" type="object" state="draft,confirmed,verified"/>
+                    <button name="action_reset_to_draft" string="Reset to Draft" type="object" state="confirmed,verified,inactive"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,verified"/> -->
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Allergy Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id" readonly= "show_back_button"/>
+                            <field name="category_id"/>
+                            <field name="type_id"/>
+                            <field name="severity_id"/>
+                            <field name="is_intolerance"/>
+                        </group>
+                        <group>
+                            <field name="first_observed"/>
+                            <field name="allergy_band_applied"/>
+                            <field name="verified" />
+                            <field name="verified_by" />
+                            <field name="verification_date" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Reaction">
+                            <field name="reaction" placeholder="Describe the reaction in detail..."/>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes" placeholder="Additional notes..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div> -->
+            </form>
+        </field>
+    </record>
+
+    
+
+    <record id="view_medical_patient_allergy_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.patient.allergy.list</field>
+        <field name="model">ehr_cdss.medical.patient.allergy</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="severity_id.name in ('Severe', 'Critical', 'Life-threatening')" decoration-info="is_intolerance == True">
+                <field name="patient_id"/>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="severity_id"/>
+                <field name="is_intolerance"/>
+                <field name="verified"/>
+                <field name="allergy_band_applied"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_medical_patient_allergy_search" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.patient.allergy.search</field>
+        <field name="model">ehr_cdss.medical.patient.allergy</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="category_id"/>
+                <field name="type_id"/>
+                <field name="severity_id"/>
+                <separator/>
+                <filter string="Medications" name="medication" domain="[('category_id.name', '=', 'Medication')]"/>
+                <filter string="Foods" name="food" domain="[('category_id.name', '=', 'Food')]"/>
+                <filter string="Environmental" name="environmental" domain="[('category_id.name', '=', 'Environmental')]"/>
+                <separator/>
+                <filter string="Critical" name="critical" domain="[('severity_id.name', 'in', ['Severe', 'Critical', 'Life-threatening'])]"/>
+                <filter string="Intolerances" name="intolerances" domain="[('is_intolerance', '=', True)]"/>
+                <filter string="Verified" name="verified" domain="[('verified', '=', True)]"/>
+                <filter string="Not Verified" name="not_verified" domain="[('verified', '=', False)]"/>
+                <filter string="Band Applied" name="band_applied" domain="[('allergy_band_applied', '=', True)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Patient" name="by_patient" domain="[]" context="{'group_by': 'patient_id'}"/>
+                    <filter string="Category" name="by_category" domain="[]" context="{'group_by': 'category_id'}"/>
+                    <filter string="Severity" name="by_severity" domain="[]" context="{'group_by': 'severity_id'}"/>
+                    <filter string="Status" name="by_state" domain="[]" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_medical_patient_allergy" model="ir.actions.act_window">
+        <field name="name">Patient Allergies</field>
+        <field name="res_model">ehr_cdss.medical.patient.allergy</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Patient Allergy Band Views -->
+    <record id="view_medical_patient_allergy_band_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.patient.allergy.band.form</field>
+        <field name="model">ehr_cdss.medical.patient.allergy.band</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_remove_band" string="Remove Band" type="object" class="oe_highlight" modifiers="{'invisible': [('state', '=', 'removed')]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="band_number" placeholder="Band Number"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="application_date"/>
+                            <field name="applied_by"/>
+                        </group>
+                        <group>
+                            <field name="removal_date" readonly="1" modifiers="{'invisible': [('state', '!=', 'removed')]}"/>
+                            <field name="removed_by" readonly="1" modifiers="{'invisible': [('state', '!=', 'removed')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Allergies">
+                            <field name="allergy_ids">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="category_id"/>
+                                    <field name="severity_id"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes" placeholder="Additional notes..."/>
+                        </page>
+                        <page string="Removal Information" modifiers="{'invisible': [('state', '!=', 'removed')]}">
+                            <field name="removal_reason" placeholder="Reason for removal..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div> -->
+            </form>
+        </field>
+    </record>
+
+    <record id="view_medical_patient_allergy_band_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.patient.allergy.band.list</field>
+        <field name="model">ehr_cdss.medical.patient.allergy.band</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state == 'applied'" decoration-muted="state == 'removed'">
+                <field name="patient_id"/>
+                <field name="band_number"/>
+                <field name="application_date"/>
+                <field name="applied_by"/>
+                <field name="state"/>
+                <field name="removal_date"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_medical_patient_allergy_band" model="ir.actions.act_window">
+        <field name="name">Allergy Bands</field>
+        <field name="res_model">ehr_cdss.medical.patient.allergy.band</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Inherited Patient Form View -->
+    
+    <!-- Wizard Views -->
+    <!-- <record id="view_medical_allergy_band_wizard_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.allergy.band.wizard.form</field>
+        <field name="model">ehr_cdss.medical.allergy.band.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Apply Allergy Band">
+                <group>
+                    <field name="patient_id" readonly="1"/>
+                    <field name="band_number"/>
+                    <field name="notes"/>
+                </group>
+                <group>
+                    <field name="allergy_ids" domain="[('patient_id', '=', patient_id), ('active', '=', True)]">
+                        <list>
+                            <field name="name"/>
+                            <field name="category_id"/>
+                            <field name="severity_id"/>
+                        </list>
+                    </field>
+                </group>
+                <footer>
+                    <button name="apply_band" string="Apply Band" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_medical_allergy_band_removal_wizard_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.allergy.band.removal.wizard.form</field>
+        <field name="model">ehr_cdss.medical.allergy.band.removal.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Remove Allergy Band">
+                <group>
+                    <field name="band_id" readonly="1"/>
+                    <field name="patient_id" readonly="1"/>
+                    <field name="removal_reason"/>
+                </group>
+                <footer>
+                    <button name="remove_band" string="Remove Band" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_medical_emr_allergy_verification_wizard_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.medical.emr.allergy.verification.wizard.form</field>
+        <field name="model">ehr_cdss.medical.emr.allergy.verification.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Verify EMR Allergies">
+                <p>Please verify the following allergies against the Electronic Medical Record system.</p>
+                <field name="patient_id" invisible="1"/>
+                <field name="allergy_verification_ids">
+                    <list editable="bottom">
+                        <field name="allergy_id"/>
+                        <field name="exists_in_emr"/>
+                        <field name="notes"/>
+                    </list>
+                </field>
+                <footer>
+                    <button name="verify_allergies" string="Confirm Verification" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record> -->
+
+    <!-- Menu Items -->
+    <!-- <menuitem id="menu_medical_allergies" name="Allergies" sequence="30"/> -->
+
+    <menuitem id="menu_medical_patient_allergy" name="Patient Allergies" 
+              parent="Master_ehr_cdss_modules" 
+              action="action_medical_patient_allergy" sequence="10"/>
+              
+    <menuitem id="menu_medical_patient_allergy_band" name="Allergy Bands" 
+              parent="Master_ehr_cdss_modules" 
+              action="action_medical_patient_allergy_band" sequence="20"/>
+              
+    <!-- <menuitem id="menu_medical_config_allergies" name="Configuration" 
+              parent="menu_medical_allergies" sequence="100"/>
+              
+    <menuitem id="menu_medical_allergy_category" name="Allergy Categories" 
+              parent="menu_medical_config_allergies" 
+              action="action_medical_allergy_category" sequence="10"/>
+              
+    <menuitem id="menu_medical_allergy_type" name="Allergy Types" 
+              parent="menu_medical_config_allergies" 
+              action="action_medical_allergy_type" sequence="20"/>
+              
+    <menuitem id="menu_medical_allergy_severity" name="Allergy Severities" 
+              parent="menu_medical_config_allergies" 
+              action="action_medical_allergy_severity" sequence="30"/>
+ -->
+
+</odoo>

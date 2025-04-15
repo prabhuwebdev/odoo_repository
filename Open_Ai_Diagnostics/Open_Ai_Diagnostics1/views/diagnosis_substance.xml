@@ -1,0 +1,49 @@
+<odoo>
+
+    <record id="view_medical_substance_form" model="ir.ui.view">
+    <field name="name">medical.substance.form</field>
+    <field name="model">medical.substance</field>
+    <field name="arch" type="xml">
+        <form string="Substance">
+            <sheet>
+                <group>
+                    <field name="name"/>
+                    <field name="category"/>
+                    <field name="active"/>
+                </group>
+                <group>
+                    <field name="description"/>
+                    <field name="common_effects"/>
+                    <field name="medical_interactions"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+    <record id="view_medical_substance_list" model="ir.ui.view">
+    <field name="name">medical.substance.tree</field>
+    <field name="model">medical.substance</field>
+    <field name="arch" type="xml">
+        <list string="Substances">
+            <field name="name"/>
+            <field name="category"/>
+            <field name="active"/>
+        </list>
+    </field>
+</record>
+
+
+
+    <record id="action_medical_substance" model="ir.actions.act_window">
+    <field name="name">Substances</field>
+    <field name="res_model">medical.substance</field>
+    <field name="view_mode">list,form</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">Create and manage medical substances used in treatment or diagnosis.</p>
+    </field>
+</record>
+
+        <menuitem id="menu_medical_substance" name="Substances" parent="menu_medical_main" action="action_medical_substance" sequence="10"/>
+
+</odoo>

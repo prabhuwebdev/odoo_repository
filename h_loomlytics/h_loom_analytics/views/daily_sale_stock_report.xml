@@ -1,0 +1,340 @@
+<!--<odoo>-->
+<!--    <record id="view_daily_sales_stock_report_form" model="ir.ui.view">-->
+<!--    <field name="name">daily.sales.stock.report.form</field>-->
+<!--    <field name="model">daily.sales.stock.report</field>-->
+<!--    <field name="arch" type="xml">-->
+<!--        <form string="Daily Sales Stock Report">-->
+<!--            <sheet>-->
+<!--                <group>-->
+<!--                    <group>-->
+<!--                        <field name="date"/>-->
+<!--                        <field name="product_group"/>-->
+<!--                        <field name="floor"/>-->
+<!--                        <field name="section"/>-->
+<!--                    </group>-->
+<!--                    <group>-->
+<!--                        <field name="days_0_30"/>-->
+<!--                        <field name="days_31_60"/>-->
+<!--                        <field name="days_61_90"/>-->
+<!--                        <field name="days_91_180"/>-->
+<!--                        <field name="days_181_360"/>-->
+<!--                    </group>-->
+<!--                    <group>-->
+<!--                        <field name="sales"/>-->
+<!--                        <field name="last_year_sales"/>-->
+<!--                        <field name="stock_days"/>-->
+<!--                    </group>-->
+<!--                </group>-->
+<!--            </sheet>-->
+<!--        </form>-->
+<!--    </field>-->
+<!--</record>-->
+
+
+<!--&lt;!&ndash;# Tree/List View XML&ndash;&gt;-->
+<!--&lt;!&ndash;LIST_VIEW&ndash;&gt;-->
+<!--<record id="view_daily_sales_stock_report_tree" model="ir.ui.view">-->
+<!--    <field name="name">daily.sales.stock.report.tree</field>-->
+<!--    <field name="model">daily.sales.stock.report</field>-->
+<!--    <field name="arch" type="xml">-->
+<!--        <tree string="Daily Sales Stock Reports" editable="top">-->
+<!--            <field name="date"/>-->
+<!--            <field name="product_group"/>-->
+<!--            <field name="floor"/>-->
+<!--            <field name="section"/>-->
+<!--            <field name="days_0_30" sum="Total 0-30 Days"/>-->
+<!--            <field name="days_31_60" sum="Total 31-60 Days"/>-->
+<!--            <field name="days_61_90" sum="Total 61-90 Days"/>-->
+<!--            <field name="days_91_180" sum="Total 91-180 Days"/>-->
+<!--            <field name="days_181_360" sum="Total 181-360 Days"/>-->
+<!--            <field name="sales" sum="Total Sales"/>-->
+<!--            <field name="last_year_sales" sum="Total LY Sales"/>-->
+<!--            <field name="stock_days" avg="Avg Stock Days"/>-->
+<!--        </tree>-->
+<!--    </field>-->
+<!--</record>-->
+
+
+<!--&lt;!&ndash;# Pivot View XML&ndash;&gt;-->
+<!--&lt;!&ndash;PIVOT_VIEW&ndash;&gt;-->
+<!--<record id="view_daily_sales_stock_report_pivot" model="ir.ui.view">-->
+<!--    <field name="name">daily.sales.stock.report.pivot</field>-->
+<!--    <field name="model">daily.sales.stock.report</field>-->
+<!--    <field name="arch" type="xml">-->
+<!--        <pivot string="Daily Sales Stock Analysis">-->
+<!--            <field name="date" type="row" interval="month"/>-->
+<!--            <field name="product_group" type="row"/>-->
+<!--            <field name="floor" type="col"/>-->
+<!--            <field name="section" type="col"/>-->
+<!--            <field name="sales" type="measure"/>-->
+<!--            <field name="last_year_sales" type="measure"/>-->
+<!--            <field name="days_0_30" type="measure"/>-->
+<!--            <field name="days_31_60" type="measure"/>-->
+<!--            <field name="days_61_90" type="measure"/>-->
+<!--            <field name="days_91_180" type="measure"/>-->
+<!--            <field name="days_181_360" type="measure"/>-->
+<!--            <field name="stock_days" type="measure"/>-->
+<!--        </pivot>-->
+<!--    </field>-->
+<!--</record>-->
+<!--"""-->
+
+<!--&lt;!&ndash;# Graph View XML&ndash;&gt;-->
+<!--&lt;!&ndash;GRAPH_VIEW&ndash;&gt;-->
+<!--<record id="view_daily_sales_stock_report_graph" model="ir.ui.view">-->
+<!--    <field name="name">daily.sales.stock.report.graph</field>-->
+<!--    <field name="model">daily.sales.stock.report</field>-->
+<!--    <field name="arch" type="xml">-->
+<!--        <graph string="Daily Sales Stock Analysis" type="line" sample="1">-->
+<!--            <field name="date" interval="week"/>-->
+<!--            <field name="product_group"/>-->
+<!--            <field name="sales" type="measure"/>-->
+<!--            <field name="last_year_sales" type="measure"/>-->
+<!--        </graph>-->
+<!--    </field>-->
+<!--</record>-->
+
+<!--&lt;!&ndash;# Search View XML&ndash;&gt;-->
+<!--&lt;!&ndash;SEARCH_VIEW &ndash;&gt;-->
+<!--<record id="view_daily_sales_stock_report_search" model="ir.ui.view">-->
+<!--    <field name="name">daily.sales.stock.report.search</field>-->
+<!--    <field name="model">daily.sales.stock.report</field>-->
+<!--    <field name="arch" type="xml">-->
+<!--        <search string="Search Daily Sales Stock Reports">-->
+<!--            <field name="date"/>-->
+<!--            <field name="product_group"/>-->
+<!--            <field name="floor"/>-->
+<!--            <field name="section"/>-->
+
+<!--            &lt;!&ndash; Date Filters &ndash;&gt;-->
+<!--            <filter string="Today" name="today" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>-->
+<!--            <filter string="Yesterday" name="yesterday" domain="[('date', '=', (context_today() + relativedelta(days=-1)).strftime('%Y-%m-%d'))]"/>-->
+<!--            <filter string="This Week" name="this_week" domain="[('date', '>=', (context_today() + relativedelta(weeks=-1, days=1, weekday=0)).strftime('%Y-%m-%d')),-->
+<!--                                                               ('date', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d'))]"/>-->
+<!--            <filter string="Last Week" name="last_week" domain="[('date', '>=', (context_today() + relativedelta(weeks=-2, days=1, weekday=0)).strftime('%Y-%m-%d')),-->
+<!--                                                                ('date', '&lt;=', (context_today() + relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d'))]"/>-->
+<!--            <filter string="This Month" name="this_month" domain="[('date', '>=', (context_today().replace(day=1)).strftime('%Y-%m-%d')),-->
+<!--                                                                  ('date', '&lt;=', (context_today() + relativedelta(months=1, day=1, days=-1)).strftime('%Y-%m-%d'))]"/>-->
+<!--            <filter string="Last Month" name="last_month" domain="[('date', '>=', (context_today() + relativedelta(months=-1, day=1)).strftime('%Y-%m-%d')),-->
+<!--                                                                  ('date', '&lt;=', (context_today() + relativedelta(day=1, days=-1)).strftime('%Y-%m-%d'))]"/>-->
+<!--            <filter string="This Quarter" name="this_quarter" domain="[('date', '>=', (context_today() + relativedelta(month=3*(((context_today().month-1)//3)+1), day=1)).strftime('%Y-%m-%d')),-->
+<!--                                                                      ('date', '&lt;=', (context_today() + relativedelta(month=3*(((context_today().month-1)//3)+1)+3, day=1, days=-1)).strftime('%Y-%m-%d'))]"/>-->
+<!--            <filter string="Last Quarter" name="last_quarter" domain="[('date', '>=', (context_today() + relativedelta(month=3*(((context_today().month-1)//3)+1)-3, day=1)).strftime('%Y-%m-%d')),-->
+<!--                                                                      ('date', '&lt;=', (context_today() + relativedelta(month=3*(((context_today().month-1)//3)+1), day=1, days=-1)).strftime('%Y-%m-%d'))]"/>-->
+<!--            <filter string="This Year" name="this_year" domain="[('date', '>=', (context_today().replace(month=1, day=1)).strftime('%Y-%m-%d')),-->
+<!--                                                                ('date', '&lt;=', (context_today().replace(month=12, day=31)).strftime('%Y-%m-%d'))]"/>-->
+<!--            <filter string="Last Year" name="last_year" domain="[('date', '>=', ((context_today().replace(month=1, day=1)) + relativedelta(years=-1)).strftime('%Y-%m-%d')),-->
+<!--                                                                ('date', '&lt;=', ((context_today().replace(month=12, day=31)) + relativedelta(years=-1)).strftime('%Y-%m-%d'))]"/>-->
+
+<!--            &lt;!&ndash; Stock Metrics Filters &ndash;&gt;-->
+<!--            <filter string="High Stock Days" name="high_stock" domain="[('stock_days', '>', 90)]"/>-->
+<!--            <filter string="Medium Stock Days" name="medium_stock" domain="[('stock_days', '>=', 30), ('stock_days', '&lt;=', 90)]"/>-->
+<!--            <filter string="Low Stock Days" name="low_stock" domain="[('stock_days', '&lt;', 30)]"/>-->
+<!--            <filter string="Zero Stock Days" name="zero_stock" domain="[('stock_days', '=', 0)]"/>-->
+
+<!--            &lt;!&ndash; Sales Comparison Filters &ndash;&gt;-->
+<!--            <filter string="Sales Growth" name="sales_growth" domain="[('sales', '>', 'last_year_sales')]"/>-->
+<!--            <filter string="Sales Decline" name="sales_decline" domain="[('sales', '&lt;', 'last_year_sales')]"/>-->
+<!--            <filter string="No Sales" name="no_sales" domain="[('sales', '=', 0)]"/>-->
+
+<!--            &lt;!&ndash; Grouping Options &ndash;&gt;-->
+<!--            <group expand="0" string="Group By">-->
+<!--                <filter string="Date" name="group_date" context="{'group_by': 'date'}"/>-->
+<!--                <filter string="Date (Week)" name="group_date_week" context="{'group_by': 'date:week'}"/>-->
+<!--                <filter string="Date (Month)" name="group_date_month" context="{'group_by': 'date:month'}"/>-->
+<!--                <filter string="Date (Quarter)" name="group_date_quarter" context="{'group_by': 'date:quarter'}"/>-->
+<!--                <filter string="Date (Year)" name="group_date_year" context="{'group_by': 'date:year'}"/>-->
+<!--                <filter string="Product Group" name="group_product_group" context="{'group_by': 'product_group'}"/>-->
+<!--                <filter string="Floor" name="group_floor" context="{'group_by': 'floor'}"/>-->
+<!--                <filter string="Section" name="group_section" context="{'group_by': 'section'}"/>-->
+<!--            </group>-->
+<!--        </search>-->
+<!--    </field>-->
+<!--</record>-->
+<!--"""-->
+
+<!--&lt;!&ndash;# Action and Menu XML&ndash;&gt;-->
+<!--&lt;!&ndash;ACTION_MENU &ndash;&gt;-->
+<!--&lt;!&ndash; Action &ndash;&gt;-->
+<!--<record id="action_daily_sales_stock_report" model="ir.actions.act_window">-->
+<!--    <field name="name">Daily Sales Stock Reports</field>-->
+<!--    <field name="res_model">daily.sales.stock.report</field>-->
+<!--    <field name="view_mode">tree,pivot,graph,form</field>-->
+<!--    <field name="search_view_id" ref="view_daily_sales_stock_report_search"/>-->
+<!--    <field name="context">{'search_default_today': 1}</field>-->
+<!--    <field name="help" type="html">-->
+<!--        <p class="o_view_nocontent_smiling_face">-->
+<!--            Create your first Daily Sales Stock Report!-->
+<!--        </p>-->
+<!--        <p>-->
+<!--            Track daily sales and stock levels by product group, floor, and section.-->
+<!--        </p>-->
+<!--    </field>-->
+<!--</record>-->
+
+<!--&lt;!&ndash; Menu &ndash;&gt;-->
+<!--<menuitem id="menu_daily_sales_stock_report_root"-->
+<!--          name="Daily Sales Stock"-->
+<!--          web_icon="daily_sales_stock_report,static/description/icon.png"-->
+<!--          parent="menu_loomlytics_analytics_root"-->
+<!--          sequence="10"/>-->
+
+<!--<menuitem id="menu_daily_sales_stock_report"-->
+<!--          name="Reports"-->
+<!--          parent="menu_daily_sales_stock_report_root"-->
+<!--          sequence="10"/>-->
+
+<!--<menuitem id="menu_daily_sales_stock_report_all"-->
+<!--          name="All Reports"-->
+<!--          parent="menu_daily_sales_stock_report"-->
+<!--          action="action_daily_sales_stock_report"-->
+<!--          sequence="10"/>-->
+<!--</odoo>-->
+
+
+
+<odoo>
+    <!-- Form View XML -->
+    <record id="view_daily_sales_stock_report_form" model="ir.ui.view">
+        <field name="name">daily.sales.stock.report.form</field>
+        <field name="model">daily.sales.stock.report</field>
+        <field name="arch" type="xml">
+            <form string="Daily Sales Stock Report">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="product_group"/>
+                            <field name="floor"/>
+                            <field name="section"/>
+                        </group>
+                        <group>
+                            <field name="days_0_30"/>
+                            <field name="days_31_60"/>
+                            <field name="days_61_90"/>
+                            <field name="days_91_180"/>
+                            <field name="days_181_360"/>
+                        </group>
+                        <group>
+                            <field name="sales"/>
+                            <field name="last_year_sales"/>
+                            <field name="stock_days"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View XML -->
+    <record id="view_daily_sales_stock_report_list" model="ir.ui.view">
+        <field name="name">daily.sales.stock.report.list</field>
+        <field name="model">daily.sales.stock.report</field>
+        <field name="arch" type="xml">
+            <list string="Daily Sales Stock Reports" editable="top">
+                <field name="date"/>
+                <field name="product_group"/>
+                <field name="floor"/>
+                <field name="section"/>
+                <field name="days_0_30" sum="Total 0-30 Days"/>
+                <field name="days_31_60" sum="Total 31-60 Days"/>
+                <field name="days_61_90" sum="Total 61-90 Days"/>
+                <field name="days_91_180" sum="Total 91-180 Days"/>
+                <field name="days_181_360" sum="Total 181-360 Days"/>
+                <field name="sales" sum="Total Sales"/>
+                <field name="last_year_sales" sum="Total LY Sales"/>
+                <field name="stock_days" avg="Avg Stock Days"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Pivot View XML -->
+    <record id="view_daily_sales_stock_report_pivot" model="ir.ui.view">
+        <field name="name">daily.sales.stock.report.pivot</field>
+        <field name="model">daily.sales.stock.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Daily Sales Stock Analysis">
+                <field name="date" type="row" interval="month"/>
+                <field name="product_group" type="row"/>
+                <field name="floor" type="col"/>
+                <field name="section" type="col"/>
+                <field name="sales" type="measure"/>
+                <field name="last_year_sales" type="measure"/>
+                <field name="days_0_30" type="measure"/>
+                <field name="days_31_60" type="measure"/>
+                <field name="days_61_90" type="measure"/>
+                <field name="days_91_180" type="measure"/>
+                <field name="days_181_360" type="measure"/>
+                <field name="stock_days" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Graph View XML -->
+    <record id="view_daily_sales_stock_report_graph" model="ir.ui.view">
+        <field name="name">daily.sales.stock.report.graph</field>
+        <field name="model">daily.sales.stock.report</field>
+        <field name="arch" type="xml">
+            <graph string="Daily Sales Stock Analysis" type="line" sample="1">
+                <field name="date" interval="week"/>
+                <field name="product_group"/>
+                <field name="sales" type="measure"/>
+                <field name="last_year_sales" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Search View XML -->
+    <record id="view_daily_sales_stock_report_search" model="ir.ui.view">
+        <field name="name">daily.sales.stock.report.search</field>
+        <field name="model">daily.sales.stock.report</field>
+        <field name="arch" type="xml">
+            <search string="Search Daily Sales Stock Reports">
+                <field name="date"/>
+                <field name="product_group"/>
+                <field name="floor"/>
+                <field name="section"/>
+
+                <!-- Date Filters -->
+                <filter string="Today" name="today" domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="Yesterday" name="yesterday" domain="[('date', '=', (context_today() + relativedelta(days=-1)).strftime('%Y-%m-%d'))]"/>
+
+                <!-- Stock Metrics Filters -->
+                <filter string="High Stock Days" name="high_stock" domain="[('stock_days', '&gt;', 90)]"/>
+                <filter string="Medium Stock Days" name="medium_stock" domain="[('stock_days', '&gt;=', 30), ('stock_days', '&lt;=', 90)]"/>
+                <filter string="Low Stock Days" name="low_stock" domain="[('stock_days', '&lt;', 30)]"/>
+                <filter string="Zero Stock Days" name="zero_stock" domain="[('stock_days', '=', 0)]"/>
+
+                <!-- Sales Comparison Filters -->
+                <filter string="Sales Growth" name="sales_growth" domain="[('sales', '&gt;', 'last_year_sales')]"/>
+                <filter string="Sales Decline" name="sales_decline" domain="[('sales', '&lt;', 'last_year_sales')]"/>
+                <filter string="No Sales" name="no_sales" domain="[('sales', '=', 0)]"/>
+
+                <!-- Grouping Options -->
+                <group expand="0" string="Group By">
+                    <filter string="Date" name="group_date" context="{'group_by': 'date'}"/>
+                    <filter string="Product Group" name="group_product_group" context="{'group_by': 'product_group'}"/>
+                    <filter string="Floor" name="group_floor" context="{'group_by': 'floor'}"/>
+                    <filter string="Section" name="group_section" context="{'group_by': 'section'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action and Menu XML -->
+    <record id="action_daily_sales_stock_report" model="ir.actions.act_window">
+        <field name="name">Daily Sales Stock Reports</field>
+        <field name="res_model">daily.sales.stock.report</field>
+        <field name="view_mode">list,pivot,graph,form</field>
+        <field name="search_view_id" ref="view_daily_sales_stock_report_search"/>
+        <field name="context">{'search_default_today': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face"> Create your first Daily Sales Stock Report! </p>
+            <p> Track daily sales and stock levels by product group, floor, and section. </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_daily_sales_stock_report_root" name="Daily Sales Stock" parent="menu_loomlytics_analytics_root" sequence="10"/>
+    <menuitem id="menu_daily_sales_stock_report" name="Reports" parent="menu_daily_sales_stock_report_root" sequence="10"/>
+    <menuitem id="menu_daily_sales_stock_report_all" name="All Reports" parent="menu_daily_sales_stock_report" action="action_daily_sales_stock_report" sequence="10"/>
+</odoo>

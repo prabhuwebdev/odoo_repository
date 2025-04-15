@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Action for the form -->
+        <record id="patient_to_dashboard_form" model="ir.actions.client">
+            <field name="name">Patient to Dashboard</field>
+            <field name="tag">patient_to_dashboard.understanding</field>
+            <field name="target">current</field>
+        </record>
+
+         Parent menu
+<!--        <menuitem id="menu_dashboard_root"-->
+<!--                  name="Dashboard"-->
+<!--                  sequence="10"/>-->
+
+        <!-- Child menu referencing the action -->
+        <menuitem id="patient_to_dashboard_menu"
+                  name="Patient To Dashboard"
+                  action="patient_to_dashboard_form"
+                  parent="menu_demo_form_root"/>
+    </data>
+</odoo>

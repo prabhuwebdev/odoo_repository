@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_patient_profile_form" model="ir.ui.view">
+        <field name="name">patient.profile.form</field>
+        <field name="model">cargenix_cdss.patient_profile</field>
+        <field name="arch" type="xml">
+            <form string="Patient Profile">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Patient Name"/>
+                        </h1>
+                        <h3>
+                            <field name="medical_record_number" placeholder="MRN"/>
+                        </h3>
+                    </div>
+
+                    <style>
+                        .patient_form .o_group {
+                            margin-bottom: 10px;
+                            padding: 15px;
+                            border-radius: 8px;
+                            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                        }
+                        .patient_form .o_inner_group {
+                            margin-bottom: 0;
+                        }
+                        .personal_info {
+                            background-color: #e8f4fc;
+                        }
+                        .demographic_info {
+                            background-color: #f0f8f0;
+                        }
+                        .cultural_info {
+                            background-color: #fef4e8;
+                        }
+                        .insurance_info {
+                            background-color: #f0f0f8;
+                        }
+                        .primary_insurance {
+                            background-color: #e8ecf4;
+                        }
+                        .secondary_insurance {
+                            background-color: #e8e8f4;
+                        }
+                        .financial_status {
+                            background-color: #f0e8fc;
+                        }
+                        .o_form_label {
+                            font-weight: 600;
+                            color: #333;
+                        }
+                    </style>
+
+                    <div class="patient_form">
+                        <!-- Personal Information -->
+                        <group name="personal_info" class="personal_info">
+                            <h2>Personal Information</h2>
+                            <group>
+                                <field name="date_of_birth"/>
+                                <field name="age"/>
+                                <field name="gender"/>
+                                <field name="sex_assigned_at_birth"/>
+                            </group>
+                            <group>
+                                <field name="contact_information"/>
+                            </group>
+                        </group>
+
+                        <!-- Demographic Information -->
+                        <group name="demographic_info" class="demographic_info">
+                            <h2>Demographic Information</h2>
+                            <group>
+                                <field name="ethnicity_race"/>
+                                <field name="primary_language"/>
+                                <field name="need_interpreter"/>
+                                <field name="marital_status"/>
+                                <field name="family_structure"/>
+                            </group>
+                            <group>
+                                <field name="education_level"/>
+                                <field name="geographic_location"/>
+                                <field name="employment_status"/>
+                                <field name="occupation"/>
+                            </group>
+                        </group>
+
+                        <!-- Cultural/Religious Information -->
+                        <group name="cultural_info" class="cultural_info">
+                            <h2>Cultural/Religious Information</h2>
+                            <group>
+                                <field name="cultural_preferences"/>
+                                <field name="religious_preferences"/>
+                                <field name="aboriginal_status"/>
+                                <field name="dietary_restrictions"/>
+                            </group>
+                            <group>
+                                <field name="cultural_customs"/>
+                                <field name="written_language_pref"/>
+                                <field name="verbal_language_pref"/>
+                            </group>
+                        </group>
+
+                        <!-- Insurance/Financial Status -->
+                        <group name="insurance_info" class="insurance_info">
+                            <h2>Insurance/Financial Status</h2>
+                            <group>
+                                <field name="insurance_coverage"/>
+                                <field name="insurance_provider"/>
+                                <field name="policy_number"/>
+                            </group>
+                        </group>
+
+                        <!-- Primary Insurance -->
+                        <group name="primary_insurance" class="primary_insurance">
+                            <h2>Primary Insurance</h2>
+                            <group>
+                                <field name="primary_insurance_coverage"/>
+                                <field name="primary_insurance_provider"/>
+                                <field name="primary_policy_number"/>
+                            </group>
+                        </group>
+
+                        <!-- Secondary Insurance -->
+                        <group name="secondary_insurance" class="secondary_insurance">
+                            <h2>Secondary Insurance</h2>
+                            <group>
+                                <field name="secondary_insurance_coverage"/>
+                                <field name="secondary_insurance_provider"/>
+                                <field name="secondary_policy_number"/>
+                            </group>
+                        </group>
+
+                        <!-- Financial Status -->
+                        <group name="financial_status" class="financial_status">
+                            <h2>Financial Status</h2>
+                            <group>
+                                <field name="financial_status"/>
+                                <field name="financial_assistance"/>
+                            </group>
+                        </group>
+                    </div>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- List/Tree View -->
+    <record id="view_patient_profile_tree" model="ir.ui.view">
+        <field name="name">patient.profile.tree</field>
+        <field name="model">cargenix_cdss.patient_profile</field>
+        <field name="arch" type="xml">
+            <list string="Patients" decoration-danger="financial_assistance==True">
+                <field name="name"/>
+                <field name="medical_record_number"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="primary_language"/>
+                <field name="need_interpreter"/>
+                <field name="primary_insurance_coverage"/>
+                <field name="financial_assistance"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_patient_profile_search" model="ir.ui.view">
+        <field name="name">patient.profile.search</field>
+        <field name="model">cargenix_cdss.patient_profile</field>
+        <field name="arch" type="xml">
+            <search string="Search Patients">
+                <field name="name"/>
+                <field name="medical_record_number"/>
+                <field name="primary_language"/>
+                <field name="gender"/>
+                <field name="primary_insurance_provider"/>
+                <separator/>
+                <filter string="Needs Interpreter" name="need_interpreter" domain="[('need_interpreter', '=', True)]"/>
+                <filter string="Needs Financial Assistance" name="financial_assistance" domain="[('financial_assistance', '=', True)]"/>
+                <filter string="Aboriginal/Torres Strait Islander" name="aboriginal_status" domain="[('aboriginal_status', '=', True)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Gender" name="group_by_gender" context="{'group_by': 'gender'}"/>
+                    <filter string="Insurance Coverage" name="group_by_primary_insurance" context="{'group_by': 'primary_insurance_coverage'}"/>
+                    <filter string="Employment Status" name="group_by_employment" context="{'group_by': 'employment_status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_patient_profile" model="ir.actions.act_window">
+        <field name="name">Patient Profiles</field>
+        <field name="res_model">cargenix_cdss.patient_profile</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_patient_profile_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first patient profile
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="cartgenx_cdss_patient_root"
+              name="CARTgenix CDSS"
+              sequence="10"/>
+
+    <menuitem id="cartgenx_cdss_patient_main"
+              name="Patients"
+              parent="cartgenx_cdss_patient_root"
+              sequence="10"/>
+
+    <menuitem id="cartgenix_patient_profile"
+              name="Patient Profiles"
+              parent="cartgenx_cdss_patient_main"
+              action="action_patient_profile"
+              sequence="10"/>
+</odoo>
+
+
+

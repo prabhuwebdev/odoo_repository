@@ -1,0 +1,334 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    &lt;!&ndash; Diagnosis Form View &ndash;&gt;-->
+<!--    <record id="view_medical_diagnosis_form" model="ir.ui.view">-->
+<!--        <field name="name">medical.diagnosis.form</field>-->
+<!--        <field name="model">medical.diagnosis</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Diagnosis">-->
+<!--                <header>-->
+<!--                    <button name="action_generate_diagnosis" string="Generate Differential Diagnosis"-->
+<!--                        type="object" class="oe_highlight" visible="state == 'draft'"/>-->
+<!--&lt;!&ndash;                    <button name="action_generate_treatment" string="Generate Treatment Plan"&ndash;&gt;-->
+<!--&lt;!&ndash;                        type="object" class="oe_highlight"&ndash;&gt;-->
+<!--&lt;!&ndash;                        attrs="{'invisible': ['|', ('state', 'not in', ['diagnosed']), ('selected_diagnosis', '=', False)]}"/>&ndash;&gt;-->
+<!--                    <button name="action_mark_completed" string="Mark as Completed"-->
+<!--                        type="object" visible="state == 'treated'"/>-->
+<!--                    <button name="action_reset_to_draft" string="Reset to Draft"-->
+<!--                        type="object"  visible="state != 'draft'"/>-->
+<!--                    <field name="state" widget="statusbar" statusbar_visible="draft,diagnosed,treated,completed"/>-->
+<!--                </header>-->
+<!--                <sheet>-->
+<!--                    <div class="oe_title">-->
+<!--                        <h1>-->
+<!--                            <field name="name"/>-->
+<!--                        </h1>-->
+<!--                    </div>-->
+<!--                    <group>-->
+<!--                        <group>-->
+<!--                            <field name="patient_id" readonly="state != 'draft'"/>-->
+<!--                            <field name="date"/>-->
+<!--                        </group>-->
+<!--                        <group>-->
+<!--                            <field name="api_key" password="True"/>-->
+<!--                            <field name="openai_model"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                    <notebook>-->
+<!--                        <page string="Symptoms">-->
+<!--&lt;!&ndash;                            modified&ndash;&gt;-->
+<!--                            <field name="symptoms" readonly="state != 'draft'" />-->
+<!--                        </page>-->
+<!--&lt;!&ndash;                        modified&ndash;&gt;-->
+<!--                        <page string="Differential Diagnosis" invisible="diagnosis_result == False">-->
+<!--                            <group>-->
+<!--                                <field name="diagnosis_result" readonly="1"/>-->
+<!--                                <field name="selected_diagnosis" attrs="{'required': [('state', '=', 'diagnosed')]}"/>-->
+<!--                            </group>-->
+<!--                        </page>-->
+<!--                        <page string="Treatment Plan" attrs="{'invisible': [('treatment_plan', '=', False)]}">-->
+<!--                            <field name="treatment_plan" readonly="1"/>-->
+<!--                        </page>-->
+<!--                    </notebook>-->
+<!--                    <div class="alert alert-danger" role="alert" style="margin-top: 15px;">-->
+<!--                        <strong>Disclaimer:</strong> This is an AI-assisted tool for educational purposes only.-->
+<!--                        It is not a substitute for professional medical advice, diagnosis, or treatment.-->
+<!--                        Always seek the advice of your physician or other qualified health provider.-->
+<!--                    </div>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Diagnosis Tree View &ndash;&gt;-->
+<!--    <record id="view_medical_diagnosis_tree" model="ir.ui.view">-->
+<!--        <field name="name">medical.diagnosis.tree</field>-->
+<!--        <field name="model">medical.diagnosis</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree string="Diagnoses">-->
+<!--                <field name="name"/>-->
+<!--                <field name="patient_id"/>-->
+<!--                <field name="date"/>-->
+<!--                <field name="selected_diagnosis"/>-->
+<!--                <field name="state"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Diagnosis Search View &ndash;&gt;-->
+<!--    <record id="view_medical_diagnosis_search" model="ir.ui.view">-->
+<!--        <field name="name">medical.diagnosis.search</field>-->
+<!--        <field name="model">medical.diagnosis</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <search string="Diagnoses">-->
+<!--                <field name="name"/>-->
+<!--                <field name="patient_id"/>-->
+<!--                <field name="symptoms"/>-->
+<!--                <field name="selected_diagnosis"/>-->
+<!--                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>-->
+<!--                <filter string="Diagnosed" name="diagnosed" domain="[('state', '=', 'diagnosed')]"/>-->
+<!--                <filter string="Treated" name="treated" domain="[('state', '=', 'treated')]"/>-->
+<!--                <filter string="Completed" name="completed" domain="[('state', '=', 'completed')]"/>-->
+<!--                <group expand="0" string="Group By">-->
+<!--                    <filter name="group_patient" string="Patient" context="{'group_by': 'patient_id'}"/>-->
+<!--                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>-->
+<!--                    <filter name="group_date" string="Date" context="{'group_by': 'date'}"/>-->
+<!--                </group>-->
+<!--            </search>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Diagnosis Action &ndash;&gt;-->
+<!--    <record id="action_medical_diagnosis" model="ir.actions.act_window">-->
+<!--        <field name="name">Diagnoses</field>-->
+<!--        <field name="res_model">medical.diagnosis</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--        <field name="search_view_id" ref="view_medical_diagnosis_search"/>-->
+<!--        <field name="help" type="html">-->
+<!--            <p class="o_view_nocontent_smiling_face">-->
+<!--                Create your first diagnosis!-->
+<!--            </p>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    &lt;!&ndash; Menu Items &ndash;&gt;-->
+<!--    <menuitem id="menu_medical_root" name="Medical" sequence="10"/>-->
+<!--    <menuitem id="menu_medical_main" name="Medical" parent="menu_medical_root" sequence="10"/>-->
+<!--    <menuitem id="menu_medical_patient" name="Patients" parent="menu_medical_main" action="action_medical_patient" sequence="10"/>-->
+<!--    <menuitem id="menu_medical_diagnosis" name="Diagnoses" parent="menu_medical_main" action="action_medical_diagnosis" sequence="20"/>-->
+<!--    <menuitem id="menu_medical_configuration" name="Configuration" parent="menu_medical_root" sequence="100"/>-->
+<!--    <menuitem id="menu_medical_substance" name="Substances" parent="menu_medical_configuration" action="action_medical_substance" sequence="10"/>-->
+<!--</odoo>-->
+
+
+
+<odoo>
+    <!-- Diagnosis Form View -->
+    <record id="view_medical_diagnosis_form" model="ir.ui.view">
+        <field name="name">medical.diagnosis.form</field>
+        <field name="model">medical.diagnosis</field>
+        <field name="arch" type="xml">
+            <form string="Diagnosis">
+                <header>
+                    <button name="action_generate_diagnosis"
+                            string="Generate Differential Diagnosis"
+                            type="object"
+                            class="oe_highlight"
+                            invisible="state != 'draft'"/>
+
+<!--                    <button name="action_generate_treatment"-->
+<!--                            string="Generate Treatment Plan"-->
+<!--                            type="object"-->
+<!--                            class="oe_highlight"-->
+<!--                            invisible="state != 'diagnosed' or selected_diagnosis == False"/>-->
+
+                    <button name="action_mark_completed"
+                            string="Mark as Completed"
+                            type="object"
+                            invisible="state != 'treated'"/>
+
+                    <button name="action_reset_to_draft"
+                            string="Reset to Draft"
+                            type="object"
+                            invisible="state == 'draft'"/>
+
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,diagnosed,treated,completed"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="patient_id" readonly="state != 'draft'"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="api_key" password="True"/>
+                            <field name="openai_model"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Symptoms">
+                            <field name="symptoms" readonly="state != 'draft'" />
+                        </page>
+
+                        <page string="Differential Diagnosis" invisible="not diagnosis_result">
+                            <group>
+                                <field name="diagnosis_result" readonly="1"/>
+                                <field name="selected_diagnosis" required="state == 'diagnosed'"/>
+                            </group>
+                        </page>
+
+                        <page string="Treatment Plan" invisible="not treatment_plan">
+                            <field name="treatment_plan" readonly="1"/>
+                        </page>
+                    </notebook>
+
+                    <div class="alert alert-danger" role="alert" style="margin-top: 15px;">
+                        <strong>Disclaimer:</strong> This is an AI-assisted tool for educational purposes only.
+                        It is not a substitute for professional medical advice, diagnosis, or treatment.
+                        Always seek the advice of your physician or other qualified health provider.
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Diagnosis List View -->
+    <record id="view_medical_diagnosis_tree" model="ir.ui.view">
+        <field name="name">medical.diagnosis.list</field>
+        <field name="model">medical.diagnosis</field>
+        <field name="arch" type="xml">
+            <list string="Diagnoses">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="date"/>
+                <field name="selected_diagnosis"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Diagnosis Search View -->
+    <record id="view_medical_diagnosis_search" model="ir.ui.view">
+        <field name="name">medical.diagnosis.search</field>
+        <field name="model">medical.diagnosis</field>
+        <field name="arch" type="xml">
+            <search string="Diagnoses">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="symptoms"/>
+                <field name="selected_diagnosis"/>
+                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
+                <filter string="Diagnosed" name="diagnosed" domain="[('state', '=', 'diagnosed')]"/>
+                <filter string="Treated" name="treated" domain="[('state', '=', 'treated')]"/>
+                <filter string="Completed" name="completed" domain="[('state', '=', 'completed')]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_patient" string="Patient" context="{'group_by': 'patient_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                    <filter name="group_date" string="Date" context="{'group_by': 'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Diagnosis Action -->
+    <record id="action_medical_diagnosis" model="ir.actions.act_window">
+        <field name="name">Diagnoses</field>
+        <field name="res_model">medical.diagnosis</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_medical_diagnosis_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first diagnosis!
+            </p>
+        </field>
+    </record>
+
+
+<!--medical patient form view-->
+<record id="view_medical_patient_form" model="ir.ui.view">
+    <field name="name">medical.patient.form</field>
+    <field name="model">medical.patient</field>
+    <field name="arch" type="xml">
+        <form string="Patient">
+            <sheet>
+                <div class="oe_title">
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                </div>
+
+                <group string="Basic Information">
+                    <field name="age"/>
+                    <field name="sex"/>
+                    <field name="date_of_birth"/>
+                    <field name="blood_group"/>
+                </group>
+
+                <group string="Measurements">
+                    <field name="height"/>
+                    <field name="weight"/>
+                    <field name="bmi" readonly="1"/>
+                </group>
+
+                <group string="Contact Information">
+                    <field name="phone"/>
+                    <field name="email"/>
+                    <field name="address"/>
+                </group>
+
+                <group string="Medical Details">
+                    <field name="allergies"/>
+                    <field name="current_medications"/>
+                    <field name="medical_history"/>
+                </group>
+
+                <group string="Health Habits">
+                    <field name="health_habits" readonly="1"/>
+                    <field name="habit_ids"/>
+                </group>
+
+                <group string="Diagnoses">
+                    <field name="diagnosis_ids" readonly="1"/>
+                </group>
+
+            </sheet>
+        </form>
+    </field>
+</record>
+
+
+
+
+
+
+
+    <record id="action_medical_patient" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">medical.patient</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Create your first patient record
+            </p>
+        </field>
+    </record>
+
+
+
+
+    <!-- Menu Items -->
+    <menuitem id="menu_medical_root" name="Medical" sequence="10"/>
+    <menuitem id="menu_medical_main" name="Medical" parent="menu_medical_root" sequence="10"/>
+    <menuitem id="menu_medical_patient" name="Patients" parent="menu_medical_main" action="action_medical_patient" sequence="10"/>
+    <menuitem id="menu_medical_diagnosis" name="Diagnoses" parent="menu_medical_main" action="action_medical_diagnosis" sequence="20"/>
+    <menuitem id="menu_medical_configuration" name="Configuration" parent="menu_medical_root" sequence="100"/>z
+</odoo>

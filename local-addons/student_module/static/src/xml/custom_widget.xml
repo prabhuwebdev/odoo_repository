@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <!-- Custom Color Field Template -->
+    <t t-name="CustomColorWidget.CustomColorField">
+        <div>
+            <t t-foreach="totalColors" t-as="color" t-key="color">
+                <span>
+                    <span t-attf-class="o_color_pill o_color_#{color}
+                        #{props.record.data[props.name] == color ? 'active': ''}"
+                          t-att-data-value="color"
+                          t-on-click="() => this.clickPill(color)"
+                          t-on-mouseover="categoryInfo"/>
+                </span>
+            </t>
+            <div class="CategInformationPanel"/>
+        </div>
+    </t>
+
+    <!-- Category Information Panel Template -->
+    <t t-name="CustomColorWidget.CategInformation">
+        <div t-attf-class="categ_info o_color_pill o_color#{value}">
+            <t t-if="value == 1">
+                <strong>Single Room with AC</strong>
+                <ul>
+                    <li>Small dressing table</li>
+                    <li>Small bedside table</li>
+                    <li>Small writing table</li>
+                    <li>Attached bathroom</li>
+                </ul>
+            </t>
+            <t t-if="value == 2">
+                <strong>Single Room with Non-AC</strong>
+                <ul>
+                    <li>Small dressing table</li>
+                    <li>Small bedside table</li>
+                    <li>Small writing table</li>
+                    <li>Attached bathroom</li>
+                </ul>
+            </t>
+            <t t-if="value == 3">
+                <strong>King Double Room with AC</strong>
+                <ul>
+                    <li>King size double bed</li>
+                    <li>Small dressing table</li>
+                    <li>Small bedside table</li>
+                    <li>Small writing table</li>
+                    <li>TV</li>
+                    <li>Small Fridge</li>
+                    <li>Attached bathroom</li>
+                </ul>
+            </t>
+            <t t-if="value == 4">
+                <strong>King Double Room with Non-AC</strong>
+                <ul>
+                    <li>King size double bed</li>
+                    <li>Small dressing table</li>
+                    <li>Small bedside table</li>
+                    <li>Small writing table</li>
+                    <li>TV</li>
+                    <li>Small Fridge</li>
+                    <li>Attached bathroom</li>
+                </ul>
+            </t>
+            <t t-if="value == 5">
+                <strong>Queen Double Room with AC</strong>
+                <ul>
+                    <li>Queen size double bed</li>
+                    <li>Small dressing table</li>
+                    <li>Small bedside table</li>
+                    <li>Small writing table</li>
+                    <li>TV</li>
+                    <li>Small Fridge</li>
+                    <li>Attached bathroom</li>
+                </ul>
+            </t>
+            <t t-if="value == 6">
+                <strong>Queen Double Room with Non-AC</strong>
+                <ul>
+                    <li>Queen size double bed</li>
+                    <li>Small dressing table</li>
+                    <li>Small bedside table</li>
+                    <li>Small writing table</li>
+                    <li>TV</li>
+                    <li>Small Fridge</li>
+                    <li>Attached bathroom</li>
+                </ul>
+            </t>
+        </div>
+    </t>
+</templates>

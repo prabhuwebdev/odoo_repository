@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!-- list View -->
+    <record id="view_safety_plan_list" model="ir.ui.view">
+        <field name="name">safety.plan.list</field>
+        <field name="model">ehr_cdss.safety.plan</field>
+        <field name="arch" type="xml">
+            <list string="Safety Plans">
+                <!-- <field name="name"/> -->
+                <field name="patient_id"/>
+                <field name="provider_id"/>
+                <field name="create_date"/>
+                <field name="is_active" invisible="not context.get('show_active', False)"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_safety_plan_form" model="ir.ui.view">
+        <field name="name">safety.plan.form</field>
+        <field name="model">ehr_cdss.safety.plan</field>
+        <field name="arch" type="xml">
+            <form string="Safety Plan">
+                <!-- <header>
+                    <button name="action_activate" string="Activate" type="object" class="oe_highlight" 
+                        invisible="state != 'draft' or is_active"/>
+                    <button name="action_archive" string="Archive" type="object" 
+                        invisible="state != 'active'"/>
+                    <button name="action_set_to_draft" string="Set to Draft" type="object" 
+                        invisible="state == 'draft'"/>
+                    <button name="action_patient_sign" string="Patient Sign" type="object" 
+                        invisible="patient_sign_date"/>
+                    <button name="action_provider_sign" string="Provider Sign" type="object" 
+                        invisible="provider_sign_date"/>
+                    <button name="action_print_safety_plan" string="Print" type="object" class="oe_stat_button" icon="fa-print"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,archived"/>
+                </header> -->
+                <sheet>
+                    <group>
+                        <group>
+                            <!-- <field name="name" readonly="1"/> -->
+                            <field name="patient_id"/>
+                            <field name="provider_id"/>
+                            <field name="medical_record_id"/>
+                            <field name="risk_assessment_id"/>
+                        </group>
+                        <group>
+                            <field name="create_date" readonly="1"/>
+                            <field name="last_update_date" readonly="1"/>
+                            <field name="is_active"/>
+                            <field name="state" readonly="1"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Warning Signs">
+                            <field name="warning_signs" placeholder="List thoughts, images, moods, or situations that may indicate a crisis is developing..."/>
+                        </page>
+                        
+                        <page string="Coping Strategies">
+                            <field name="internal_coping_strategies" placeholder="List things you can do to take your mind off problems without contacting others..."/>
+                            <field name="social_contacts" placeholder="List people and places that provide distraction..."/>
+                        </page>
+                        
+                        <page string="Support Contacts">
+                            <field name="help_contacts" placeholder="List people you can ask for help during a crisis..."/>
+                            <field name="help_contacts_ids" mode="list,form">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="relationship"/>
+                                    <field name="phone"/>
+                                    <field name="email"/>
+                                </list>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="relationship"/>
+                                        <field name="phone"/>
+                                        <field name="email"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        
+                        <page string="Professional Help">
+                            <field name="professional_contacts" placeholder="List professionals or agencies you can contact during a crisis..."/>
+                            <field name="professional_contacts_ids" mode="list,form">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="role"/>
+                                    <field name="phone"/>
+                                    <field name="hours"/>
+                                </list>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="role"/>
+                                        <field name="phone"/>
+                                        <field name="hours"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        
+                        <page string="Safety &amp; Reasons">
+                            <field name="environment_safety" placeholder="List things you can do to remove means of harm..."/>
+                            <field name="reasons_for_living" placeholder="List your most important reasons for living..."/>
+                        </page>
+                        
+                        <page string="Additional Info">
+                            <field name="triggering_events" placeholder="List specific events or situations that might trigger a crisis..."/>
+                            <field name="early_warning_behaviors" placeholder="List behaviors that indicate escalating risk..."/>
+                            <field name="additional_resources" placeholder="List any additional crisis resources, phone apps, etc..."/>
+                        </page>
+                        
+                        <page string="Signatures">
+                            <group>
+                                <group string="Patient Signature">
+                                    <field name="patient_signature" widget="image" options="{'preview_image': 'image_medium'}"/>
+                                    <field name="patient_sign_date" readonly="1"/>
+                                </group>
+                                <group string="Provider Signature">
+                                    <field name="provider_signature" widget="image" options="{'preview_image': 'image_medium'}"/>
+                                    <field name="provider_sign_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+   
+    <record id="action_safety_plan" model="ir.actions.act_window">
+        <field name="name">Safety Plans</field>
+        <field name="res_model">ehr_cdss.safety.plan</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a new Safety Plan</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_safety_plan" name="All Safety Plans" parent="Master_ehr_cdss_modules" action="action_safety_plan" sequence="10"/>
+
+</odoo>

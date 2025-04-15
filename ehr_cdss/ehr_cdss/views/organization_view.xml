@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_ehr_cdss_organization_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.organization.form</field>
+        <field name="model">ehr_cdss.organization</field>
+        <field name="arch" type="xml">
+            <form string="Healthcare Organization">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <group>
+                            <field name="code"/>
+                            <field name="organization_type"/>
+                            <field name="organization_subtype"/>
+                            <field name="specialty"/>
+                        </group>
+                    </div>
+
+                    <notebook>
+                        <page string="Overview">
+                            <group>
+                                <group string="Identification">
+                                    <field name="legal_name"/>
+                                    <field name="tax_id"/>
+                                    <field name="npi"/>
+                                    <field name="website"/>
+                                </group>
+                                <group string="Status">
+                                    <field name="state"/>
+                                    <field name="active"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Contact Information">
+                                    <field name="phone"/>
+                                    <field name="fax"/>
+                                    <field name="email"/>
+                                </group>
+                                <group string="Logo">
+                                    <field name="logo" widget="image" class="oe_avatar"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Relationships">
+                            <group>
+                                <group string="Organization Structure">
+                                    <field name="parent_id"/>
+                                    <field name="child_ids" mode="list">
+                                        <list>
+                                            <field name="name"/>
+                                            <field name="code"/>
+                                            <field name="organization_type"/>
+                                        </list>
+                                    </field>
+                                </group>
+                                <group string="Partners">
+                                    <field name="partner_organization_ids" widget="many2many_tags"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Providers">
+                                    <field name="provider_ids" mode="list">
+                                        <list>
+                                            <field name="name"/>
+                                            <field name="provider_type"/>
+                                            <!-- <field name="specialty"/> -->
+                                        </list>
+                                    </field>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Services">
+                            <group>
+                                <group string="Service Information">
+                                    <field name="service_ids" widget="many2many_tags"/>
+                                    <field name="accepts_new_patients"/>
+                                    <field name="telehealth_available"/>
+                                    <field name="emergency_services"/>
+                                    <field name="is_insurance_accepted"/>
+                                </group>
+                                <group string="Operating Hours">
+                                    <field name="is_24_hours"/>
+                                    <!-- <field name="operating_hours_ids" mode="list">
+                                        <list>
+                                            <field name="day_of_week"/>
+                                            <field name="opening_time"/>
+                                            <field name="closing_time"/>
+                                        </list>
+                                    </field> -->
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Accreditations">
+                            <field name="accreditation_ids" mode="list">
+                                <list>
+                                    <field name="accrediting_body"/>
+                                    <field name="accreditation_number"/>
+                                    <field name="issue_date"/>
+                                    <field name="expiry_date"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Certifications">
+                            <field name="certification_ids" mode="list">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="certifying_body"/>
+                                    <field name="certification_number"/>
+                                    <field name="issue_date"/>
+                                    <field name="expiry_date"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ehr_cdss_organization_tree" model="ir.ui.view">
+        <field name="name">ehr_cdss.organization.list</field>
+        <field name="model">ehr_cdss.organization</field>
+        <field name="arch" type="xml">
+            <list string="Healthcare Organizations">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="organization_type"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="state"/>
+                <field name="active" invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ehr_cdss_organization" model="ir.actions.act_window">
+        <field name="name">Healthcare Organizations</field>
+        <field name="res_model">ehr_cdss.organization</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first Healthcare Organization</p>
+        </field>
+    </record>
+    <!-- Organizations Submenu -->
+    <menuitem id="menu_ehr_cdss_organizations" name="Healthcare Organizations" parent="sub_Master_ehr_cdss_modules" sequence="10" action="action_ehr_cdss_organization"/>
+</odoo>

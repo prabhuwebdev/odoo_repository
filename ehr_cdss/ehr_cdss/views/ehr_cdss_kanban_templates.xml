@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_ehr_cdss_kanban_header" model="ir.ui.view">
+            <field name="name">ehr_cdss.kanban.header.buttons</field>
+            <field name="model">ehr_cdss.document</field>
+            <field name="inherit_id" ref="ehr_cdss.view_document_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='o_kanban_header_buttons']" position="replace">
+                    <div class="o_kanban_header_buttons">
+                        <button type="object" name="action_back_to_patient" class="btn btn-secondary">Demographic</button>
+                        <button type="object" name="action_medical_history" class="btn btn-primary">Medical History</button>
+                        <button type="object" name="action_family_history" class="btn btn-primary">Family History</button>
+                        <button type="object" name="action_immunization_infectious_disease" class="btn btn-primary">Immunization</button>
+                        <button type="object" name="action_medication" class="btn btn-primary">Medication</button>
+                        <button type="object" name="action_medical_patient_allergy" class="btn btn-primary">Allergy</button>
+                        <button class="btn btn-danger" disabled="1">Patient Document</button>
+                        <button type="object" name="action_appointment" class="btn btn-primary">Appointment</button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

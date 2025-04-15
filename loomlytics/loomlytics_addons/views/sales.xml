@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree View (List View) -->
+    <record id="view_sales_list" model="ir.ui.view">
+        <field name="name">sales.data.list</field>
+        <field name="model">sales.data</field>
+        <field name="arch" type="xml">
+            <list string="Sales Data">
+                <field name="month"/>
+                <field name="year"/>
+                <field name="item7"/>
+                <field name="item8"/>
+                <field name="salqtd"/>
+                <field name="salamount"/>
+                <field name="netqtd"/>
+                <field name="netamount"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_sales_form" model="ir.ui.view">
+        <field name="name">sales.data.form</field>
+        <field name="model">sales.data</field>
+        <field name="arch" type="xml">
+            <form string="Sales Data">
+                <sheet>
+                    <group>
+                        <field name="month"/>
+                        <field name="year"/>
+                    </group>
+                    <group>
+                        <field name="item7"/>
+                        <field name="item8"/>
+                    </group>
+                    <group>
+                        <field name="salqtd"/>
+                        <field name="salamount"/>
+                    </group>
+                    <group>
+                        <field name="netqtd"/>
+                        <field name="netamount"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_sales_data" model="ir.actions.act_window">
+        <field name="name">Sales Data</field>
+        <field name="res_model">sales.data</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_sales_list"/>
+    </record>
+
+    <!-- Menu Items -->
+
+    <menuitem id="menu_sales_data" name="Sales" parent="menu_loomlytics_root" action="action_sales_data"/>
+</odoo>

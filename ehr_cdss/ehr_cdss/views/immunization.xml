@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- list View -->
+    <record id="view_patient_immunization_record_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.patient.immunization.record.list</field>
+        <field name="model">ehr_cdss.patient.immunization.record</field>
+        <field name="arch" type="xml">
+            <list string="Patient Immunization Records">
+                <field name="partner_id"/>
+                <field name="immunization_status"/>
+                <field name="immunization_records_available"/>
+                <field name="covid19_vaccination"/>
+                <field name="influenza_vaccination"/>
+                <field name="tetanus_vaccination"/>
+                <field name="hepatitis_b_vaccination"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_patient_immunization_record_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.patient.immunization.record.form</field>
+        <field name="model">ehr_cdss.patient.immunization.record</field>
+        <field name="arch" type="xml">
+            <form string="Patient Immunization Record">
+                <header>
+                    <button name="action_back_to_patient" string="Demographic" type="object" class="oe_secondary" invisible="not show_back_button"/>
+                    <button name="action_medical_history" string="Medical History" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="action_family_history" string="Family History" type="object" class="oe_highlight" invisible="not show_back_button"  />
+                    <!-- <button name="action_immunization_infectious_disease" string="Immunization-Infectious-Disease" type="object" invisible="not show_back_button" class="oe_highlight"/> -->
+                    <button name="dummy_action" string="Immunization-Infectious-Disease" type="object" class="btn btn-danger oe_highlight" invisible="not show_back_button" disabled="1" />
+                    <button name="action_medication" string="Medication" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="action_medical_patient_allergy" string="Patient Allergy" type="object" invisible="not show_back_button" class="oe_highlight"/>
+                    <button name="action_document" string="Patient Document" class="oe_highlight" type="object" invisible="not show_back_button" />
+                    <button name="action_appointment" string="Patient Appointment" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="open_insurance_record" string="Insurance" type="object" class="oe_highlight" invisible="not show_back_button" />
+                    <button name="open_allergy_record" string="Patient Allergy" type="object" class="oe_highlight" invisible="not show_back_button" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="partner_id" placeholder="Patient" options="{'no_create': True}" readonly= "show_back_button" />
+                        </h1>
+                    </div>
+                    <notebook>
+                        <!-- Vaccine History -->
+                        <page string="Vaccine History">
+                            <group>
+                                <group string="Childhood Vaccines">
+                                    <field name="childhood_vaccine_history"/>
+                                </group>
+                                <group string="Adult Vaccines">
+                                    <field name="adult_vaccine_history"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="COVID-19 Vaccination">
+                                    <field name="covid19_vaccination"/>
+                                    <field name="covid19_vaccine_type" invisible="[(covid19_vaccination, '=', False)]"/>
+                                    <field name="covid19_doses" invisible="[(covid19_vaccination, '=', False)]"/>
+                                    <field name="covid19_last_dose_date" invisible="[(covid19_vaccination, '=', False)]"/>
+                                    <field name="covid19_booster" invisible="[(covid19_vaccination, '=', False)]"/>
+                                </group>
+                                <group string="Influenza Vaccination">
+                                    <field name="influenza_vaccination"/>
+                                    <field name="influenza_last_date" invisible="[(influenza_vaccination, '=', False)]"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Tetanus Vaccination">
+                                    <field name="tetanus_vaccination"/>
+                                    <field name="tetanus_type" invisible="[(tetanus_vaccination, '=', False)]"/>
+                                    <field name="tetanus_last_date" invisible="[(tetanus_vaccination, '=', False)]"/>
+                                </group>
+                                <group string="Pneumococcal Vaccination">
+                                    <field name="pneumococcal_vaccination"/>
+                                    <field name="pneumococcal_type" invisible="[(pneumococcal_vaccination, '=', False)]"/>
+                                    <field name="pneumococcal_date" invisible="[(pneumococcal_vaccination, '=', False)]"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Hepatitis Vaccinations">
+                                    <field name="hepatitis_a_vaccination"/>
+                                    <field name="hepatitis_a_completion" invisible="[(hepatitis_a_vaccination, '=', False)]"/>
+                                    <field name="hepatitis_a_dates" invisible="[(hepatitis_a_vaccination, '=', False)]"/>
+                                    <field name="hepatitis_b_vaccination"/>
+                                    <field name="hepatitis_b_completion" invisible="[(hepatitis_b_vaccination, '=', False)]"/>
+                                    <field name="hepatitis_b_dates" invisible="[(hepatitis_b_vaccination, '=', False)]"/>
+                                </group>
+                                <group string="Other Common Vaccinations">
+                                    <field name="mmr_vaccination"/>
+                                    <field name="mmr_dates" invisible="[(mmr_vaccination, '=', False)]"/>
+                                    <field name="varicella_vaccination"/>
+                                    <field name="varicella_dates" invisible="[(varicella_vaccination, '=', False)]"/>
+                                    <field name="hpv_vaccination"/>
+                                    <field name="hpv_completion" invisible="[(hpv_vaccination, '=', False)]"/>
+                                    <field name="hpv_dates" invisible="[(hpv_vaccination, '=', False)]"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Specialty Vaccinations">
+                                    <field name="zoster_vaccination"/>
+                                    <field name="zoster_type" invisible="[(zoster_vaccination, '=', False)]"/>
+                                    <field name="zoster_dates" invisible="[(zoster_vaccination, '=', False)]"/>
+                                    <field name="meningococcal_vaccination"/>
+                                    <field name="meningococcal_type" invisible="[(meningococcal_vaccination, '=', False)]"/>
+                                    <field name="meningococcal_dates" invisible="[(meningococcal_vaccination, '=', False)]"/>
+                                </group>
+                                <group string="Travel Vaccines">
+                                    <field name="travel_vaccines_received"/>
+                                    <field name="travel_vaccine_dates" invisible="[(travel_vaccines_received, '=', False)]"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Vaccine">
+                                    <field name="vaccine_name"/>
+                                    <field name="vaccine_type_id"/>
+
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- Infectious Disease History -->
+                        <page string="Infectious Disease History">
+                            <group>
+                                <group string="General Disease History">
+                                    <field name="infectious_disease_history"/>
+                                    <field name="childhood_diseases" invisible="[(infectious_disease_history, '=', False)]"/>
+                                    <field name="childhood_disease_dates" invisible="[(infectious_disease_history, '=', False)]"/>
+                                </group>
+                                <group string="COVID-19 Infection">
+                                    <field name="covid19_infection"/>
+                                    <field name="covid19_infection_date" invisible="[(covid19_infection, '=', False)]"/>
+                                    <field name="covid19_severity" invisible="[(covid19_infection, '=', False)]"/>
+                                    <field name="covid19_long_term_effects" invisible="[(covid19_infection, '=', False)]"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Influenza History">
+                                    <field name="influenza_history"/>
+                                    <field name="influenza_dates" invisible="[(influenza_history, '=', False)]"/>
+                                </group>
+                                <group string="Tuberculosis Screening">
+                                    <field name="tuberculosis_screening"/>
+                                    <field name="tuberculosis_test_type" invisible="[(tuberculosis_screening, '=', False)]"/>
+                                    <field name="tuberculosis_test_date" invisible="[(tuberculosis_screening, '=', False)]"/>
+                                    <field name="tuberculosis_test_result" invisible="[(tuberculosis_screening, '=', False)]"/>
+                                    <field name="tuberculosis_infection"/>
+                                    <field name="tuberculosis_treatment" invisible="[(tuberculosis_infection, '=', False)]"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group string="HIV and Hepatitis">
+                                    <field name="hiv_screening"/>
+                                    <field name="hiv_test_date" invisible="[(hiv_screening, '=', False)]"/>
+                                    <field name="hiv_status" invisible="[(hiv_screening, '=', False)]"/>
+                                    <field name="hiv_treatment" invisible="[(hiv_screening, '=', False)]"/>
+                                    <field name="hepatitis_b_infection"/>
+                                    <field name="hepatitis_b_status" invisible="[(hepatitis_b_infection, '=', False)]"/>
+                                    <field name="hepatitis_b_treatment" invisible="[(hepatitis_b_infection, '=', False)]"/>
+                                </group>
+                                <group string="Dates">
+                                    <field name="form_date"/>
+                                    <field name="to_date"/>
+
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+        <!-- Action: Open Immunization Records List -->
+    <record id="action_patient_immunization_record" model="ir.actions.act_window">
+        <field name="name">Patient Immunization Records</field>
+        <field name="res_model">ehr_cdss.patient.immunization.record</field>
+        <field name="view_mode">list,form</field> <!-- Both List and Form views -->
+        <field name="view_id" ref="view_patient_immunization_record_list"/> <!-- Link to the list view -->
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create new immunization records for patients.
+            </p>
+        </field>
+    </record>
+
+      <!-- Sub-menu Item for Patient Immunization Records -->
+    <menuitem id="menu_patient_immunization_record" 
+              name="Immunization Records"
+              parent="Master_ehr_cdss_modules"
+              action="action_patient_immunization_record"
+              sequence="10"/>
+</odoo>

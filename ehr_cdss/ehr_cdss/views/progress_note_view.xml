@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!-- list View -->
+    <record id="view_progress_note_list" model="ir.ui.view">
+        <field name="name">progress.note.list</field>
+        <field name="model">ehr_cdss.progress.note</field>
+        <field name="arch" type="xml">
+            <list string="Progress Notes">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="provider_id"/>
+                <field name="date_of_service"/>
+                <field name="service_provided"/>
+                <field name="session_duration"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_progress_note_form" model="ir.ui.view">
+        <field name="name">progress.note.form</field>
+        <field name="model">ehr_cdss.progress.note</field>
+        <field name="arch" type="xml">
+            <form string="Progress Note">
+                <!-- <header>
+                    <button name="action_sign" string="Sign" type="object" class="oe_highlight" />
+                    <button name="action_lock" string="Lock" type="object" />
+                    <button name="action_set_to_draft" string="Set to Draft" type="object" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,signed,locked"/>
+                </header> -->
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1"/>
+                            <field name="patient_id"/>
+                            <field name="provider_id"/>
+                            <field name="medical_record_id"/>
+                            <field name="appointment_id"/>
+                        </group>
+                        <group>
+                            <field name="date_of_service"/>
+                            <field name="session_start_time"/>
+                            <field name="session_end_time"/>
+                            <field name="session_duration" readonly="1"/>
+                            <field name="service_code"/>
+                            <field name="service_code_other" />
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Session Information">
+                            <group>
+                                <group>
+                                    <field name="present_at_session"/>
+                                    <field name="present_at_session_other" />
+                                    <field name="service_provided"/>
+                                    <field name="location"/>
+                                </group>
+                                <group>
+                                    <field name="telehealth_confirmation"/>
+                                    <field name="telehealth_appropriate"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Note Content">
+                            <group>
+                                <field name="current_symptoms"/>
+                                <field name="functional_impairment_areas"/>
+                                <field name="functional_impairment_details"/>
+                                <field name="session_focus"/>
+                                <field name="specific_interventions"/>
+                                <field name="client_response"/>
+                                <field name="plan"/>
+                                <field name="progress_towards_goals"/>
+                            </group>
+                        </page>
+                        
+                        <page string="SOAP Note">
+                            <group>
+                                <field name="subjective"/>
+                                <field name="objective"/>
+                                <field name="assessment"/>
+                                <field name="plan"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Diagnoses">
+                            <field name="diagnosis_ids" widget="many2many_tags"/>
+                        </page>
+                        
+                        <page string="Outcome Measures">
+                            <group>
+                                <field name="ongoing_measures_completed"/>
+                                <field name="measures_reviewed"/>
+                                <field name="risk_factors_present"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Signature">
+                            <group>
+                                <field name="provider_signature" widget="image" options="{'preview_image': 'image_medium'}"/>
+                                <field name="provider_sign_date" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_progress_note" model="ir.actions.act_window">
+        <field name="name">Reports</field>
+        <field name="res_model">ehr_cdss.progress.note</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a new Progress Note</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_progress_note" name="Reports" parent="menu_ehr_cdss_main" action="action_progress_note" sequence="10"/>
+</odoo>

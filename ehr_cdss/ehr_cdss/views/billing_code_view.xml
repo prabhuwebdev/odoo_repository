@@ -1,0 +1,83 @@
+<odoo>
+    <record id="view_billing_code_form" model="ir.ui.view">
+        <field name="name">ehr_cdss.billing.code.form</field>
+        <field name="model">ehr_cdss.billing.code</field>
+        <field name="arch" type="xml">
+            <form string="Billing Code">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="code_type"/>
+                        <field name="category"/>
+                        <field name="short_description"/>
+                        <field name="description"/>
+                    </group>
+                    <notebook>
+                        <page string="Billing Details">
+                            <group>
+                                <field name="unit_type"/>
+                                <field name="default_units"/>
+                                <field name="max_units_per_day"/>
+                                <field name="time_based"/>
+                                <field name="min_time" />
+                                <field name="max_time" />
+                                <field name="is_add_on"/>
+                                <field name="parent_code_ids" widget="many2many_tags"/>
+                            </group>
+                        </page>
+                        <page string="Rate Information">
+                            <group>
+                                <field name="default_rate"/>
+                                <field name="insurance_specific_rates"/>
+                                <field name="rate_ids"/>
+                                <field name="allowed_modifier_ids" widget="many2many_tags"/>
+                            </group>
+                        </page>
+                        <page string="Telehealth and Documentation">
+                            <group>
+                                <field name="telehealth_eligible"/>
+                                <field name="telehealth_modifier_required"/>
+                                <field name="telehealth_place_of_service"/>
+                                <field name="required_documentation"/>
+                                <field name="credential_requirements"/>
+                                <field name="requires_diagnosis"/>
+                            </group>
+                        </page>
+                        <page string="Scheduling and Status">
+                            <group>
+                                <field name="default_duration"/>
+                                <field name="applicable_notes"/>
+                                <field name="effective_date"/>
+                                <field name="end_date"/>
+                                <field name="active"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_billing_code_list" model="ir.ui.view">
+        <field name="name">ehr_cdss.billing.code.list</field>
+        <field name="model">ehr_cdss.billing.code</field>
+        <field name="arch" type="xml">
+            <list string="Billing Codes">
+                <field name="code"/>
+                <field name="code_type"/>
+                <field name="short_description"/>
+                <field name="default_rate"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_billing_code" model="ir.actions.act_window">
+        <field name="name">Billing</field>
+        <field name="res_model">ehr_cdss.billing.code</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_billing_code" name="Billing" parent="menu_ehr_cdss_main" action="action_billing_code" sequence="3"/>
+</odoo>

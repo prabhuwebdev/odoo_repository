@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ehr_cdss_patient" model="ir.ui.view">
+            <field name="name">ehr_cdss.patient.form</field>
+            <field name="model">ehr_cdss.patient</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" class="oe_inline" placeholder="Patient Name" />
+                            </h1>
+                            <group>
+                                <group>
+                                    <field name="mrn"/>
+                                    <field name="birth_date"/>
+                                    <field name="age"/>
+                                </group>
+                                <group>
+                                    <field name="image" widget="image" class="oe_avatar"/>
+                                    <field name="state" />
+                                </group>
+                            </group>
+                        </div>
+
+                        <notebook>
+                            <!-- Basic Information Page -->
+                            <page string="Basic Information">
+                                <group>
+                                    <group string="Identification">
+                                        <field name="active"/>
+                                        <field name="gender"/>
+                                        <field name="pronouns" widget="many2many_tags"/>
+                                        <field name="marital_status"/>
+                                        <field name="sexual_orientation" widget="many2many_tags"/>
+                                    </group>
+                                    <group string="Demographics">
+                                        <field name="race_ids" widget="many2many_tags"/>
+                                        <field name="ethnicity"/>
+                                        <field name="interpreter_needed"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <!-- Contact Information Page -->
+                            <page string="Contact Information">
+                                <group>
+                                    <field name="email"/>
+                                    <field name="phone"/>
+                                </group>
+                            </page>
+
+                            <!-- Medical Information Page -->
+                            <page string="Medical Information">
+                                <group>
+                                    <group string="Medical History">
+                                        <field name="medical_history" />
+                                        <field name="surgical_history" />
+                                        <field name="psychiatric_history" />
+                                    </group>
+                                    <group string="Current Status">
+                                        <field name="current_medications" />
+                                        <field name="allergies" />
+                                    </group>
+                                </group>
+                            </page>
+
+                            <!-- Family History Page -->
+                            <page string="Family History">
+                                <group>
+                                    <field name="family_history" />
+                                    <field name="family_mental_health_history" />
+                                    <field name="family_substance_use_history" />
+                                </group>
+                            </page>
+
+                            <!-- Social History Page -->
+                            <page string="Social History">
+                                <group>
+                                    <group string="Employment and Education">
+                                        <field name="occupation"/>
+                                        <field name="employment_status"/>
+                                        <field name="employer_or_school"/>
+                                        <field name="education_level"/>
+                                    </group>
+                                    <group string="Social Details">
+                                        <field name="social_history" />
+                                        <field name="living_situation" />
+                                        <field name="cultural_considerations" />
+                                    </group>
+                                </group>
+                            </page>
+
+                            <!-- Substance Use Page -->
+                            <page string="Substance Use">
+                                <field name="substance_use_ids">
+                                    <list editable="bottom">
+                                        <field name="substance_type"/>
+                                        <field name="frequency"/>
+                                        <field name="other_substance"/>
+                                        <field name="first_use_age"/>
+                                        <field name="last_use_date"/>
+                                        <field name="details"/>
+                                        <field name="is_current"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <!-- Risk Assessment Page -->
+                            <page string="Risk Assessment">
+                                <field name="risk_assessment_ids">
+                                    <list editable="bottom">
+                                        <field name="assessment_date"/>
+                                        <field name="cssr_q1"/>
+                                        <field name="cssr_q2"/>
+                                        <field name="cssr_q3"/>
+                                        <field name="cssr_q4"/>
+                                        <field name="cssr_q5"/>
+                                        <field name="cssr_q6"/>
+                                        <field name="cssr_q6a"/>
+                                        <field name="cssr_q6b"/>
+                                        <field name="risk_explanation"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <!-- Child/Adolescent Page -->
+                            <page string="Child/Adolescent">
+                                <group>
+                                    <field name="custody_arrangements" />
+                                    <field name="developmental_history" />
+                                    <field name="school_performance" />
+                                </group>
+                            </page>
+
+                            <!-- Administrative Page -->
+                            <page string="Administrative">
+                                <group>
+                                    <field name="date_registered"/>
+                                    <field name="referral_source"/>
+                                    <field name="consent_for_treatment"/>
+                                    <field name="telehealth_appropriate"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_ehr_cdss_patient_tree" model="ir.ui.view">
+            <field name="name">ehr_cdss.patient.tree</field>
+            <field name="model">ehr_cdss.patient</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="mrn"/>
+                    <field name="birth_date"/>
+                    <field name="age"/>
+                    <field name="gender"/>
+                    <field name="state" widget="badge"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Action to open Patient records -->
+        <record id="action_ehr_cdss_patient" model="ir.actions.act_window">
+            <field name="name">Patients</field>
+            <field name="res_model">ehr_cdss.patient</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first patient record
+                </p>
+            </field>
+        </record>
+
+        <!-- Main Menu Item -->
+        <menuitem id="menu_ehr_cdss_main" name="EHR CDSS" sequence="10"/>
+
+        <!-- Patients Submenu -->
+        <menuitem id="menu_ehr_cdss_patient_menu" name="Patients" parent="menu_ehr_cdss_main" action="action_ehr_cdss_patient" sequence="2" />
+        <menuitem id="Master_ehr_cdss_modules" name="Master" parent="menu_ehr_cdss_main"  sequence="3" />
+        <!-- <menuitem id="menu_ehr_cdss_patient" name="Patients" parent="menu_ehr_cdss_patient_menu" action="action_ehr_cdss_patient" /> -->
+        <!-- <menuitem id="menu_provider" name="Healthcare Providers" parent="menu_ehr_cdss_main" action="action_ehr_cdss_provider" sequence="9"/> -->
+    </data>
+</odoo>
