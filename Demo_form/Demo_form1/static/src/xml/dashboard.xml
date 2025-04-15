@@ -72,7 +72,7 @@
               <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold">Lab Tests</button>
               <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-semibold">Clinical Notes</button>
             </div>
-            <button class="btn btn-success btn-sm px-3" t-on-click.prevent="state.new_image_record = 'true'">+ Add Record</button>
+            <button class="btn btn-success btn-sm px-3" t-on-click.prevent="new_image_record = 'true'">+ Add Record</button>
             <button class="btn btn-outline-primary btn-sm" t-on-click="() => editRecord(record.id)">
                       Edit
                   </button>
@@ -352,9 +352,27 @@
               <button class="btn btn-outline-primary" style="border-color: #b3a6d2; color: #5e4b8b;">Timeline View</button>
             </div>
 
+
             <!-- Right side: Add Surgery button -->
             <button class="btn btn-success" style="padding: 6px 16px; font-weight: 500;"  t-on-click.prevent="() => state.add_surgical_form = 'true'">+ Add Surgery</button>
           </div>
+          <div class="timeline-container d-flex justify-content-around text-center my-4">
+        <div class="timeline-event">
+            <div class="label">Appendectomy</div>
+            <div class="dot purple"></div>
+            <div class="year">2015</div>
+        </div>
+        <div class="timeline-event">
+            <div class="label">ACL Reconstruction</div>
+            <div class="dot teal"></div>
+            <div class="year">2018</div>
+        </div>
+        <div class="timeline-event">
+            <div class="label">Cataract Surgery</div>
+            <div class="dot purple" style="height:20px; width:20px; border-radius:50%"></div>
+            <div class="year">2023</div>
+        </div>
+    </div>
 
           <t t-if="state.add_surgical_form === 'true'">
 <!--              surgical Form start-->
