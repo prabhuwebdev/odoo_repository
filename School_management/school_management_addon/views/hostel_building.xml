@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_hostel_building_form" model="ir.ui.view">
+        <field name="name">school_management.hostel.building.form</field>
+        <field name="model">school_management.hostel.building</field>
+        <field name="arch" type="xml">
+            <form string="Hostel Building">
+                <sheet>
+                    <group>
+                        <field name="display_name"/>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="type"/>
+                        <field name="floors"/>
+<!--                        <field name="warden_id"/>-->
+                        <field name="address"/>
+                        <field name="capacity"/>
+                        <field name="available_capacity"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_hostel_building_list" model="ir.ui.view">
+        <field name="name">school_management.hostel.building.list</field>
+        <field name="model">school_management.hostel.building</field>
+        <field name="arch" type="xml">
+            <list string="Hostel Building List">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="type"/>
+                <field name="floors"/>
+<!--                <field name="warden_id"/>-->
+                <field name="capacity"/>
+                <field name="available_capacity"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_hostel_building" model="ir.actions.act_window">
+        <field name="name">Hostel Buildings</field>
+        <field name="res_model">school_management.hostel.building</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+<!--    <menuitem id="menu_hostel_building_root" name="Hostel Management"/>-->
+
+    <menuitem id="menu_hostel_building"
+              name="Hostel Buildings"
+              parent="menu_fee_assignment_root_sub"
+              action="action_hostel_building"/>
+</odoo>

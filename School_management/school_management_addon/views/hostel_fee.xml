@@ -1,0 +1,51 @@
+<odoo>
+    <record id="view_hostel_fee_form" model="ir.ui.view">
+        <field name="name">hostel.fee.form</field>
+        <field name="model">school_management.hostel.fee</field>
+        <field name="arch" type="xml">
+            <form string="Hostel Fee">
+                <sheet>
+                    <group>
+                        <field name="display_name"/>
+                        <field name="name"/>
+<!--                        <field name="student_id"/>-->
+                        <field name="room_id"/>
+                        <field name="month"/>
+                        <field name="amount"/>
+                        <field name="paid_amount"/>
+                        <field name="payment_date"/>
+                        <field name="payment_method"/>
+                        <field name="status"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hostel_fee_list" model="ir.ui.view">
+        <field name="name">hostel.fee.list</field>
+        <field name="model">school_management.hostel.fee</field>
+        <field name="arch" type="xml">
+            <list string="Hostel Fees">
+                <field name="name"/>
+<!--                <field name="student_id"/>-->
+                <field name="room_id"/>
+                <field name="month"/>
+                <field name="amount"/>
+                <field name="paid_amount"/>
+                <field name="payment_date"/>
+                <field name="payment_method"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_hostel_fee" model="ir.actions.act_window">
+        <field name="name">Hostel Fees</field>
+        <field name="res_model">school_management.hostel.fee</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+<!--    <menuitem id="menu_school_hostel_fee_root" name="Hostel Fee" parent="school_management.menu_school_root" sequence="40"/>-->
+    <menuitem id="menu_school_hostel_fee" name="Hostel Fee Entries" parent="menu_fee_assignment_root_sub" action="action_hostel_fee"/>
+</odoo>

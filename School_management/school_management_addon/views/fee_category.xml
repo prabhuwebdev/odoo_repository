@@ -7,6 +7,7 @@
             <field name="model">school_management.fee.category</field>
             <field name="arch" type="xml">
                 <list string="Fee Categories">
+
                     <field name="name"/>
                     <field name="code"/>
                     <field name="refundable"/>
@@ -26,6 +27,7 @@
                 <form string="Fee Category">
                     <sheet>
                         <group>
+                            <field name="display_name"/>
                             <field name="name"/>
                             <field name="code"/>
                             <field name="refundable"/>
@@ -49,7 +51,7 @@
         </record>
 
         <!-- Menu for Fee Categories -->
-        <menuitem id="menu_fee_category" name="Fee Categories" parent="menu_fee_assignment_root" action="action_fee_category"/>
+        <menuitem id="menu_fee_category" name="Fee Categories" parent="menu_fee_assignment_root_sub" action="action_fee_category"/>
 
     </data>
 </odoo>

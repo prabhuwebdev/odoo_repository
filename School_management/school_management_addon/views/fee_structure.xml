@@ -9,10 +9,11 @@
             <form string="Fee Structure">
                 <sheet>
                     <group>
+                        <field name="display_name"/>
                         <field name="name"/>
                         <field name="code"/>
-                        <field name="academic_year_id"/>
-                        <field name="class_id"/>
+<!--                        <field name="academic_year_id"/>-->
+<!--                        <field name="class_id"/>-->
                         <field name="Frequency"/>
                         <field name="total_amount"/>
                         <field name="payment_terms"/>
@@ -32,8 +33,8 @@
             <list string="Fee Structures">
                 <field name="name"/>
                 <field name="code"/>
-                <field name="academic_year_id"/>
-                <field name="class_id"/>
+<!--                <field name="academic_year_id"/>-->
+<!--                <field name="class_id"/>-->
                 <field name="Frequency"/>
                 <field name="total_amount"/>
                 <field name="payment_terms"/>
@@ -53,7 +54,7 @@
     <!-- Menu -->
 <!--    <menuitem id="menu_school_management_root" name="School Management"/>-->
     <menuitem id="menu_fee_structure" name="Fee Structures"
-              parent="menu_fee_assignment_root"
+              parent="menu_fee_assignment_root_sub"
               action="action_fee_structure"/>
 
 </odoo>

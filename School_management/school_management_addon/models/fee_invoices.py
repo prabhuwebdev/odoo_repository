@@ -4,9 +4,13 @@ class FeeInvoice(models.Model):
     _name = 'school_management.fee.invoice'
     _description = 'Fee Invoice'
 
+    display_name = fields.Char(string="Fee Invoice",compute="_compute_name_display", store=False)
+
     name = fields.Char(string='Invoice Number', default='New')
-    student_id = fields.Many2one('student', string='Student')
-    fee_structure_id = fields.Many2one('fee.structure', string='Fee Structure')
+    # student_id = fields.Many2one('student', string='Student')
+    # fee_structure_id = fields.Many2one('school_management.fee.structure', string='Fee Structure')
+    # fee_structure_id = fields.Many2one('fee.structure', string='Fee Structure')
+
     invoice_date = fields.Date(string='Invoice Date', default=fields.Date.today)
     due_date = fields.Date(string='Due Date')
     state = fields.Selection([
@@ -21,11 +25,11 @@ class FeeInvoice(models.Model):
     balance_amount = fields.Float(string='Balance Amount', compute='_compute_balance_amount', store=True)
     notes = fields.Text(string='Notes')
 
-    @api.depends('fee_structure_id', 'student_id')
-    def _compute_total_amount(self):
-        for record in self:
-            # Logic to calculate total_amount based on fee structure and student
-            record.total_amount = 0.0  # Example, add actual calculation logic
+    # @api.depends('fee_structure_id', 'student_id')
+    # def _compute_total_amount(self):
+    #     for record in self:
+    #         # Logic to calculate total_amount based on fee structure and student
+    #         record.total_amount = 0.0  # Example, add actual calculation logic
 
     @api.depends('total_amount', 'paid_amount')
     def _compute_balance_amount(self):
@@ -37,4 +41,12 @@ class FeeInvoice(models.Model):
         for record in self:
             # Logic to calculate paid amount
             record.paid_amount = 0.0  # Example, add actual calculation logic
+
+    @api.depends()
+    def _compute_name_display(self):
+        for record in self:
+            if not record.name:
+                record.display_name = "NEW"
+            else:
+                record.display_name = f"{record.name}"
 

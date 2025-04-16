@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_hostel_allocation_form" model="ir.ui.view">
+        <field name="name">school_management.hostel.allocation.form</field>
+        <field name="model">school_management.hostel.allocation</field>
+        <field name="arch" type="xml">
+            <form string="Hostel Allocation">
+                <sheet>
+                    <group>
+<!--                        <field name="student_id"/>-->
+                        <field name="room_id"/>
+                        <field name="bed_number"/>
+                        <field name="allotment_date"/>
+                        <field name="vacating_date"/>
+                        <field name="monthly_fee"/>
+                        <field name="security_deposit"/>
+                        <field name="status"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_hostel_allocation_list" model="ir.ui.view">
+        <field name="name">school_management.hostel.allocation.list</field>
+        <field name="model">school_management.hostel.allocation</field>
+        <field name="arch" type="xml">
+            <list string="Hostel Allocation List">
+<!--                <field name="student_id"/>-->
+                <field name="room_id"/>
+                <field name="bed_number"/>
+                <field name="allotment_date"/>
+                <field name="vacating_date"/>
+                <field name="monthly_fee"/>
+                <field name="security_deposit"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_hostel_allocation" model="ir.actions.act_window">
+        <field name="name">Hostel Allocations</field>
+        <field name="res_model">school_management.hostel.allocation</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_hostel_root" name="Hostel Management"/>
+
+    <menuitem id="menu_hostel_allocation"
+              name="Hostel Allocations"
+              parent="menu_fee_assignment_root_sub"
+              action="action_hostel_allocation"/>
+</odoo>

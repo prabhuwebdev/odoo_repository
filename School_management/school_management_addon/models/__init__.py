@@ -3,3 +3,14 @@ from . import fee_category
 from . import fee_invoices
 from . import fee_structure
 from . import fee_remainder
+from . import appraisal
+from . import department
+from . import employee
+from . import employee_leave
+from . import employee_payroll
+from . import fee_invoices_line
+from . import hostel_allocation
+from . import hostel_building
+from . import hostel_fee
+from . import hostel_room
+from . import fee_payment

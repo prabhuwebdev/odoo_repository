@@ -24,6 +24,7 @@
             <form string="Fee Reminder">
                 <sheet>
                     <group>
+                        <field name="display_name"/>
                         <field name="name"/>
                         <field name="days_before_due"/>
                         <field name="days_after_due"/>
@@ -46,6 +47,5 @@
     </record>
 
     <!-- Menu (adjust parent if needed) -->
-<!--    <menuitem id="menu_fee_reminder_root" name="Fee Reminders" parent="school_management.menu_root" sequence="50"/>-->
-    <menuitem id="menu_fee_reminder" name="Fee Reminders" parent="menu_fee_assignment_root" action="action_fee_reminder"/>
+    <menuitem id="menu_fee_reminder" name="Fee Reminders" parent="menu_fee_assignment_root_sub" action="action_fee_reminder"/>
 </odoo>

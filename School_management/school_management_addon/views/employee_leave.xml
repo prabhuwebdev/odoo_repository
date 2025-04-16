@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_employee_leave_form" model="ir.ui.view">
+        <field name="name">school_management.employee.leave.form</field>
+        <field name="model">school_management.employee.leave</field>
+        <field name="arch" type="xml">
+            <form string="Employee Leave">
+                <sheet>
+                    <group>
+                        <field name="display_name"/>
+                        <field name="name"/>
+                        <field name="employee_id"/>
+<!--                        <field name="leave_type_id"/>-->
+                        <field name="from_date"/>
+                        <field name="to_date"/>
+                        <field name="days"/>
+                        <field name="reason"/>
+                        <field name="attachment"/>
+                        <field name="state"/>
+                        <field name="approved_by"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_employee_leave_list" model="ir.ui.view">
+        <field name="name">school_management.employee.leave.list</field>
+        <field name="model">school_management.employee.leave</field>
+        <field name="arch" type="xml">
+            <list string="Employee Leave List">
+                <field name="name"/>
+                <field name="employee_id"/>
+<!--                <field name="leave_type_id"/>-->
+                <field name="from_date"/>
+                <field name="to_date"/>
+                <field name="days"/>
+                <field name="state"/>
+                <field name="approved_by"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_employee_leave" model="ir.actions.act_window">
+        <field name="name">Employee Leaves</field>
+        <field name="res_model">school_management.employee.leave</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_employee_leave_root" name="Leaves"/>
+
+    <menuitem id="menu_employee_leave"
+              name="Employee Leaves"
+              parent="menu_fee_assignment_root_sub"
+              action="action_employee_leave"/>
+</odoo>

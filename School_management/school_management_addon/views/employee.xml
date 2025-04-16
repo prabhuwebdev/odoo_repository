@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_school_employee_form" model="ir.ui.view">
+        <field name="name">school_management.employee.form</field>
+        <field name="model">school_management.employee</field>
+        <field name="arch" type="xml">
+            <form string="Employee">
+                <sheet>
+                    <group>
+                        <field name="display_name"/>
+                        <field name="name"/>
+                        <field name="employee_code"/>
+                        <field name="joining_date"/>
+                        <field name="gender"/>
+                        <field name="date_of_birth"/>
+<!--                        <field name="job_position_id"/>-->
+                        <field name="department_id"/>
+                        <field name="work_email"/>
+                        <field name="work_phone"/>
+                        <field name="mobile"/>
+                        <field name="street"/>
+                        <field name="city"/>
+                        <field name="state_id"/>
+                        <field name="zip"/>
+                        <field name="country_id"/>
+                        <field name="qualification"/>
+                        <field name="experience"/>
+                        <field name="resume"/>
+                        <field name="photo"/>
+                        <field name="contract_type"/>
+                        <field name="contract_end_date"/>
+                        <field name="bank_account_number"/>
+                        <field name="bank_name"/>
+                        <field name="ifsc_code"/>
+                        <field name="emergency_contact"/>
+                        <field name="active"/>
+                        <field name="user_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View (not tree view) -->
+    <record id="view_school_employee_list" model="ir.ui.view">
+        <field name="name">school_management.employee.list</field>
+        <field name="model">school_management.employee</field>
+        <field name="arch" type="xml">
+            <list string="Employee List">
+                <field name="name"/>
+                <field name="employee_code"/>
+                <field name="joining_date"/>
+                <field name="gender"/>
+                <field name="date_of_birth"/>
+                <field name="work_email"/>
+                <field name="mobile"/>
+                <field name="qualification"/>
+                <field name="experience"/>
+                <field name="contract_type"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_school_employee" model="ir.actions.act_window">
+        <field name="name">Employees</field>
+        <field name="res_model">school_management.employee</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_school_employee_root" name="Employees"/>
+
+    <menuitem id="menu_school_employee"
+              name="Employees"
+              parent="menu_fee_assignment_root_sub"
+              action="action_school_employee"/>
+</odoo>
