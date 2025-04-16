@@ -8,6 +8,7 @@
             <form string="Fee Invoice Line">
                 <sheet>
                     <group>
+                        <field name="display_name"/>
                         <field name="invoice_id"/>
                         <field name="fee_category_id"/>
                         <field name="amount"/>

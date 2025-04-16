@@ -8,7 +8,9 @@
             <form string="Employee Payroll">
                 <sheet>
                     <group>
+                        <field name="display_name"/>
                         <field name="worked_days"/>
+                        <field name="employee_id"/>
                         <field name="basic_salary"/>
                         <field name="allowances"/>
                         <field name="deductions"/>

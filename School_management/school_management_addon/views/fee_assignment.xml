@@ -17,6 +17,7 @@
         <field name="arch" type="xml">
             <form string="Fee Assignment">
                 <group>
+                    <field name="display_name"/>
                     <field name="fee_structure_id"/>
                     <field name="fee_category_id"/>
                     <field name="amount"/>

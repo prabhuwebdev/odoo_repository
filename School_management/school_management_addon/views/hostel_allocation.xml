@@ -8,6 +8,7 @@
             <form string="Hostel Allocation">
                 <sheet>
                     <group>
+                        <field name="display_name"/>
 <!--                        <field name="student_id"/>-->
                         <field name="room_id"/>
                         <field name="bed_number"/>

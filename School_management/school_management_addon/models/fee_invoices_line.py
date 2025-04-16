@@ -4,6 +4,7 @@ class FeeInvoiceLine(models.Model):
     _name = 'school_management.fee.invoice.line'
     _description = 'Fee Invoice Line'
 
+    display_name=fields.Char(string="Fee Invoice Line", compute="_compute_name_display",store=False)
     invoice_id = fields.Many2one('school_management.fee.invoice', string='Invoice')
     fee_category_id = fields.Many2one('school_management.fee.category', string='Fee Category')
     amount = fields.Float(string='Amount', default=0.0)
@@ -20,3 +21,11 @@ class FeeInvoiceLine(models.Model):
     def _compute_final_amount(self):
         for line in self:
             line.final_amount = line.amount - line.discount_amount
+
+    @api.depends()
+    def _compute_name_display(self):
+        for record in self:
+            if not record.invoice_id.id:
+                record.display_name = "NEW"
+            else:
+                record.display_name = f"{record.invoice_id.name}"
