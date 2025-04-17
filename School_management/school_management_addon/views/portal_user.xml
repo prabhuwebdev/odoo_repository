@@ -1,0 +1,50 @@
+<odoo>
+    <record id="view_form_portal_user" model="ir.ui.view">
+        <field name="name">portal.user.form</field>
+        <field name="model">school_management.portal.user</field>
+        <field name="arch" type="xml">
+            <form string="Portal User">
+                <sheet>
+                    <group>
+                        <field name="display_name"/>
+                        <field name="name"/>
+                        <field name="login"/>
+                        <field name="password" password="True"/>
+                        <field name="user_type"/>
+<!--                        <field name="student_id"/>-->
+<!--                        <field name="parent_id"/>-->
+                        <field name="employee_id"/>
+                        <field name="active"/>
+                        <field name="last_login"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_list_portal_user" model="ir.ui.view">
+        <field name="name">portal.user.list</field>
+        <field name="model">school_management.portal.user</field>
+        <field name="arch" type="xml">
+            <list string="Portal User">
+                <field name="name"/>
+                <field name="login"/>
+                <field name="user_type"/>
+                <field name="active"/>
+                <field name="last_login"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_portal_user" model="ir.actions.act_window">
+        <field name="name">Portal Users</field>
+        <field name="res_model">school_management.portal.user</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+<!--    <menuitem id="menu_school_management_root" name="School Management"/>-->
+
+    <menuitem id="menu_portal_user" name="Portal Users"
+              parent="menu_communications_sub"
+              action="action_portal_user"/>
+</odoo>

@@ -1,0 +1,54 @@
+<odoo>
+    <!-- Form View -->
+    <record id="view_message_recipient_form" model="ir.ui.view">
+        <field name="name">message.recipient.form</field>
+        <field name="model">school_management.message.recipient</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="display_name"/>
+                        <field name="message_id"/>
+                        <field name="recipient_type"/>
+<!--                        <field name="user_id"/>-->
+<!--                        <field name="student_id"/>-->
+                        <field name="employee_id"/>
+<!--                        <field name="parent_id"/>-->
+<!--                        <field name="class_id"/>-->
+                        <field name="department_id"/>
+                        <field name="state"/>
+                        <field name="read_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View (Not Tree View) -->
+    <record id="view_message_recipient_list" model="ir.ui.view">
+        <field name="name">message.recipient.list</field>
+        <field name="model">school_management.message.recipient</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="message_id"/>
+                <field name="recipient_type"/>
+                <field name="state"/>
+                <field name="read_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_message_recipient" model="ir.actions.act_window">
+        <field name="name">Message Recipients</field>
+        <field name="res_model">school_management.message.recipient</field>
+        <field name="view_mode">list,form</field>
+<!--        <field name="target">current</field>-->
+    </record>
+
+    <!-- Menu Item -->
+<menuitem id="menu_message_recipient"
+              name="Messages Recipients"
+              parent="menu_communications_sub"
+              action="action_message_recipient"/>
+</odoo>

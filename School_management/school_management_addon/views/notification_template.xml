@@ -1,0 +1,50 @@
+<odoo>
+
+
+    <!-- Form View -->
+    <record id="view_form_notification_template" model="ir.ui.view">
+        <field name="name">school_management.notification.template.form</field>
+        <field name="model">school_management.notification.template</field>
+        <field name="arch" type="xml">
+            <form string="Notification Template">
+                <sheet>
+                    <group>
+                        <field name="display_name"/>
+                        <field name="name" placeholder="Enter Template Name"/>
+                        <field name="notification_type"/>
+                        <field name="subject"/>
+                        <field name="body"/>
+                        <field name="recipient_type"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_list_notification_template" model="ir.ui.view">
+        <field name="name">school_management.notification.template.list</field>
+        <field name="model">school_management.notification.template</field>
+        <field name="arch" type="xml">
+            <list string="Notification Templates">
+                <field name="name"/>
+                <field name="notification_type"/>
+                <field name="subject"/>
+                <field name="recipient_type"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action to open the list and form views -->
+    <record id="action_notification_template" model="ir.actions.act_window">
+        <field name="name">Notification Templates</field>
+        <field name="res_model">school_management.notification.template</field>
+        <field name="view_mode">list,form</field>
+<!--        <field name="view_id" ref="view_list_notification_template"/>-->
+    </record>
+
+    <!-- Menu Item for the Notification Templates -->
+    <menuitem id="menu_notification_templates" name="Notification Templates" parent="menu_communications_sub" action="action_notification_template"/>
+</odoo>

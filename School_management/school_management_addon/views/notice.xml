@@ -1,0 +1,59 @@
+<odoo>
+    <!-- Form View -->
+    <record id="view_school_management_notice_form" model="ir.ui.view">
+        <field name="name">school.management.notice.form</field>
+        <field name="model">school_management.notice</field>
+        <field name="arch" type="xml">
+            <form string="Notice">
+                <sheet>
+                    <group>
+                        <field name="display_name"/>
+                        <field name="name"/>
+                        <field name="notice_date"/>
+                        <field name="notice_type"/>
+                        <field name="content"/>
+                        <field name="recipient_type"/>
+<!--                        <field name="applicable_classes"/>-->
+<!--                        <field name="applicable_departments"/>-->
+                        <field name="published"/>
+                        <field name="publish_date"/>
+                        <field name="expiry_date"/>
+<!--                        <field name="attachment_ids" widget="many2many_tags"/>-->
+<!--                        <field name="created_by"/>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_school_management_notice_list" model="ir.ui.view">
+        <field name="name">school.management.notice.list</field>
+        <field name="model">school_management.notice</field>
+        <field name="arch" type="xml">
+            <list string="Notices">
+                <field name="name"/>
+                <field name="notice_date"/>
+                <field name="notice_type"/>
+                <field name="recipient_type"/>
+                <field name="published"/>
+                <field name="publish_date"/>
+                <field name="expiry_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_school_management_notice" model="ir.actions.act_window">
+        <field name="name">Notices</field>
+        <field name="res_model">school_management.notice</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_school_management_notice"
+              name="Notices"
+              parent="menu_communications_sub"
+              action="action_school_management_notice"
+              />
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_dealer_purchase_custom_pivot" model="ir.actions.act_window">
+        <field name="name">Dealer Pivot Export</field>
+        <field name="res_model">dealer.purchase</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="view_dealer_purchase_pivot"/>
+        <field name="context">{'pivot_view_type': 'dealer_pivot_export'}</field>
+    </record>
+
+    <menuitem id="menu_dealer_purchase_custom_pivot"
+              name="Dealer Pivot Export"
+              parent="menu_dealer_purchase"
+              action="action_dealer_purchase_custom_pivot"/>
+</odoo>

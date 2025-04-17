@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dealer_purchase_full,dealer.purchase full access,model_dealer_purchase,group_dealer_full_access,1,1,1,1
+access_dealer_purchase_read,dealer.purchase read only,model_dealer_purchase,group_dealer_readonly,1,0,0,0
+
+access_dealer_purchase_line_full,dealer.purchase.line full access,model_dealer_purchase_line,group_dealer_full_access,1,1,1,1
+access_dealer_purchase_line_read,dealer.purchase.line read only,model_dealer_purchase_line,group_dealer_readonly,1,0,0,0

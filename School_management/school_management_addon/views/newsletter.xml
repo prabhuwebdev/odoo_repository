@@ -1,0 +1,55 @@
+<odoo>
+    <!-- Form View -->
+    <record id="view_form_newsletter" model="ir.ui.view">
+        <field name="name">newsletter.form</field>
+        <field name="model">school_management.newsletter</field>
+        <field name="arch" type="xml">
+            <form string="Newsletter">
+                <sheet>
+                    <group>
+                        <field name="display_name"/>
+                        <field name="name"/>
+                        <field name="issue_number"/>
+                        <field name="publish_date"/>
+                        <field name="recipient_type"/>
+                        <field name="sent"/>
+                        <field name="sent_date"/>
+<!--                        <field name="created_by"/>-->
+<!--                        <field name="attachment_ids" widget="many2many_binary"/>-->
+                    </group>
+                    <group>
+                        <field name="content" widget="html"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_list_newsletter" model="ir.ui.view">
+        <field name="name">newsletter.list</field>
+        <field name="model">school_management.newsletter</field>
+        <field name="arch" type="xml">
+            <list string="Newsletter">
+                <field name="name"/>
+                <field name="issue_number"/>
+                <field name="publish_date"/>
+                <field name="recipient_type"/>
+                <field name="sent"/>
+                <field name="sent_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_newsletter" model="ir.actions.act_window">
+        <field name="name">Newsletter</field>
+        <field name="res_model">school_management.newsletter</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+<!--    <menuitem id="menu_newsletter_root" name="Newsletter" sequence="10"/>-->
+    <menuitem id="menu_newsletter" name="Newsletter"
+              parent="menu_communications_sub" action="action_newsletter"/>
+</odoo>

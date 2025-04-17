@@ -1,0 +1,39 @@
+<odoo>
+    <record id="view_form_mail_configuration" model="ir.ui.view">
+        <field name="name">school_management.mail.configuration.form</field>
+        <field name="model">school_management.mail.configuration</field>
+        <field name="arch" type="xml">
+            <form string="Mail Configuration">
+                <sheet>
+                    <group>
+                        <field name="display_name"/>
+                        <field name="name"/>
+                        <field name="smtp_server"/>
+                        <field name="smtp_port"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_list_mail_configuration" model="ir.ui.view">
+        <field name="name">school_management.mail.configuration.list</field>
+        <field name="model">school_management.mail.configuration</field>
+        <field name="arch" type="xml">
+            <list string="Mail Configurations">
+                <field name="name"/>
+                <field name="smtp_server"/>
+                <field name="smtp_port"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_mail_configuration" model="ir.actions.act_window">
+        <field name="name">Mail Configurations</field>
+        <field name="res_model">school_management.mail.configuration</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_mail_configuration" name=" Email Configurations"
+              parent="menu_communications_sub" action="action_mail_configuration" />
+</odoo>

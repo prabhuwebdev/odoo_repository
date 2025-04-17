@@ -14,3 +14,14 @@ from . import hostel_building
 from . import hostel_fee
 from . import hostel_room
 from . import fee_payment
+from . import message
+from . import message_recipient
+from . import notice
+from . import newsletter
+from . import portal_user
+from . import portal_access_group
+from . import portal_access_right
+from . import portal_user_group
+from . import mobile_app_setting
+from . import  notification_template
+from . import email_configuration

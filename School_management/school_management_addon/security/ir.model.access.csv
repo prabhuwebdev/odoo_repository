@@ -15,3 +15,14 @@ access_hostel_building,hostel.building,model_school_management_hostel_building,b
 access_hostel_fee,hostel.fee,model_school_management_hostel_fee,base.group_user,1,1,1,1
 access_hostel_room,hostel.room,model_school_management_hostel_room,base.group_user,1,1,1,1
 access_fee_payment,fee.payment,model_school_management_fee_payment,base.group_user,1,1,1,1
+access_message,message,model_school_management_message,base.group_user,1,1,1,1
+access_message_recipient,message.recipient,model_school_management_message_recipient,base.group_user,1,1,1,1
+access_notice,notice,model_school_management_notice,base.group_user,1,1,1,1
+access_newsletter,newsletter,model_school_management_newsletter,base.group_user,1,1,1,1
+access_portal_user,portal.user,model_school_management_portal_user,base.group_user,1,1,1,1
+access_portal_access_group,portal.access.group,model_school_management_portal_access_group,base.group_user,1,1,1,1
+access_portal_access_right,portal.access.right,model_school_management_portal_access_right,base.group_user,1,1,1,1
+access_portal_user_group,portal.user.group,model_school_management_portal_user_group,base.group_user,1,1,1,1
+access_mobile_app_setting,mobile.app.setting,model_school_management_mobile_app_setting,base.group_user,1,1,1,1
+access_notification_template,notification.template,model_school_management_notification_template,base.group_user,1,1,1,1
+access_mail_configuration,mail.configuration,model_school_management_mail_configuration,base.group_user,1,1,1,1

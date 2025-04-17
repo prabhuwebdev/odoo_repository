@@ -1,0 +1,36 @@
+<odoo>
+    <record id="view_form_portal_user_group" model="ir.ui.view">
+        <field name="name">portal.user.group.form</field>
+        <field name="model">school_management.portal.user.group</field>
+        <field name="arch" type="xml">
+            <form string="Portal User Group">
+                <group>
+<!--                    <field name="user_id"/>-->
+                    <field name="group_id"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_list_portal_user_group" model="ir.ui.view">
+        <field name="name">portal.user.group.list</field>
+        <field name="model">school_management.portal.user.group</field>
+        <field name="arch" type="xml">
+            <list string="Portal User Group">
+<!--                <field name="user_id"/>-->
+                <field name="group_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_portal_user_group" model="ir.actions.act_window">
+        <field name="name">Portal User Group</field>
+        <field name="res_model">school_management.portal.user.group</field>
+        <field name="view_mode">form,list</field>
+    </record>
+
+    <menuitem id="menu_portal_user_group"
+              name="Portal User Groups"
+              parent="menu_communications_sub"
+              action="action_portal_user_group"/>
+</odoo>

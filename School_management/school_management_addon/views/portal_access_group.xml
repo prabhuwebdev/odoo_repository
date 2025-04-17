@@ -1,0 +1,47 @@
+<odoo>
+    <!-- Form View -->
+    <record id="view_form_portal_access_group" model="ir.ui.view">
+        <field name="name">school_management.portal.access.group.form</field>
+        <field name="model">school_management.portal.access.group</field>
+        <field name="arch" type="xml">
+            <form string="Portal Access Group">
+                <sheet>
+                    <group>
+                        <field name="display_name"/>
+                        <field name="name"/>
+                        <field name="access_level"/>
+                        <field name="description"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View (not tree view) -->
+    <record id="view_list_portal_access_group" model="ir.ui.view">
+        <field name="name">school_management.portal.access.group.list</field>
+        <field name="model">school_management.portal.access.group</field>
+        <field name="arch" type="xml">
+            <list string="Portal Access Groups">
+                <field name="name"/>
+                <field name="access_level"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_portal_access_group" model="ir.actions.act_window">
+        <field name="name">Portal Access Groups</field>
+        <field name="res_model">school_management.portal.access.group</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_list_portal_access_group"/>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_portal_access_group"
+              name="Portal Access Groups"
+              parent="menu_communications_sub"
+              action="action_portal_access_group"/>
+</odoo>

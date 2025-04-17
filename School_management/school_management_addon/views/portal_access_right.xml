@@ -1,0 +1,46 @@
+<odoo>
+    <record id="view_form_portal_access_right" model="ir.ui.view">
+        <field name="name">portal.access.right.form</field>
+        <field name="model">school_management.portal.access.right</field>
+        <field name="arch" type="xml">
+            <form string="Portal Access Right">
+                <sheet>
+                    <group>
+<!--                        <field name="group_id"/>-->
+<!--                        <field name="model_id"/>-->
+                        <field name="perm_read"/>
+                        <field name="perm_write"/>
+                        <field name="perm_create"/>
+                        <field name="perm_unlink"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_list_portal_access_right" model="ir.ui.view">
+        <field name="name">portal.access.right.list</field>
+        <field name="model">school_management.portal.access.right</field>
+        <field name="arch" type="xml">
+            <list string="Portal Access Rights">
+<!--                <field name="group_id"/>-->
+<!--                <field name="model_id"/>-->
+                <field name="perm_read"/>
+                <field name="perm_write"/>
+                <field name="perm_create"/>
+                <field name="perm_unlink"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_portal_access_right" model="ir.actions.act_window">
+        <field name="name">Portal Access Rights</field>
+        <field name="res_model">school_management.portal.access.right</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_portal_access_right"
+              name="Portal Access Rights"
+              action="action_portal_access_right"
+              parent="menu_communications_sub"/>
+</odoo>

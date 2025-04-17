@@ -22,7 +22,18 @@
         'views/hostel_building.xml',
         'views/hostel_fee.xml',
         'views/hostel_room.xml',
-        'views/fee_payment.xml'
+        'views/fee_payment.xml',
+        'views/message.xml',
+        'views/message_recipient.xml',
+        'views/notice.xml',
+        'views/newsletter.xml',
+        'views/portal_user.xml',
+        'views/portal_access_group.xml',
+        'views/portal_access_right.xml',
+        'views/portal_user_group.xml',
+        'views/mobile_app_setting.xml',
+        'views/notification_template.xml',
+        'views/email_configuration.xml'
 
     ],
     'assets':{

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_dealer_purchase_line_list" model="ir.ui.view">
+        <field name="name">dealer.purchase.line.list</field>
+        <field name="model">dealer.purchase.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="purchase_id"/>
+                <field name="product_name"/>
+                <field name="unit_price"/>
+                <field name="quantity"/>
+                <field name="discount"/>
+                <field name="hsn_code"/>
+                
+                <field name="tax_rate"/>
+                <field name="amount"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_dealer_purchase_line_form" model="ir.ui.view">
+        <field name="name">dealer.purchase.line.form</field>
+        <field name="model">dealer.purchase.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="purchase_id"/>
+                        <field name="product_name"/>
+                        <field name="unit_price"/>
+                        <field name="quantity"/>
+                        <field name="discount"/>
+                        <field name="tax_rate"/>
+                        <field name="hsn_code"/>
+                        <field name="amount" readonly="1"/>
+                        <field name="amount_words" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_dealer_purchase_line" model="ir.actions.act_window">
+        <field name="name">Dealer Purchase Lines</field>
+        <field name="res_model">dealer.purchase.line</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_dealer_purchase_line"
+            name="Dealer Purchase Lines"
+            parent="menu_dealer_purchase"
+            action="action_dealer_purchase_line"
+            sequence="20"/>
+
+</odoo>

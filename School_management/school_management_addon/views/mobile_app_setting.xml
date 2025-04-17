@@ -1,0 +1,55 @@
+<odoo>
+    <record id="view_mobile_app_setting_form" model="ir.ui.view">
+        <field name="name">mobile.app.setting.form</field>
+        <field name="model">school_management.mobile.app.setting</field>
+        <field name="arch" type="xml">
+            <form string="Mobile App Setting">
+                <sheet>
+                    <group>
+                        <field name="display_name"/>
+                        <field name="name"/>
+                        <field name="app_version"/>
+                        <field name="fcm_server_key"/>
+                        <field name="enable_notifications"/>
+                        <field name="maintenance_mode"/>
+                    </group>
+                    <group string="Features">
+                        <field name="student_features"/>
+                        <field name="parent_features"/>
+                        <field name="teacher_features"/>
+                    </group>
+                    <group string="Maintenance">
+                        <field name="maintenance_message"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_mobile_app_setting_list" model="ir.ui.view">
+        <field name="name">mobile.app.setting.list</field>
+        <field name="model">school_management.mobile.app.setting</field>
+        <field name="arch" type="xml">
+            <list string="Mobile App Setting">
+                <field name="name"/>
+                <field name="app_version"/>
+                <field name="enable_notifications"/>
+                <field name="maintenance_mode"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_mobile_app_setting" model="ir.actions.act_window">
+        <field name="name">Mobile App Settings</field>
+        <field name="res_model">school_management.mobile.app.setting</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+
+
+    <menuitem id="menu_mobile_app_setting"
+              name="Mobile App Settings"
+              parent="menu_communications_sub"
+              action="action_mobile_app_setting"
+              sequence="1"/>
+</odoo>
