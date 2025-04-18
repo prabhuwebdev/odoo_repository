@@ -97,4 +97,9 @@ access_report_field,report.field,model_school_management_report_field,base.group
 access_report_filter,report.filter,model_school_management_report_filter,base.group_user,1,1,1,1
 access_custom_report,custom.report,model_school_management_custom_report,base.group_user,1,1,1,1
 access_dashboard_widget,dashboard.widget,model_school_management_dashboard_widget,base.group_user,1,1,1,1
+<<<<<<< HEAD
 >>>>>>> 78a4e18a (created the five report models)
+=======
+access_analytics_kpi,analytics.kpi,model_school_management_analytics_kpi,base.group_user,1,1,1,1
+access_schedule_report,schedule.report,model_school_management_schedule_report,base.group_user,1,1,1,1
+>>>>>>> 793ca93f ( added another 2 modules in report)

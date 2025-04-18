@@ -97,3 +97,5 @@ from . import report_field
 from . import report_filter
 from . import custom_report
 from . import dashboard_widget
+from . import analytics_kpi
+from . import scheduled_report

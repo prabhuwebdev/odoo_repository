@@ -96,7 +96,9 @@
         'views/report_field.xml',
         'views/report_filter.xml',
         'views/custom_report.xml',
-        'views/dashboard_widget.xml'
+        'views/dashboard_widget.xml',
+        'views/analytics_kpi.xml',
+        'views/scheduled_report.xml'
 
     ],
     'assets':{
