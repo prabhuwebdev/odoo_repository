@@ -61,13 +61,13 @@
     </record>
 
     <!-- Top-Level Menu -->
-    <menuitem id="Master_administrative_root"
+    <!-- <menuitem id="Master_administrative_root"
               name="Administrative"
-              parent="menu_school_root"/>
+              parent="menu_school_root"/> -->
 
     <!-- Submenu for Transport Vehicle -->
     <menuitem id="menu_transport_vehicle"
               name="Transport Vehicles"
-              parent="Master_administrative_root"
+              parent="menu_fee_assignment_root_sub"
               action="action_transport_vehicle"/>
 </odoo>

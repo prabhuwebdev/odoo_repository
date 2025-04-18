@@ -67,6 +67,6 @@
     <!-- Menu Item (adjust parent as needed) -->
     <menuitem id="menu_alumni_record"
               name="Alumni Records"
-              parent="Master_advance_root"
+              parent="menu_fee_assignment_root_sub"
               action="action_alumni_record"/>
 </odoo>
