@@ -52,12 +52,12 @@
     </record>
 
     <!-- Submenu for Transport Route -->
-    <menuitem id="Master_administrative_root"
+    <!-- <menuitem id="Master_administrative_root"
               name="Administrative"
-              parent="menu_school_root"/>
+              parent="menu_school_root"/> -->
 
     <menuitem id="menu_transport_route"
               name="Transport Routes"
-              parent="Master_administrative_root"
+              parent="menu_fee_assignment_root_sub"
               action="action_transport_route"/>
 </odoo>

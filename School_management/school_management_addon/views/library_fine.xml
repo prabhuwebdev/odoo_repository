@@ -57,12 +57,12 @@
     </record>
 
     <!-- Submenu for Library Fine -->
-    <menuitem id="Master_administrative_root"
+    <!-- <menuitem id="Master_administrative_root"
               name="Administrative"
-              parent="menu_school_root"/>
+              parent="menu_school_root"/> -->
 
     <menuitem id="menu_library_fine"
               name="Library Fines"
-              parent="Master_administrative_root"
+              parent="menu_fee_assignment_root_sub"
               action="action_library_fine"/>
 </odoo>

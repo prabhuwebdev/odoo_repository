@@ -56,9 +56,9 @@
     </record>
 
     <!-- Menu Items -->
-    <menuitem id="menu_school_root" name="School Management"/>
+    <!-- <menuitem id="menu_school_root" name="School Management"/> -->
     <menuitem id="Master_assignment_submission" name="Academic"
-              parent="menu_school_root"/>
+              parent="menu_fee_assignment_root"/>
 
 
     <menuitem id="menu_assignment_submission" name="Assignment Submissions"

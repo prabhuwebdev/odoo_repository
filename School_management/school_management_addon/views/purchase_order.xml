@@ -50,12 +50,12 @@
     </record>
 
     <!-- Submenu for Purchase Order -->
-    <menuitem id="Master_administrative_root"
+    <!-- <menuitem id="Master_administrative_root"
               name="Administrative"
-              parent="menu_school_root"/>
+              parent="menu_school_root"/> -->
 
     <menuitem id="menu_purchase_order"
               name="Purchase Orders"
-              parent="Master_administrative_root"
+              parent="menu_fee_assignment_root_sub"
               action="action_purchase_order"/>
 </odoo>

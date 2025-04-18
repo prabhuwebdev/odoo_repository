@@ -49,12 +49,12 @@
     </record>
 
     <!-- Submenu for Transport Assignment -->
-    <menuitem id="Master_administrative_root"
-              name="Administrative"
-              parent="menu_school_root"/>
+    <!-- <menuitem id="Master_administrative_root"
+              name="Administrative" -->
+              <!-- parent="menu_school_root"/> -->
 
     <menuitem id="menu_transport_assignment"
               name="Transport Assignments"
-              parent="Master_administrative_root"
+              parent="menu_fee_assignment_root_sub"
               action="action_transport_assignment"/>
 </odoo>

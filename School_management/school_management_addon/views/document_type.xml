@@ -48,11 +48,11 @@
     </record>
 
     <!-- Menu -->
-    <menuitem id="Master_advance_root" name="Advance"
-              parent="menu_school_root"/>
+    <menuitem id="menu_fee_assignment_root_sub" name="Advance"
+              parent="menu_fee_assignment_root_sub"/>
               
     <menuitem id="menu_document_type"
               name="Documents Type"
-              parent="Master_advance_root"
+              parent="menu_fee_assignment_root_sub"
               action="action_document_type"/>
 </odoo>
