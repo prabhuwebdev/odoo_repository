@@ -67,7 +67,7 @@
         <field name="view_mode">list,form</field>
     </record>
 
-    <!-- Menu Items -->
+    Menu Items
     <menuitem id="menu_fee_assignment_root_sub" name="Advance"
               parent="menu_school_root"/>
 

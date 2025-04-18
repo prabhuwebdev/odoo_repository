@@ -83,8 +83,8 @@
     </record>
 
     <!-- Menu -->
-    <menuitem id="menu_fee_assignment_root_sub" name="Advance"
-              parent="menu_school_root"/>
+    <!-- <menuitem id="menu_fee_assignment_root_sub" name="Advance"
+              parent="menu_school_root"/> -->
 
     <menuitem id="menu_online_admission"
               name="Online Admissions"

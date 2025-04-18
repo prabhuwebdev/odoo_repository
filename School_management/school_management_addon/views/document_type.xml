@@ -49,7 +49,7 @@
 
     <!-- Menu -->
     <menuitem id="menu_fee_assignment_root_sub" name="Advance"
-              parent="menu_fee_assignment_root_sub"/>
+              parent="menu_fee_assignment_root"/>
               
     <menuitem id="menu_document_type"
               name="Documents Type"
