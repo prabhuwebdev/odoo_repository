@@ -1,0 +1,58 @@
+<odoo>
+    <!-- List View -->
+    <record id="view_sms_configuration_list" model="ir.ui.view">
+        <field name="name">school_management.sms.configuration.list</field>
+        <field name="model">school_management.sms.configuration</field>
+        <field name="arch" type="xml">
+            <list string="SMS Configurations">
+                <field name="name"/>
+                <field name="provider"/>
+                <field name="sender_id"/>
+                <field name="api_endpoint"/>
+                <field name="is_default"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_sms_configuration_form" model="ir.ui.view">
+        <field name="name">school_management.sms.configuration.form</field>
+        <field name="model">school_management.sms.configuration</field>
+        <field name="arch" type="xml">
+            <form string="SMS Configuration">
+                <sheet>
+                    <group>
+                        <field name="display_name"/>
+                        <field name="name"/>
+                        <field name="provider"/>
+                        <field name="api_key"/>
+                        <field name="api_secret" password="True"/>
+                        <field name="sender_id"/>
+                        <field name="api_endpoint"/>
+                        <field name="is_default"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_sms_configuration" model="ir.actions.act_window">
+        <field name="name">SMS Configurations</field>
+        <field name="res_model">school_management.sms.configuration</field>
+        <field name="view_mode">list,form</field>
+<!--        <field name="help" type="html">-->
+<!--            <p class="o_view_nocontent_smiling_face">Create your first SMS Configuration</p>-->
+<!--        </field>-->
+    </record>
+
+    <!-- Menu -->
+<!--    <menuitem id="menu_school_management_root" name="School Management"/>-->
+
+    <menuitem id="menu_sms_configuration"
+              name="SMS Configuration"
+              parent="menu_communications_sub"
+              action="action_sms_configuration"/>
+</odoo>

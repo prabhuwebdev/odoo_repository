@@ -1,0 +1,70 @@
+<odoo>
+    <!-- Form View for Dashboard Widget -->
+    <record id="view_dashboard_widget_form" model="ir.ui.view">
+        <field name="name">school_management.dashboard.widget.form</field>
+        <field name="model">school_management.dashboard.widget</field>
+        <field name="arch" type="xml">
+            <form string="Dashboard Widget">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="widget_type"/>
+<!--                        <field name="model_id"/>-->
+                        <field name="domain_filter"/>
+                        <field name="chart_type"/>
+                        <field name="measure_field"/>
+                        <field name="group_by_field"/>
+                        <field name="limit"/>
+                        <field name="refresh_interval"/>
+                        <field name="color_scheme"/>
+                        <field name="height"/>
+                        <field name="width"/>
+                        <field name="sequence"/>
+<!--                        <field name="user_id"/>-->
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View for Dashboard Widget -->
+    <record id="view_dashboard_widget_tree" model="ir.ui.view">
+        <field name="name">school_management.dashboard.widget.tree</field>
+        <field name="model">school_management.dashboard.widget</field>
+        <field name="arch" type="xml">
+            <list string="Dashboard Widgets">
+                <field name="name"/>
+                <field name="widget_type"/>
+<!--                <field name="model_id"/>-->
+                <field name="chart_type"/>
+                <field name="measure_field"/>
+                <field name="group_by_field"/>
+                <field name="limit"/>
+                <field name="refresh_interval"/>
+                <field name="color_scheme"/>
+                <field name="height"/>
+                <field name="width"/>
+                <field name="sequence"/>
+<!--                <field name="user_id"/>-->
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action to open the Dashboard Widget -->
+    <record id="action_dashboard_widget" model="ir.actions.act_window">
+        <field name="name">Dashboard Widgets</field>
+        <field name="res_model">school_management.dashboard.widget</field>
+        <field name="view_mode">list,form</field>
+
+    </record>
+
+    <!-- Menu Item to access the Dashboard Widget -->
+    <menuitem id="menu_dashboard_widget"
+              name="Dashboard Widgets"
+              parent="menu_report_root_sub"
+              action="action_dashboard_widget"
+              />
+
+</odoo>
