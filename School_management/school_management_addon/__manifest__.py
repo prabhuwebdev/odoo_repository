@@ -89,7 +89,14 @@
         'views/portal_user_group.xml',
         'views/mobile_app_setting.xml',
         'views/notification_template.xml',
-        'views/email_configuration.xml'
+        'views/email_configuration.xml',
+        'views/sms_configuration.xml',
+        'views/push_notification.xml',
+        'views/report_template.xml',
+        'views/report_field.xml',
+        'views/report_filter.xml',
+        'views/custom_report.xml',
+        'views/dashboard_widget.xml'
 
     ],
     'assets':{

@@ -1,5 +1,5 @@
 <odoo>
-    <record id="view_form_mail_configuration" model="ir.ui.view">
+    <record id="view_mail_configuration_form" model="ir.ui.view">
         <field name="name">school_management.mail.configuration.form</field>
         <field name="model">school_management.mail.configuration</field>
         <field name="arch" type="xml">
@@ -10,13 +10,19 @@
                         <field name="name"/>
                         <field name="smtp_server"/>
                         <field name="smtp_port"/>
+                        <field name="smtp_encryption"/>
+                        <field name="smtp_user"/>
+                        <field name="smtp_password" password="True"/>
+                        <field name="default_from"/>
+                        <field name="is_default"/>
+                        <field name="active"/>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <record id="view_list_mail_configuration" model="ir.ui.view">
+     <record id="view_mail_configuration_list" model="ir.ui.view">
         <field name="name">school_management.mail.configuration.list</field>
         <field name="model">school_management.mail.configuration</field>
         <field name="arch" type="xml">
@@ -24,6 +30,10 @@
                 <field name="name"/>
                 <field name="smtp_server"/>
                 <field name="smtp_port"/>
+                <field name="smtp_encryption"/>
+                <field name="smtp_user"/>
+                <field name="is_default"/>
+                <field name="active"/>
             </list>
         </field>
     </record>

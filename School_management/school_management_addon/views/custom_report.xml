@@ -1,0 +1,54 @@
+<odoo>
+    <!-- List View -->
+    <record id="view_custom_report_list" model="ir.ui.view">
+        <field name="name">school_management.custom.report.list</field>
+        <field name="model">school_management.custom.report</field>
+        <field name="arch" type="xml">
+            <list string="Custom Reports">
+                <field name="name"/>
+                <field name="template_id"/>
+<!--                <field name="user_id"/>-->
+                <field name="last_run"/>
+                <field name="run_count"/>
+                <field name="is_favorite"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_custom_report_form" model="ir.ui.view">
+        <field name="name">school_management.custom.report.form</field>
+        <field name="model">school_management.custom.report</field>
+        <field name="arch" type="xml">
+            <form string="Custom Report">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="template_id"/>
+<!--                        <field name="user_id"/>-->
+                        <field name="filter_domain"/>
+                        <field name="sort_by"/>
+                        <field name="is_favorite"/>
+                        <field name="last_run"/>
+                        <field name="run_count"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_custom_report" model="ir.actions.act_window">
+        <field name="name">Custom Reports</field>
+        <field name="res_model">school_management.custom.report</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_custom_report"
+              name="Custom Reports"
+              parent="menu_report_root_sub"
+              action="action_custom_report"
+              sequence="50"/>
+</odoo>

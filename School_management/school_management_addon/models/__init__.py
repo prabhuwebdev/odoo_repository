@@ -90,3 +90,10 @@ from . import portal_user_group
 from . import mobile_app_setting
 from . import  notification_template
 from . import email_configuration
+from . import sms_configuration
+from . import push_notification
+from . import report_template
+from . import report_field
+from . import report_filter
+from . import custom_report
+from . import dashboard_widget
