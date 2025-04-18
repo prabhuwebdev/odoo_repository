@@ -42,6 +42,6 @@
     <!-- Menu Items -->
     <menuitem id="menu_elearning_answer"
               name="E Learning Answers"
-              parent="menu_fee_assignment_root_sub"
+              parent="menu_advanced_root"
               action="action_elearning_answer"/>
 </odoo>

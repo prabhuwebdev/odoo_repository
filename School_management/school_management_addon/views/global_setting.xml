@@ -72,6 +72,6 @@
     <!-- Menu Item -->
     <menuitem id="menu_school_global_settings"
               name="Global Settings"
-              parent="menu_fee_assignment_root_sub"
+              parent="menu_advanced_root"
               action="action_school_global_setting"/>
 </odoo>

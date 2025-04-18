@@ -56,10 +56,10 @@
     </record>
 
     <!-- Menu Items -->
-    <!-- <menuitem id="menu_school_root" name="School Management"/> -->
-    <menuitem id="Master_assignment_submission" name="Academic"
-              parent="menu_fee_assignment_root"/>
+    <menuitem id="menu_fee_assignment_root" name="School Management" sequence="1"/>
 
+    <menuitem id="Master_assignment_submission" name="Academic"
+              parent="menu_fee_assignment_root" sequence="2"/>
 
     <menuitem id="menu_assignment_submission" name="Assignment Submissions"
               parent="Master_assignment_submission" action="action_assignment_submission"/>

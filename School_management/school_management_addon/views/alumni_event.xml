@@ -56,6 +56,6 @@
     <!-- Menu Item (adjust parent menu if needed) -->
     <menuitem id="menu_alumni_event"
               name="Alumni Events"
-              parent="menu_fee_assignment_root_sub"
+              parent="menu_advanced_root"
               action="action_alumni_event"/>
 </odoo>

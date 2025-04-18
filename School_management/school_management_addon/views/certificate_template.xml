@@ -73,6 +73,6 @@
     <!-- Menu Item -->
     <menuitem id="menu_certificate_template"
               name="Certificate Templates"
-              parent="menu_fee_assignment_root_sub"
+              parent="menu_advanced_root"
               action="action_certificate_template"/>
 </odoo>

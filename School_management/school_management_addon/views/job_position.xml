@@ -48,10 +48,6 @@
     </record>
 
     <!-- Submenu for Job Position -->
-    <!-- <menuitem id="Master_administrative_root"
-              name="Administrative"
-              parent="menu_school_root"/> -->
-
     <menuitem id="menu_school_job_position"
               name="Job Positions"
               parent="menu_fee_assignment_root_sub"

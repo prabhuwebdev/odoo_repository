@@ -63,6 +63,6 @@
     <!-- Menu Item -->
     <menuitem id="menu_school_branch"
               name="School Branches"
-              parent="menu_fee_assignment_root_sub"
+              parent="menu_advanced_root"
               action="action_school_branch"/>
 </odoo>

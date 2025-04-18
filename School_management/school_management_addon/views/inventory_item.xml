@@ -58,10 +58,6 @@
     </record>
 
     <!-- Submenu for Inventory Item -->
-    <!-- <menuitem id="Master_administrative_root"
-              name="Administrative"
-              parent="menu_school_root"/> -->
-
     <menuitem id="menu_inventory_item"
               name="Inventory Items"
               parent="menu_fee_assignment_root_sub"

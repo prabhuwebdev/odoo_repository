@@ -57,6 +57,6 @@
     <!-- Menu -->
     <menuitem id="menu_school_academic_year"
               name="Academic Years"
-              parent="menu_fee_assignment_root_sub"
+              parent="menu_advanced_root"
               action="action_academic_year"/>
 </odoo>

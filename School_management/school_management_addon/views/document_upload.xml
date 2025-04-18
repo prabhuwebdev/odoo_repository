@@ -59,11 +59,8 @@
     </record>
 
     <!-- Menu Item -->
-    <!-- <menuitem id="menu_fee_assignment_root_sub" name="Advance"
-              parent="menu_school_root"/> -->
-
     <menuitem id="menu_document_upload"
               name="Documents Uploaded"
-              parent="menu_fee_assignment_root_sub"
+              parent="menu_advanced_root"
               action="action_document_upload"/>
 </odoo>

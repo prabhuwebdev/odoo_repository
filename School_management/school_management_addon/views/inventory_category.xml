@@ -46,9 +46,6 @@
     </record>
 
     <!-- Submenu for Inventory Category -->
-    <!-- <menuitem id="Master_administrative_root" name="Administrative"
-              parent="menu_school_root"/> -->
-
     <menuitem id="menu_inventory_category"
               name="Inventory Categories"
               parent="menu_fee_assignment_root_sub"

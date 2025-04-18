@@ -45,8 +45,6 @@
         <field name="view_mode">list,form</field>
     </record>
 
-
-
     <menuitem id="menu_mobile_app_setting"
               name="Mobile App Settings"
               parent="menu_communications_sub"

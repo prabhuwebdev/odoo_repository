@@ -51,10 +51,6 @@
     </record>
 
     <!-- Submenu for Purchase Order Line -->
-    <!-- <menuitem id="Master_administrative_root"
-              name="Administrative"
-              parent="menu_school_root"/> -->
-
     <menuitem id="menu_purchase_order_line"
               name="Purchase Order Lines"
               parent="menu_fee_assignment_root_sub"

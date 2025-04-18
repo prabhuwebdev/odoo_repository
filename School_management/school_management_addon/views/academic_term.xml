@@ -52,6 +52,6 @@
 
     <!-- Menu -->
     <menuitem id="menu_school_academic_term" name="Academic Terms"
-              parent="menu_fee_assignment_root_sub"
+              parent="menu_advanced_root"
               action="action_academic_term"/>
 </odoo>

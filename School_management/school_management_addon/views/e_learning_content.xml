@@ -56,6 +56,6 @@
     <!-- Menu Items -->
     <menuitem id="menu_elearning_content"
               name="E Learning Contents"
-              parent="menu_fee_assignment_root_sub"
+              parent="menu_advanced_root"
               action="action_elearning_content"/>
 </odoo>

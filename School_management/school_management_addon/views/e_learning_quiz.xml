@@ -51,6 +51,6 @@
     <!-- Menu -->
     <menuitem id="menu_elearning_quiz"
               name="E Learning Quizzes"
-              parent="menu_fee_assignment_root_sub"
+              parent="menu_advanced_root"
               action="action_elearning_quiz"/>
 </odoo>

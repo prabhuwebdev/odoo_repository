@@ -7,8 +7,6 @@
             <form string="Employee Appraisal">
                 <sheet>
                     <group>
-
-
                         <field name="display_name" readonly="True"/>
                         <field name="name"/>
                         <field name="appraisal_date"/>
@@ -47,7 +45,6 @@
         <field name="res_model">school_management.appraisal</field>
         <field name="view_mode">list,form</field>
     </record>
-
 
     <menuitem id="menu_appraisal" name="Appraisal Records" parent="menu_fee_assignment_root_sub" action="action_appraisal"/>
 </odoo>

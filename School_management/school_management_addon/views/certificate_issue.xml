@@ -58,6 +58,6 @@
     <!-- Menu Item (adjust parent as needed) -->
     <menuitem id="menu_certificate_issue"
               name="Certificate Issue"
-              parent="menu_fee_assignment_root_sub"
+              parent="menu_advanced_root"
               action="action_certificate_issue"/>
 </odoo>

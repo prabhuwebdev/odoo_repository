@@ -61,6 +61,6 @@
     <!-- Menu Item -->
     <menuitem id="menu_discipline_incident"
               name="Discipline Incidents"
-              parent="menu_fee_assignment_root_sub"
+              parent="menu_advanced_root"
               action="action_discipline_incident"/>
 </odoo>
