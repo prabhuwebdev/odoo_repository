@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<record id="view_syllabus_tracker_form" model="ir.ui.view">
+    <field name="name">syllabus.tracker.form</field>
+    <field name="model">school_management.syllabus.tracker</field>
+    <field name="arch" type="xml">
+        <form string="Syllabus Tracker">
+            <sheet>
+                <group>
+                    <field name="subject_id"/>
+                    <field name="class_id"/>
+                    <field name="academic_year"/>
+                </group>
+                <group>
+                    <field name="total_units" />
+                    <field name="completed_units" />
+                    <field name="progress" widget="progressbar"/>
+                    <!-- <field name="last_updated" readonly="1"/> -->
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="view_syllabus_tracker_list" model="ir.ui.view">
+    <field name="name">syllabus.tracker.list</field>
+    <field name="model">school_management.syllabus.tracker</field>
+    <field name="arch" type="xml">
+        <list>
+            <field name="subject_id"/>
+            <field name="class_id"/>
+            <field name="academic_year"/>
+            <field name="total_units"/>
+            <field name="completed_units"/>
+            <field name="progress"/>
+            <field name="last_updated"/>
+        </list>
+    </field>
+</record>
+
+<record id="action_syllabus_tracker" model="ir.actions.act_window">
+    <field name="name">Syllabus Tracker</field>
+    <field name="res_model">school_management.syllabus.tracker</field>
+    <field name="view_mode">list,form</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            Monitor subject-wise syllabus progress here.
+        </p>
+    </field>
+</record>
+
+<menuitem id="menu_syllabus_tracker"
+          name="Syllabus Tracker"
+          parent="Master_assignment_submission"
+          action="action_syllabus_tracker"
+          sequence="30"/>
+
+</odoo>

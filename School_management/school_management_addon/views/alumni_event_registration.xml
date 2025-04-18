@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="view_alumni_event_registration_list" model="ir.ui.view">
+        <field name="name">alumni.event.registration.list</field>
+        <field name="model">school_management.alumni.event.registration</field>
+        <field name="arch" type="xml">
+            <list string="Alumni Event Registrations">
+                <field name="event_id"/>
+                <field name="alumni_id"/>
+                <field name="registration_date"/>
+                <field name="attendance"/>
+                <field name="fee_paid"/>
+                <field name="payment_method"/>
+                <field name="payment_reference"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_alumni_event_registration_form" model="ir.ui.view">
+        <field name="name">alumni.event.registration.form</field>
+        <field name="model">school_management.alumni.event.registration</field>
+        <field name="arch" type="xml">
+            <form string="Alumni Event Registration">
+                <sheet>
+                    <group>
+                        <field name="name_display" readonly="1"/>
+                        <field name="event_id"/>
+                        <field name="alumni_id"/>
+                        <field name="registration_date"/>
+                    </group>
+                    <group>
+                        <field name="attendance"/>
+                        <field name="fee_paid"/>
+                        <field name="payment_method"/>
+                        <field name="payment_reference"/>
+                    </group>
+                    <group>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_alumni_event_registration" model="ir.actions.act_window">
+        <field name="name">Alumni Event Registrations</field>
+        <field name="res_model">school_management.alumni.event.registration</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu Item (You can adjust the parent menu ID as needed) -->
+    <menuitem id="menu_alumni_event_registration"
+              name="Event Registrations"
+              parent="Master_advance_root"
+              action="action_alumni_event_registration"/>
+</odoo>

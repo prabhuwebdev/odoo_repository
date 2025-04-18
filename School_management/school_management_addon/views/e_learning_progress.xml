@@ -1,0 +1,59 @@
+<odoo>
+    <!-- List View -->
+    <record id="view_elearning_progress_list" model="ir.ui.view">
+        <field name="name">school_management.e.learning.progress.list</field>
+        <field name="model">school_management.e.learning.progress</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="student_id"/>
+                <field name="course_id"/>
+                <field name="enrollment_date"/>
+                <field name="progress_percentage"/>
+                <field name="completed_modules"/>
+                <field name="total_modules"/>
+                <field name="last_activity"/>
+                <field name="state"/>
+                <field name="certificate_issued"/>
+                <field name="certificate_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_elearning_progress_form" model="ir.ui.view">
+        <field name="name">school_management.e.learning.progress.form</field>
+        <field name="model">school_management.e.learning.progress</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name_display" readonly="1"/>
+                        <field name="student_id"/>
+                        <field name="course_id"/>
+                        <field name="enrollment_date"/>
+                        <field name="progress_percentage"/>
+                        <field name="completed_modules"/>
+                        <field name="total_modules" readonly="1"/>
+                        <field name="last_activity"/>
+                        <field name="state"/>
+                        <field name="certificate_issued"/>
+                        <field name="certificate_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_elearning_progress" model="ir.actions.act_window">
+        <field name="name">E-Learning Progress</field>
+        <field name="res_model">school_management.e.learning.progress</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_elearning_progress"
+              name="E Learning Progress"
+              parent="Master_advance_root"
+              action="action_elearning_progress"/>
+</odoo>

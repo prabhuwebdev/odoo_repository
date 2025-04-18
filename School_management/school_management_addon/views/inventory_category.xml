@@ -1,0 +1,56 @@
+<odoo>
+    <!-- List View -->
+    <record id="view_inventory_category_list" model="ir.ui.view">
+        <field name="name">school_management.inventory.category.list</field>
+        <field name="model">school_management.inventory.category</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <!-- <field name="parent_id"/> -->
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_inventory_category_form" model="ir.ui.view">
+        <field name="name">school_management.inventory.category.form</field>
+        <field name="model">school_management.inventory.category</field>
+        <field name="arch" type="xml">
+            <form string="Inventory Category">
+                <sheet>
+                    <group>
+                        <field name="name_display" readonly="1"/>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <!-- <field name="parent_id"/> -->
+                        <field name="description"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_inventory_category" model="ir.actions.act_window">
+        <field name="name">Inventory Categories</field>
+        <field name="res_model">school_management.inventory.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first inventory category
+            </p>
+        </field>
+    </record>
+
+    <!-- Submenu for Inventory Category -->
+    <menuitem id="Master_administrative_root" name="Administrative"
+              parent="menu_school_root"/>
+
+    <menuitem id="menu_inventory_category"
+              name="Inventory Categories"
+              parent="Master_administrative_root"
+              action="action_inventory_category"/>
+</odoo>

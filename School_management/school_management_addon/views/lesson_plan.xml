@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_lesson_plan_form" model="ir.ui.view">
+        <field name="name">lesson.plan.form</field>
+        <field name="model">school_management.lesson.plan</field>
+        <field name="arch" type="xml">
+            <form string="Lesson Plan">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="subject_id"/>
+                        <field name="class_id"/>
+                        <field name="section_id"/>
+                    </group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="completed"/>
+                        <field name="completion_date"/>
+                    </group>
+                    <group string="Lesson Details" colspan="2">
+                        <field name="topics"/>
+                        <field name="teaching_methods"/>
+                        <field name="resources"/>
+                        <field name="assessment"/>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_lesson_plan_list" model="ir.ui.view">
+        <field name="name">lesson.plan.list</field>
+        <field name="model">school_management.lesson.plan</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="subject_id"/>
+                <field name="class_id"/>
+                <field name="section_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="completed"/>
+                <field name="completion_date"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_lesson_plan" model="ir.actions.act_window">
+        <field name="name">Lesson Plans</field>
+        <field name="res_model">school_management.lesson.plan</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create and manage lesson plans for specific subjects and classes.
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_lesson_plan"
+            name="Lesson Plans"
+            parent="Master_assignment_submission"
+            action="action_lesson_plan"/>
+
+</odoo> 

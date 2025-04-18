@@ -1,0 +1,59 @@
+<odoo>
+    <!-- List View -->
+    <record id="view_elearning_activity_list" model="ir.ui.view">
+        <field name="name">school_management.e.learning.activity.list</field>
+        <field name="model">school_management.e.learning.activity</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="student_id"/>
+                <field name="course_id"/>
+                <field name="content_id"/>
+                <field name="activity_date"/>
+                <field name="activity_type"/>
+                <field name="time_spent"/>
+                <field name="progress"/>
+                <field name="is_completed"/>
+                <field name="completion_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_elearning_activity_form" model="ir.ui.view">
+        <field name="name">school_management.e.learning.activity.form</field>
+        <field name="model">school_management.e.learning.activity</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Activity Info">
+                        <field name="name_display" readonly="1"/>
+                        <field name="student_id"/>
+                        <field name="course_id"/>
+                        <field name="content_id"/>
+                        <field name="activity_type"/>
+                        <field name="activity_date"/>
+                    </group>
+                    <group string="Progress Info" col="2">
+                        <field name="time_spent"/>
+                        <field name="progress"/>
+                        <field name="is_completed"/>
+                        <field name="completion_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_elearning_activity" model="ir.actions.act_window">
+        <field name="name">E-Learning Activities</field>
+        <field name="res_model">school_management.e.learning.activity</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_elearning_activity"
+              name="E Learning Activities"
+              parent="Master_advance_root"
+              action="action_elearning_activity"/>
+</odoo>

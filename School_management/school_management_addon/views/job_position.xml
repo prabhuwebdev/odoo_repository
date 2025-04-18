@@ -1,0 +1,59 @@
+<odoo>
+    <!-- List View -->
+    <record id="view_school_job_position_list" model="ir.ui.view">
+        <field name="name">school_management.job.position.list</field>
+        <field name="model">school_management.job.position</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <!-- <field name="department_id"/> -->
+                <field name="is_teacher"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_school_job_position_form" model="ir.ui.view">
+        <field name="name">school_management.job.position.form</field>
+        <field name="model">school_management.job.position</field>
+        <field name="arch" type="xml">
+            <form string="Job Position">
+                <sheet>
+                    <group>
+                        <field name="name_display" readonly="1"/>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <!-- <field name="department_id"/> -->
+                        <field name="description"/>
+                        <field name="is_teacher"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_school_job_position" model="ir.actions.act_window">
+        <field name="name">Job Positions</field>
+        <field name="res_model">school_management.job.position</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first job position
+            </p>
+        </field>
+    </record>
+
+    <!-- Submenu for Job Position -->
+    <menuitem id="Master_administrative_root"
+              name="Administrative"
+              parent="menu_school_root"/>
+
+    <menuitem id="menu_school_job_position"
+              name="Job Positions"
+              parent="Master_administrative_root"
+              action="action_school_job_position"/>
+</odoo>

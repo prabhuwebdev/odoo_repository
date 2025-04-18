@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="view_school_event_list" model="ir.ui.view">
+        <field name="name">school.event.list</field>
+        <field name="model">school_management.event</field>
+        <field name="arch" type="xml">
+            <list string="School Events">
+                <field name="name"/>
+                <!-- <field name="calendar_id"/> -->
+                <field name="event_type"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="all_day"/>
+                <field name="participant_type"/>
+                <field name="is_holiday"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_school_event_form" model="ir.ui.view">
+        <field name="name">school.event.form</field>
+        <field name="model">school_management.event</field>
+        <field name="arch" type="xml">
+            <form string="School Event">
+                <sheet>
+                    <group>
+                        <field name="name_display" readonly="1"/>
+                        <field name="name"/>
+                        <!-- <field name="calendar_id"/> -->
+                    </group>
+                    <group>
+                        <field name="event_type"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="all_day"/>
+                    </group>
+                    <group>
+                        <field name="start_time"/>
+                        <field name="end_time"/>
+                    </group>
+                    <group>
+                        <field name="venue"/>
+                        <field name="description"/>
+                    </group>
+                    <group>
+                        <field name="participant_type"/>
+                        <field name="applicable_classes"/>
+                        <field name="is_holiday"/>
+                    </group>
+                    <group>
+                        <field name="create_notice"/>
+                        <!-- <field name="notice_id"/> -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_school_event" model="ir.actions.act_window">
+        <field name="name">School Events</field>
+        <field name="res_model">school_management.event</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_school_event"
+              name="School Events"
+              parent="Master_advance_root"
+              action="action_school_event"/>
+</odoo>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_attendance_staff_list" model="ir.ui.view">
+        <field name="name">attendance.staff.list</field>
+        <field name="model">school_management.attendance.staff</field>
+        <field name="arch" type="xml">
+            <list string="Staff Attendance">
+                <field name="date"/>
+                <!-- <field name="employee_id"/> -->
+                <field name="status"/>
+                <field name="check_in"/>
+                <field name="check_out"/>
+                <field name="working_hours"/>
+                <!-- <field name="marked_by"/> -->
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_attendance_staff_form" model="ir.ui.view">
+        <field name="name">attendance.staff.form</field>
+        <field name="model">school_management.attendance.staff</field>
+        <field name="arch" type="xml">
+            <form string="Staff Attendance">
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <!-- <field name="employee_id"/> -->
+                        <field name="status"/>
+                        <field name="reason"/>
+                        <field name="check_in"/>
+                        <field name="check_out"/>
+                        <field name="working_hours" readonly="1"/>
+                        <!-- <field name="marked_by"/> -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_attendance_staff" model="ir.actions.act_window">
+        <field name="name">Staff Attendance</field>
+        <field name="res_model">school_management.attendance.staff</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Record staff attendance entries.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_attendance_staff"
+              name="Staff Attendance"
+              parent="Master_assignment_submission"
+              action="action_attendance_staff"
+              sequence="30"/>
+              
+</odoo>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="view_school_global_setting_list" model="ir.ui.view">
+        <field name="name">school.global.setting.list</field>
+        <field name="model">school_management.global.setting</field>
+        <field name="arch" type="xml">
+            <list string="Global Settings">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="tagline"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="website"/>
+                <field name="currency_id"/>
+                <field name="language"/>
+                <field name="academic_year_id"/>
+                <field name="date_format"/>
+                <field name="time_format"/>
+                <field name="timezone"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_school_global_setting_form" model="ir.ui.view">
+        <field name="name">school.global.setting.form</field>
+        <field name="model">school_management.global.setting</field>
+        <field name="arch" type="xml">
+            <form string="Global Settings">
+                <sheet>
+                    <group>
+                        <field name="name_display" readonly="1"/>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="tagline"/>
+                        <field name="logo"/>
+                        <field name="address"/>
+                    </group>
+                    <group>
+                        <field name="phone"/>
+                        <field name="email"/>
+                        <field name="website"/>
+                        <field name="currency_id"/>
+                        <field name="language"/>
+                    </group>
+                    <group>
+                        <field name="academic_year_id"/>
+                        <field name="date_format"/>
+                        <field name="time_format"/>
+                        <field name="timezone"/>
+                    </group>
+                    <group>
+                        <field name="admission_number_prefix"/>
+                        <field name="employee_number_prefix"/>
+                        <field name="default_attendance_type"/>
+                        <field name="working_days"/>
+                        <field name="grading_system_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_school_global_setting" model="ir.actions.act_window">
+        <field name="name">Global Settings</field>
+        <field name="res_model">school_management.global.setting</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_school_global_settings"
+              name="Global Settings"
+              parent="Master_advance_root"
+              action="action_school_global_setting"/>
+</odoo>

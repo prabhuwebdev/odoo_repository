@@ -1,0 +1,60 @@
+<odoo>
+    <!-- List View -->
+    <record id="view_transport_assignment_list" model="ir.ui.view">
+        <field name="name">school_management.transport.assignment.list</field>
+        <field name="model">school_management.transport.assignment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="student_id"/>
+                <field name="route_id"/>
+                <field name="stop_id"/>
+                <field name="effective_date"/>
+                <field name="monthly_fee"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_transport_assignment_form" model="ir.ui.view">
+        <field name="name">school_management.transport.assignment.form</field>
+        <field name="model">school_management.transport.assignment</field>
+        <field name="arch" type="xml">
+            <form string="Transport Assignment">
+                <sheet>
+                    <group>
+                        <field name="name_display" readonly="1"/>
+                        <field name="student_id"/>
+                        <field name="route_id"/>
+                        <field name="stop_id"/>
+                        <field name="effective_date"/>
+                        <field name="monthly_fee"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_transport_assignment" model="ir.actions.act_window">
+        <field name="name">Transport Assignments</field>
+        <field name="res_model">school_management.transport.assignment</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage student transport assignments.
+            </p>
+        </field>
+    </record>
+
+    <!-- Submenu for Transport Assignment -->
+    <menuitem id="Master_administrative_root"
+              name="Administrative"
+              parent="menu_school_root"/>
+
+    <menuitem id="menu_transport_assignment"
+              name="Transport Assignments"
+              parent="Master_administrative_root"
+              action="action_transport_assignment"/>
+</odoo>

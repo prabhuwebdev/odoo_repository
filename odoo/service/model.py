@@ -15,7 +15,7 @@ from odoo.models import check_method_name
 from odoo.modules.registry import Registry
 from odoo.tools import DotDict, lazy
 from odoo.tools.translate import translate_sql_constraint
-
+from .import get_public_method
 from . import security
 
 _logger = logging.getLogger(__name__)

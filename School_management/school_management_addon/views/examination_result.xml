@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_examination_result_form" model="ir.ui.view">
+        <field name="name">school_management.examination.result.form</field>
+        <field name="model">school_management.examination.result</field>
+        <field name="arch" type="xml">
+            <form string="Examination Result">
+                <sheet>
+                    <group>
+                        <field name="student_id"/>
+                        <field name="examination_id"/>
+                        <field name="class_id"/>
+                        <field name="section_id"/>
+                        <field name="subject_id"/>
+                        <field name="marks_obtained"/>
+                        <field name="max_marks"/>
+                        <field name="percentage" readonly="1"/>
+                        <field name="grade" readonly="1"/>
+                        <field name="pass_status" readonly="1"/>
+                        <field name="remarks"/>
+                        <!-- <field name="evaluated_by"/> -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_examination_result_tree" model="ir.ui.view">
+        <field name="name">school_management.examination.result.list</field>
+        <field name="model">school_management.examination.result</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="student_id"/>
+                <field name="examination_id"/>
+                <field name="subject_id"/>
+                <field name="marks_obtained"/>
+                <field name="max_marks"/>
+                <field name="percentage"/>
+                <field name="grade"/>
+                <field name="pass_status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_examination_result" model="ir.actions.act_window">
+        <field name="name">Examination Results</field>
+        <field name="res_model">school_management.examination.result</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the first examination result
+            </p>
+        </field>
+    </record>
+    <menuitem id="menu_examination_results"
+            name="Examinations Results"
+            parent="Master_assignment_submission"
+            action="action_examination_result"/>
+</odoo>

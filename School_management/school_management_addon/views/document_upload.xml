@@ -1,0 +1,69 @@
+<odoo>
+    <!-- List View -->
+    <record id="view_document_upload_list" model="ir.ui.view">
+        <field name="name">school_management.document.upload.list</field>
+        <field name="model">school_management.document.upload</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="document_type_id"/>
+                <field name="model"/>
+                <field name="res_id"/>
+                <field name="file_name"/>
+                <field name="upload_date"/>
+                <field name="uploaded_by"/>
+                <field name="is_verified"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_document_upload_form" model="ir.ui.view">
+        <field name="name">school_management.document.upload.form</field>
+        <field name="model">school_management.document.upload</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name_display" readonly="1"/>
+                        <field name="name"/>
+                        <field name="document_type_id"/>
+                        <field name="model"/>
+                        <field name="res_id"/>
+                        <field name="file" filename="file_name"/>
+                        <field name="file_name"/>
+                        <field name="mime_type"/>
+                        <field name="upload_date"/>
+                        <field name="uploaded_by"/>
+                        <field name="description"/>
+                        <field name="is_verified"/>
+                        <field name="verified_by"/>
+                        <field name="verification_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_document_upload" model="ir.actions.act_window">
+        <field name="name">Document Upload</field>
+        <field name="res_model">school_management.document.upload</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_document_upload_list"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Upload and manage all school-related documents here.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="Master_advance_root" name="Advance"
+              parent="menu_school_root"/>
+
+    <menuitem id="menu_document_upload"
+              name="Documents Uploaded"
+              parent="Master_advance_root"
+              action="action_document_upload"/>
+</odoo>

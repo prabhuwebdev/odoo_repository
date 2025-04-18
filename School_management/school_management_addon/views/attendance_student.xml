@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_attendance_student_list" model="ir.ui.view">
+        <field name="name">attendance.student.list</field>
+        <field name="model">school_management.attendance.student</field>
+        <field name="arch" type="xml">
+            <list string="Student Attendance">
+                <field name="date"/>
+                <field name="student_id"/>
+                <field name="class_id"/>
+                <field name="section_id"/>
+                <field name="status"/>
+                <field name="reason"/>
+                <field name="marked_by"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_attendance_student_form" model="ir.ui.view">
+        <field name="name">attendance.student.form</field>
+        <field name="model">school_management.attendance.student</field>
+        <field name="arch" type="xml">
+            <form string="Student Attendance">
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <field name="student_id"/>
+                        <field name="class_id"/>
+                        <field name="section_id"/>
+                        <field name="status"/>
+                        <field name="reason"/>
+                        <field name="marked_by"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_attendance_student" model="ir.actions.act_window">
+        <field name="name">Student Attendance</field>
+        <field name="res_model">school_management.attendance.student</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Record and manage student attendance.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_attendance_student"
+              name="Student Attendance"
+              parent="Master_assignment_submission"
+              action="action_attendance_student"
+              sequence="40"/>
+
+</odoo>

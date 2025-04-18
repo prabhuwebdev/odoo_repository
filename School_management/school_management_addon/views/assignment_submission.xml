@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_assignment_submission_list" model="ir.ui.view">
+        <field name="name">assignment.submission.list</field>
+        <field name="model">school_management.assignment.submission</field>
+        <field name="arch" type="xml">
+            <list string="Assignment Submissions">
+                <!-- <field name="name"/> -->
+                <field name="assignment_id"/>
+                <field name="student_id"/>
+                <field name="submission_date"/>
+                <field name="marks_obtained"/>
+                <field name="state"/>
+                <!-- <field name="evaluated_by"/> -->
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_assignment_submission_form" model="ir.ui.view">
+        <field name="name">assignment.submission.form</field>
+        <field name="model">school_management.assignment.submission</field>
+        <field name="arch" type="xml">
+            <form string="Assignment Submission">
+                <sheet>
+                    <group>
+                        <!-- <field name="name" readonly="1"/> -->
+                        <field name="assignment_id"/>
+                        <field name="student_id"/>
+                        <field name="submission_date"/>
+                        <field name="content"/>
+                        <field name="attachment" filename="assignment_filename"/>
+                    </group>
+                    <group>
+                        <field name="marks_obtained"/>
+                        <field name="feedback"/>
+                        <field name="state"/>
+                        <!-- <field name="evaluated_by"/> -->
+                        <field name="evaluation_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_assignment_submission" model="ir.actions.act_window">
+        <field name="name">Assignment Submissions</field>
+        <field name="res_model">school_management.assignment.submission</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Submit your first assignment</p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_school_root" name="School Management"/>
+    <menuitem id="Master_assignment_submission" name="Academic"
+              parent="menu_school_root"/>
+
+
+    <menuitem id="menu_assignment_submission" name="Assignment Submissions"
+              parent="Master_assignment_submission" action="action_assignment_submission"/>
+
+</odoo>

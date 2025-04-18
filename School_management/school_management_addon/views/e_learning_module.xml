@@ -1,0 +1,55 @@
+<odoo>
+    <!-- List View -->
+    <record id="view_e_learning_module_list" model="ir.ui.view">
+        <field name="name">school_management.e.learning.module.list</field>
+        <field name="model">school_management.e.learning.module</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="course_id"/>
+                <field name="sequence"/>
+                <field name="duration"/>
+                <field name="is_published"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_e_learning_module_form" model="ir.ui.view">
+        <field name="name">school_management.e.learning.module.form</field>
+        <field name="model">school_management.e.learning.module</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name_display" readonly="1"/>
+                        <field name="name"/>
+                        <field name="course_id"/>
+                        <field name="sequence"/>
+                        <field name="description"/>
+                        <field name="duration"/>
+                        <field name="is_published"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_e_learning_module" model="ir.actions.act_window">
+        <field name="name">E-Learning Modules</field>
+        <field name="res_model">school_management.e.learning.module</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="Master_advance_root" name="Advance"
+              parent="menu_school_root"/>
+
+    <menuitem id="menu_e_learning_module"
+              name="E Learning Modules"
+              parent="Master_advance_root"
+              action="action_e_learning_module"/>
+</odoo>

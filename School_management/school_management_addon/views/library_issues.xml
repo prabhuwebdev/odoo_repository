@@ -1,0 +1,75 @@
+<odoo>
+    <!-- List View -->
+    <record id="view_library_issue_list" model="ir.ui.view">
+        <field name="name">school_management.library.issue.list</field>
+        <field name="model">school_management.library.issue</field>
+        <field name="arch" type="xml">
+            <list>
+                <!-- <field name="name"/> -->
+                <field name="book_id"/>
+                <field name="member_type"/>
+                <field name="student_id"/>
+                <!-- <field name="employee_id"/> -->
+                <field name="issue_date"/>
+                <field name="due_date"/>
+                <field name="return_date"/>
+                <field name="actual_return_date"/>
+                <field name="fine_amount"/>
+                <field name="fine_paid"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_library_issue_form" model="ir.ui.view">
+        <field name="name">school_management.library.issue.form</field>
+        <field name="model">school_management.library.issue</field>
+        <field name="arch" type="xml">
+            <form string="Library Issue">
+                <sheet>
+                    <group>
+                        <field name="name_display" readonly="1"/>
+                        <!-- <field name="name" readonly="1"/> -->
+                        <field name="book_id"/>
+                        <field name="member_type"/>
+                        <field name="student_id"/>
+                        <!-- <field name="employee_id"/> -->
+                        <field name="issue_date"/>
+                        <field name="due_date"/>
+                        <field name="return_date"/>
+                        <field name="actual_return_date"/>
+                        <field name="fine_amount"/>
+                        <field name="fine_paid"/>
+                        <field name="state"/>
+                        <!-- <field name="issued_by"/> -->
+                        <!-- <field name="returned_to"/> -->
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_library_issue" model="ir.actions.act_window">
+        <field name="name">Library Issues</field>
+        <field name="res_model">school_management.library.issue</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Manage book issues and returns for students and employees.
+            </p>
+        </field>
+    </record>
+
+    <!-- Submenu for Library Issue -->
+    <menuitem id="Master_administrative_root"
+              name="Administrative"
+              parent="menu_school_root"/>
+
+    <menuitem id="menu_library_issue"
+              name="Library Issues"
+              parent="Master_administrative_root"
+              action="action_library_issue"/>
+</odoo>

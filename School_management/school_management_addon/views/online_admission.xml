@@ -1,0 +1,93 @@
+<odoo>
+    <!-- List View -->
+    <record id="view_online_admission_list" model="ir.ui.view">
+        <field name="name">school_management.online.admission.list</field>
+        <field name="model">school_management.online.admission</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="student_name"/>
+                <field name="gender"/>
+                <field name="date_of_birth"/>
+                <field name="class_id"/>
+                <!-- <field name="academic_year_id"/> -->
+                <field name="application_date"/>
+                <field name="state"/>
+                <field name="registration_fee"/>
+                <field name="fee_paid"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_online_admission_form" model="ir.ui.view">
+        <field name="name">school_management.online.admission.form</field>
+        <field name="model">school_management.online.admission</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Application Info">
+                        <field name="name_display" readonly="1"/>
+                        <field name="name"/>
+                        <field name="application_date"/>
+                        <field name="state"/>
+                    </group>
+
+                    <group string="Student Info">
+                        <field name="student_name"/>
+                        <field name="gender"/>
+                        <field name="date_of_birth"/>
+                        <field name="father_name"/>
+                        <field name="mother_name"/>
+                    </group>
+
+                    <group string="Contact Info" col="2">
+                        <field name="email"/>
+                        <field name="phone"/>
+                        <field name="mobile"/>
+                        <field name="street"/>
+                        <field name="city"/>
+                        <field name="state_id"/>
+                        <field name="zip_code"/>
+                        <field name="country_id"/>
+                    </group>
+
+                    <group string="Academic Info">
+                        <field name="class_id"/>
+                        <!-- <field name="academic_year_id"/> -->
+                        <field name="previous_school"/>
+                        <field name="previous_class"/>
+                    </group>
+
+                    <group string="Payment Info">
+                        <field name="registration_fee"/>
+                        <field name="fee_paid"/>
+                        <field name="payment_date"/>
+                        <field name="payment_method"/>
+                        <field name="payment_reference"/>
+                    </group>
+
+                    <group>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_online_admission" model="ir.actions.act_window">
+        <field name="name">Online Admissions</field>
+        <field name="res_model">school_management.online.admission</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="Master_advance_root" name="Advance"
+              parent="menu_school_root"/>
+
+    <menuitem id="menu_online_admission"
+              name="Online Admissions"
+              parent="Master_advance_root"
+              action="action_online_admission"/>
+</odoo>

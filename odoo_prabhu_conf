@@ -1,0 +1,11 @@
+[options]
+db_host = localhost
+db_port = 5432
+db_user = prabhu7
+db_password = prabhu@33
+db_name = False
+
+addons_path = D:/odoo-18/addons,D:/odoo-18/custom,D:/odoo-18/local-addons,D:/odoo-18/loomlytics,D:/odoo-18/h_loomlytics,D:/odoo-18/a_cart_cdss,D:/odoo-18/embedded_forms,D:/odoo-18/Demo_form,D:/odoo-18/Demo_form2,D:/odoo-18/Open_Ai_Diagnostics,D:/odoo-18/ehr_cdss,D:/odoo-18/Demo_form1_elavarasan,D:/odoo-18/School_management,D:\odoo-18\dealer_purchase
+
+admin_passwd = $pbkdf2-sha512$600000$NgbAWMs5Z.zd27u3tvZe6w$QOWPAe11IZCFq1Dol.Z99arErn4slRE2lTLBBXU3USU2/XAdwMNtFyrkuFXvuiNShnMqI.MpRwTTU/WM5QkraA
+
