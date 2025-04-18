@@ -48,7 +48,7 @@
     </record>
 
     <!-- Menu -->
-    <menuitem id="menu_fee_assignment_root_sub" name="Advance"
+    <menuitem id="menu_advanced_root" name="Advance"
               parent="menu_fee_assignment_root" sequence="4"/>
               
     <menuitem id="menu_document_type"
